@@ -1,0 +1,38 @@
+{
+  "name": "sustainablestillwater",
+  "version": "1.0.0",
+  "description": "This is the GitHub repository for the Sustainable Stillwater initiative tracker.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DPGoertzen/SustainableStillwater.git"
+  },
+  "author": "team sustainable stillwater",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DPGoertzen/SustainableStillwater/issues"
+  },
+  "homepage": "https://github.com/DPGoertzen/SustainableStillwater#readme",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "bcrypt": "^0.8.7",
+    "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
+    "d3": "^4.2.2",
+    "express": "^4.14.0",
+    "express-session": "^1.14.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "mongoose": "^4.5.9",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
+  }
+}
