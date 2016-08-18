@@ -2,14 +2,22 @@
 <html ng-app="ssmnApp">
   <head>
     <script src="vendors/angular/angular.min.js" charset="utf-8"></script>
+    <script src="vendors/angular-route/angular-route.min.js" charset="utf-8"></script>
     <script src="vendors/d3/build/d3.min.js" charset="utf-8"></script>
     <script src="scripts/ssmnApp.module.js" charset="utf-8"></script>
+    <script src="scripts/ssmnApp.config.js" charset="utf-8"></script>
     <script src="scripts/SSMNController.js" charset="utf-8"></script>
+    <script src="scripts/InitiativeController.js" charset="utf-8"></script>
     <script src="scripts/DataService.js" charset="utf-8"></script>
     <script src="scripts/client.js" charset="utf-8"></script>
+    <base href="/" />
     <title>Sustainable Stillwater Data Visualization</title>
   </head>
   <body ng-controller="SSMNController as ssmn">
     <h1>Test. {{3+3}}</h1>
+    <a href="/form">form</a>
+    <div ng-view>
+      
+    </div>
   </body>
 </html>

@@ -1,1 +1,1 @@
-angular.module('ssmnApp', []);
+angular.module('ssmnApp', ['ngRoute']);

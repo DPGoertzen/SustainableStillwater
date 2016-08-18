@@ -9,6 +9,14 @@ var mongoose = require('mongoose');
 var User = require('./models/User.js');
 var index = require('./routes/index.js');
 
+var login = require('./routes/login');
+var register = require('./routes/register');
+
+var initiativeRouter = require('./routes/init');
+var Initiative = require('./models/initiative');
+var kpiRouter = require('./routes/init');
+var KPI = require('./models/kpi');
+
 
 var mongoURI;
 
@@ -44,6 +52,10 @@ app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
+app.use('/initiative', initiativeRouter);
+app.use('/kpi', kpiRouter);
+app.use('/login', login);
+app.use('register', register);
 
 passport.use('local', new LocalStrategy({
   usernameField: 'username',

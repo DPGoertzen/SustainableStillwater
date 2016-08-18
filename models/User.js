@@ -1,10 +1,12 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
+var initiative = require('./initiative').schema;
 
 var UserSchema = new Schema({
   username: {type: String, required: true, index: {unique: true}},
-  password: {type: String, required: true}
+  password: {type: String, required: true},
+  initiatives: [initiative], required: false
 });
 
 UserSchema.pre('save', function(next){
