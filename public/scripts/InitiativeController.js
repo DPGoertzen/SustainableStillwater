@@ -1,7 +1,7 @@
 angular.module('ssmnApp').controller('InitiativeController', function($http, $location){
   var vm = this;
 
-  vm.pillar = '';
+  vm.pillars = [1,2,3];
   vm.name = '';
 
 
@@ -11,9 +11,18 @@ angular.module('ssmnApp').controller('InitiativeController', function($http, $lo
 
     sendData.pillar = vm.pillar;
     sendData.name = vm.name;
+    sendData.objectives = vm.objectives;
+    sendData.contactName = vm.contactName;
+    sendData.contactPhone = vm.contactPhone;
+    sendData.contactEmail = vm.contactEmail;
+    sendData.website = vm.website;
+
     console.log('sendData',sendData);
+
+
     $http.post('/init/newInit', sendData).then(function(response){
       console.log('Successfully posted', response);
+      $location.path('/kpi')
     }, function(response){
       console.log('Fail to post');
     });

@@ -5,8 +5,8 @@ angular.module('ssmnApp').config(function($routeProvider, $locationProvider){
     controller: 'LoginController',
     controllerAs: 'login'
   })
-  .when('/form', {
-    templateUrl: 'views/testform.html',
+  .when('/initiative', {
+    templateUrl: 'views/initform.html',
     controller: 'InitiativeController',
     controllerAs: 'init'
   })
@@ -14,6 +14,11 @@ angular.module('ssmnApp').config(function($routeProvider, $locationProvider){
     templateUrl: 'views/register.html',
     controller: 'RegisterController',
     controllerAs: 'register'
+  })
+  .when('/kpi', {
+    templateUrl: 'views/kpiform.html',
+    controller: 'KPIController',
+    controllerAs: 'kpi'
   })
 
   $locationProvider.html5Mode(true);

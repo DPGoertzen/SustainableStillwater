@@ -10,7 +10,12 @@ router.post('/newInit', function(request,response){
 
   var createdInitiative = new Initiative ({
     pillar: data.pillar,
-    name: data.name
+    name: data.name,
+    objectives: data.objectives,
+    contactName: data.contactName,
+    contactPhone: data.contactPhone,
+    contactEmail: data.contactEmail,
+    website: data.website
   })
   createdInitiative.save(function(err){
     if(err){
@@ -34,7 +39,14 @@ router.post('/newInit', function(request,response){
   })
 });
 
+router.get('/init/userKpi', function(request,response){
+  var user = request.user;
+  console.log('user is', user);
+})
 
+router.post('/newKpi', function(request,response){
+
+})
 
 
 

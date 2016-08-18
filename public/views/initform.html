@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>Create a New Initiative with SSMN</h2>
+  <form>
+    <label for="Name">Initiative Name:</label>
+    <input type="text" ng-model="init.name"/>
+    <br />
+    <label for="Objectives">Objectives:</label>
+    <input type="text" ng-model="init.objectives" />
+    <br />
+    <label for="Pillar">Pillar:</label>
+    <select ng-model="init.pillar" ng-options="x for x in init.pillars"></select>
+    <label for="Website">Website:</label>
+    <input type="text" ng-model="init.website" />
+    <br />
+    <label for="contactName">Contact Full Name: </label>
+    <input type="text" ng-model="init.contactName" />
+    <label for="contactEmail">Contact Email: </label>
+    <input type="text" ng-model="init.contactEmail" />
+    <label for="contactPhone">Contact Phone: </label>
+    <input type="text" ng-model="init.contactPhone" />
+    <br />
+    <button type="submit" ng-click="init.submit()">Submit</button>
+  </form>
+
+</div>

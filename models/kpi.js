@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var kpiSchema = new Schema ({
   label: String,
-  measure: Number || Boolean
+  goal: Number || Boolean
 });
 
 var KPI = mongoose.model('KPI', kpiSchema);
