@@ -11,17 +11,13 @@ angular.module('ssmnApp').controller('InitiativeController', function($http, $lo
 
     sendData.pillar = vm.pillar;
     sendData.name = vm.name;
-
-    $http.post('/init/newInit', sendData).then(handleSuccess, handleFailure);
+    console.log('sendData',sendData);
+    $http.post('/init/newInit', sendData).then(function(response){
+      console.log('Successfully posted', response);
+    }, function(response){
+      console.log('Fail to post');
+    });
   };
 
-  function handleSuccess(response){
-    console.log('Success', response);
-
-  };
-
-  function handleFailure(response){
-    console.log('Failure', response);
-  };
 
 })

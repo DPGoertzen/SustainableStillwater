@@ -9,7 +9,12 @@ angular.module('ssmnApp').config(function($routeProvider, $locationProvider){
     templateUrl: 'views/testform.html',
     controller: 'InitiativeController',
     controllerAs: 'init'
-  });
+  })
+  .when('/register', {
+    templateUrl: 'views/register.html',
+    controller: 'RegisterController',
+    controllerAs: 'register'
+  })
 
   $locationProvider.html5Mode(true);
 })

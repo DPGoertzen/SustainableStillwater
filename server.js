@@ -52,10 +52,10 @@ app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
-app.use('/initiative', initiativeRouter);
+app.use('/init', initiativeRouter);
 app.use('/kpi', kpiRouter);
 app.use('/login', login);
-app.use('register', register);
+app.use('/register', register);
 
 passport.use('local', new LocalStrategy({
   usernameField: 'username',

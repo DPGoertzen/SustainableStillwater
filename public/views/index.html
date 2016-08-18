@@ -8,6 +8,8 @@
     <script src="scripts/ssmnApp.config.js" charset="utf-8"></script>
     <script src="scripts/SSMNController.js" charset="utf-8"></script>
     <script src="scripts/InitiativeController.js" charset="utf-8"></script>
+    <script src="scripts/LoginController.js" charset="utf-8"></script>
+    <script src="scripts/RegisterController.js" charset="utf-8"></script>
     <script src="scripts/DataService.js" charset="utf-8"></script>
     <script src="scripts/client.js" charset="utf-8"></script>
     <base href="/" />
@@ -15,9 +17,10 @@
   </head>
   <body ng-controller="SSMNController as ssmn">
     <h1>Test. {{3+3}}</h1>
+    <a href="/login">Login</a>
     <a href="/form">form</a>
     <div ng-view>
-      
+
     </div>
   </body>
 </html>
