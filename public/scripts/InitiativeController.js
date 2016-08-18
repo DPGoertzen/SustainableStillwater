@@ -2,7 +2,6 @@ angular.module('ssmnApp').controller('InitiativeController', function($http, $lo
   var vm = this;
 
   vm.pillars = [1,2,3];
-  vm.name = '';
 
 
   vm.submit = function(){

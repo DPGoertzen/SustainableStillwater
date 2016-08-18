@@ -20,6 +20,11 @@ angular.module('ssmnApp').config(function($routeProvider, $locationProvider){
     controller: 'KPIController',
     controllerAs: 'kpi'
   })
+  .when('/profile', {
+    templateUrl: 'views/profile.html',
+    controller: 'ProfileController',
+    controllerAs: 'profile'
+  })
 
   $locationProvider.html5Mode(true);
 })

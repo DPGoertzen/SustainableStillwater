@@ -44,6 +44,12 @@ router.get('/init/userKpi', function(request,response){
   console.log('user is', user);
 })
 
+router.get('/profile', function(request,response){
+  var user = request.user;
+  response.send(user);
+  // console.log('user', user);
+})
+
 router.post('/newKpi', function(request,response){
 
 })

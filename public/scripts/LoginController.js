@@ -14,11 +14,12 @@ angular.module('ssmnApp').controller('LoginController', function($http, $locatio
   };
 
   function handleSuccess(response){
-  console.log('Success', response);
+    console.log('Success', response);
+    $location.path('/profile');
   };
 
   function handleFailure(response){
     console.log('Failure', response);
-  
+
   };
 })
