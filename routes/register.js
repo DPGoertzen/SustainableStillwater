@@ -1,7 +1,7 @@
 var router = require('express').Router();
 var path = require('path');
 
-var User = require('../models/user');
+var User = require('../models/User');
 
 router.get('/', function(request, response){
   response.sendFile(path.join(__dirname, '../public/views/register.html'));
