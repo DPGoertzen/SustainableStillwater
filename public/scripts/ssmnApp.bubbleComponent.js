@@ -1,3 +1,3 @@
 angular.module('ssmnApp').component('bubbles', {
-  controller: "BubbleController.js"
+  controller: "BubbleController"
 })

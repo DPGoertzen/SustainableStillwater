@@ -8,7 +8,7 @@
     <script src="vendors/angular-animate/angular-animate.min.js" charset="utf-8"></script>
     <script src="vendors/angular-aria/angular-aria.min.js" charset="utf-8"></script>
     <!-- <script src="vendors/d3/build/d3.min.js" charset="utf-8"></script> -->
-    <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script>
+    <script src="vendors/d3/d3.min.js"></script>
     <script src="scripts/ssmnApp.module.js" charset="utf-8"></script>
     <script src="scripts/ssmnApp.config.js" charset="utf-8"></script>
     <script src="scripts/SSMNController.js" charset="utf-8"></script>
@@ -20,15 +20,20 @@
     <script src="scripts/KPIController.js" charset="utf-8"></script>
     <script src="scripts/DataService.js" charset="utf-8"></script>
     <script src="scripts/client.js" charset="utf-8"></script>
-    <script src="scripts/ssmnApp.bubbleDirective.js" charset="utf-8"></script>
+    <script src="scripts/BubbleController.js" charset="utf-8"></script>
+    <script src="scripts/ssmnApp.bubbleComponent.js" charset="utf-8"></script>
     <base href="/" />
     <title>Sustainable Stillwater Data Visualization</title>
   </head>
   <body ng-controller="SSMNController as ssmn">
     <h1>Test. {{3+3}}</h1>
-    <bubbles></bubbles>
-    <div id="canvas">
+    <div ng-controller="BubbleController as bubble">
 
+
+      <bubbles></bubbles>
+      <div id="canvas">
+
+      </div>
     </div>
     <a href="/login">Login</a>
     <!-- <md-button class="md-primary md-raised" ng-click="ssmn.login()">Login</md-button> -->
