@@ -2,22 +2,22 @@
   <h2>Create a New Initiative with SSMN</h2>
   <form name="initForm">
     <label for="Name">Initiative Name:</label>
-    <input type="text" ng-model="init.name" required/>
+    <input type="text" ng-model="init.name" ng-required="true"/>
     <br />
     <label for="Objectives">Objectives:</label>
-    <input type="text" ng-model="init.objectives"/>
+    <input type="text" ng-model="init.objectives" ng-required="true"/>
     <br />
     <label for="Pillar">Pillar:</label>
-    <select ng-model="init.pillar" ng-options="x for x in init.pillars"></select>
+    <select ng-model="init.pillar" ng-options="x for x in init.pillars" ></select>
     <label for="Website">Website:</label>
-    <input type="text" ng-model="init.website"/>
+    <input type="text" ng-model="init.website" ng-required="true" ng-required="true"/>
     <br />
     <label for="contactName">Contact Full Name: </label>
-    <input type="text" ng-model="init.contactName"/>
+    <input type="text" ng-model="init.contactName" ng-required="true"/>
     <label for="contactEmail">Contact Email: </label>
-    <input type="text" ng-model="init.contactEmail"/>
+    <input type="text" ng-model="init.contactEmail" ng-required="true" />
     <label for="contactPhone">Contact Phone: </label>
-    <input type="text" ng-model="init.contactPhone"/>
+    <input type="text" ng-model="init.contactPhone" ng-required="true" />
     <br />
     <button type="submit" ng-click="init.submit()">Submit</button>
   </form>
