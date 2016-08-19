@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 var kpiSchema = new Schema ({
   label: String,
   milestone: String,
+  final: Number,
   progress: Number
 });
 

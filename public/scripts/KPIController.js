@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('KPIController', function($http, $location){
+angular.module('ssmnApp').controller('KPIController', function($http, $location, init){
   var vm = this;
 
   vm.milestones = ["Monetary", "CheckBox", "Number"]
@@ -8,7 +8,7 @@ angular.module('ssmnApp').controller('KPIController', function($http, $location)
     console.log('http kpi',response);
   })
 
-
+  // console.log(init);;
 
   vm.submit = function(){
 
@@ -16,7 +16,11 @@ angular.module('ssmnApp').controller('KPIController', function($http, $location)
 
     sendData.label = vm.label;
     sendData.measurement = vm.milestone;
+    sendData.final = vm.final;
     sendData.progress = 0;
+    sendData.id = init._id;
+
+
 
     console.log('kpi',sendData);
     $http.post('/init/newKpi', sendData).then(function(response){

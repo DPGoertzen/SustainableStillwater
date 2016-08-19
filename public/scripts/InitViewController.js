@@ -13,7 +13,10 @@ angular.module('ssmnApp').controller('InitViewController', function($http,init,$
       templateUrl: 'views/kpiform.html',
       fullscreen: useFullScreen,
       clickOutsideToClose: true,
-      ariaLabel: 'Good'
+      ariaLabel: 'Good',
+      locals: {
+        init: init
+      }
     })
   }
 })

@@ -5,6 +5,8 @@
   <br />
   <label for="Milestone">Milestone Measurement:</label>
   <select ng-model="kpi.milestone" ng-options="x for x in kpi.milestones"></select>
+  <label for="Milestone Goal">End Goal: </label>
+  <input type="number" ng-model="kpi.final"/>
   <br />
   <button type="submit" ng-click="kpi.submit()">Submit</button>
 </form>
