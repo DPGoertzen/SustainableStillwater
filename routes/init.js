@@ -39,9 +39,9 @@ router.post('/newInit', function(request,response){
   })
 });
 
-router.get('/init/userKpi', function(request,response){
+router.get('/userKpi', function(request,response){
   var user = request.user;
-  console.log('user is', user);
+  // console.log('user is', user);
 })
 
 router.get('/profile', function(request,response){
@@ -51,6 +51,7 @@ router.get('/profile', function(request,response){
 })
 
 router.post('/newKpi', function(request,response){
+  console.log('kpi', request.data);
 
 })
 

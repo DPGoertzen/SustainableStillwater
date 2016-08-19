@@ -21,7 +21,7 @@ angular.module('ssmnApp').controller('InitiativeController', function($http, $lo
 
     $http.post('/init/newInit', sendData).then(function(response){
       console.log('Successfully posted', response);
-      $location.path('/kpi')
+      $location.path('/profile')
     }, function(response){
       console.log('Fail to post');
     });
