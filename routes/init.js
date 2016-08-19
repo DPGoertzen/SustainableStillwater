@@ -51,7 +51,24 @@ router.get('/profile', function(request,response){
 })
 
 router.post('/newKpi', function(request,response){
-  console.log('kpi', request.data);
+  console.log('kpi', request.body);
+  var data = request.body;
+  var id = request.user.initiatives._id;
+  console.log(id);
+
+  // var createdMilestone = new KPI ({
+  //   label: data.label,
+  //   milestone: data.measurement,
+  //   progress: data.progress
+  // })
+  // createdMilestone.save(function(err){
+  //   if(err){
+  //     console.log(err);
+  //     response.sendStatus(500);
+  //   } else {
+  //
+  //   }
+  // })
 
 })
 

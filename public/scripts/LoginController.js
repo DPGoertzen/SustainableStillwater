@@ -11,6 +11,7 @@ angular.module('ssmnApp').controller('LoginController', function($http, $locatio
     sendData.password = vm.password;
 
     $http.post('/login', sendData).then(handleSuccess, handleSuccess);
+
   };
 
   function handleSuccess(response){

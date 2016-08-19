@@ -5,7 +5,7 @@ angular.module('ssmnApp').controller('KPIController', function($http, $location)
 
 
   $http.get('/init/userKpi').then(function(response){
-    console.log('kpi',response);
+    console.log('http kpi',response);
   })
 
 

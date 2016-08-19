@@ -1,7 +1,12 @@
 
+
 <div ng-repeat="init in profile.initiativeList">
-  Initiative: {{init.name}}
-  <a href="/kpi">Add a Milestone</a>
+  <md-button class="md-primary md-raised" ng-click="profile.action(init)">Initiative: {{init.name}}</md-button>
+  <!-- <a href="/kpi">Add a Milestone</a> -->
+  <div hide-gt-sm layout="row" layout-align="center center" flex="100">
+
+  </div>
 </div>
 
+<md-button class="md-primary md-raised" ng-click="profile.newInit()">Create a New Initiative</md-button>
 <a href="/initiative">Create a New Initiative</a>
