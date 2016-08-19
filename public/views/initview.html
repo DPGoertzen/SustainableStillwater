@@ -1,15 +1,23 @@
 
 
 <div class="container">
-<h1>Initiative</h1>
-<div ng-repeat="init in initview.initiativeList">
+<h1>{{initview.init.name}}</h1>
 
 <ul>
   <li>
-    {{init.name}}
+    {{initview.init.objectives}}
+  </li>
+  <li>
+    {{initview.init.website}}
+  </li>
+  <li>
+    {{initview.init.pillar}}
+  </li>
+  <li>
+    {{initview.init.contactName}}
+    {{initview.init.contactEmail}}
+    {{initview.init.contactPhone}}
   </li>
 </ul>
 <md-button class="md-primary md-raised" ng-click="initview.add()">Add Kpi</md-button>
-
-</div>
 </div>

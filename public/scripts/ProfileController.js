@@ -27,7 +27,10 @@ angular.module('ssmnApp').controller('ProfileController', function($http, $locat
       controllerAs: 'initview',
       fullscreen: useFullScreen,
       clickOutsideToClose: true,
-      ariaLabel: 'Good'
+      ariaLabel: 'Good',
+      locals: {
+      init: init
+      }
     })
 
   }
@@ -41,6 +44,6 @@ angular.module('ssmnApp').controller('ProfileController', function($http, $locat
       clickOutsideToClose: true,
       ariaLabel: 'Good'
     })
-  findInitiatives();
+
   }
 })
