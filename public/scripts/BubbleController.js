@@ -11,20 +11,22 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     var width = window.innerWidth;
     var height = window.innerHeight;
     var centered;
-    var zoom = d3.behavior.zoom()
-        .scaleExtent([1, 32])
-        .on("zoom", zoomed);
+    var isTransformed = false;
+    // var zoom = d3.behavior.zoom()
+    //     .scaleExtent([1, 32])
+    //     .on("zoom", zoomed);
 
     var svg = d3.select("#canvas").append("svg")
     .attr("width", width)
     .attr("height", height)
+    .attr("id", "root")
     .append("g")
-    .call(d3.behavior.zoom().scaleExtent([1, 8]).on('zoom', zoomed))
-    .append("g");
+    // .call(d3.behavior.zoom().scaleExtent([1, 8]).on('zoom', zoomed))
+    // .append("g");
 
-    function zoomed() {
-      svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-    }
+    // function zoomed() {
+    //   svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    // }
 
 
     // var svg = d3.select('svg');
@@ -112,60 +114,71 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
 
     function clicked(){
-        console.log("we clicked x position", d3.select(this).attr("cx"), "and y position", d3.select(this).attr("cy"));
-        // console.log("this is d", d)
-        // if (centered != null) {
-          x = d3.event.x;
-          y = d3.event.y;
-          k = 3;
-          // centered = d;
-        // } else {
-        //   x = width/2;
-        //   y = height/2;
-        //   k = 1;
-        //   centered = null;
-        // }
-        var currentCircle = this;
-        var originCircle = d3.select(".originCircle");
-        console.log("this is our originCircle", originCircle[0][0]);
+      var currentCircle = this;
+      var originCircle = d3.select(".originCircle");
+      var ourCircles = d3.selectAll("circle");
+      var ourLines = d3.selectAll("line")
+      var newCLine;
 
-        d3.select(this).transition()
+      if(!isTransformed){
+        console.log("isTransformed is currently", isTransformed);
+        console.log("we clicked x position", d3.select(this).attr("cx"), "and y position", d3.select(this).attr("cy"));
+        var scaler = 4;
+
+        // console.log("this is our originCircle", originCircle[0][0]);
+
+        d3.select(currentCircle).transition()
         .duration(750)
-        .attr("transform", "translate(" + d3.select(this).attr("originX") + "," + d3.select(this).attr("originY") + ")scale(" + k + ")translate(" + -d3.select(this).attr("cx") + "," + -d3.select(this).attr("cy") + ")")
-        .style("stroke-width", 1.5 / k + "px");
+        .attr("transform", "translate(" + d3.select(this).attr("originX") + "," + d3.select(this).attr("originY") + ")scale(" + scaler + ")translate(" + -d3.select(this).attr("cx") + "," + -d3.select(this).attr("cy") + ")")
+        .style("stroke-width", 1.5 / scaler + "px");
 
         sustainableCircle.transition()
         .duration(750)
-        .attr("transform", "translate(" + -.6*sustainableCircle.attr("cx") + "," + -.6*sustainableCircle.attr("cy") + ")scale(" + .3*k + ")")
+        .attr("transform", "translate(" + -.6*sustainableCircle.attr("cx") + "," + -.6*sustainableCircle.attr("cy") + ")scale(" + .3*scaler + ")")
         // d3.selectAll("circle").transition
 
-        var ourCircles = d3.selectAll("circle");
+
         ourCircles.attr({"opacity": function(){
-          console.log("this is", this)
+          // console.log("this is", this)
           return (this === currentCircle || d3.select(this).attr("fill") == "green") ? 1 : 0;
         }});
 
-        var ourLines = d3.selectAll("line")
+
         ourLines.attr({"opacity": 0});
 
-        console.log("our currentCircle bounding box is:", currentCircle.getBBox());
-        console.log("our originCircle bounding box is:", originCircle[0][0]);
+        // console.log("our currentCircle bounding box is:", currentCircle.getBBox());
+        // console.log("our originCircle bounding box is:", originCircle[0][0]);
+        // console.log("sustainableCircle x position", sustainableCircle.attr("cx"))
+
+        // var newPointOrbitter, newPointSustainable;
+
         function newConnectorLine(){
-          svg.append("line").attr({
-            // x1: currentCircle.getBBox().x,
-            // y1: currentCircle.getBBox().y,
-            // x2: originCircle[0][0].getBBox().x,
-            // y2: originCircle[0][0].getBBox().y,
+            newCLine = svg.append("line").attr({
+            class: "newCLine",
             x1: d3.select(currentCircle).attr("cx"),
             y1: d3.select(currentCircle).attr("cy"),
-            x2: originCircle[0][0].cx,
-            y2: originCircle[0][0].cy,
+            x2: sustainableCircle.attr("cx"),
+            y2: sustainableCircle.attr("cy"),
             opacity: 1,
             stroke: "black"
           });
+          // newCLine.transition()
+          // .duration(35)
+          // .attr("transform", "translate(" + d3.select(currentCircle).attr("originX") + "," + d3.select(currentCircle).attr("originY") + ")scale(" + scaler + ")translate(" + -d3.select(currentCircle).attr("cx") + "," + -d3.select(currentCircle).attr("cy") + ")")
         }
         setTimeout(newConnectorLine, 750);
+        isTransformed = true;
+      }else{
+        console.log("isTransformed is currently", isTransformed);
+        sustainableCircle.attr("transform", null);
+        d3.select(currentCircle).attr("transform", null);
+        d3.select(".newCLine").remove();
+        ourCircles.attr("opacity", 1);
+        ourLines.attr("opacity", 1);
+        isTransformed = false;
       }
+
+    }
       //end new code.
   };  }
 ])
