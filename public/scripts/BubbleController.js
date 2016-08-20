@@ -43,6 +43,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     var originX = .5*width;
     var originY = .5*height;
     var innerCircleRadius = 125;
+    var outerCircleRadius = 300;
 
 
     // build our pillar dividers
