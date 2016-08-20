@@ -74,7 +74,8 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         cy: originY,
         r: innerCircleRadius,
         fill: "green",
-        stroke: "black"
+        stroke: "black",
+        originalScale: innerCircleRadius
     });
 
 
@@ -105,7 +106,10 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             fill: "aqua",
             stroke: "black",
             originX: originX,
-            originY: originY
+            originY: originY,
+            initialX: orbitterX,
+            initialY: orbitterY,
+            initialR: orbitRadius
         });
       }
     }
@@ -129,12 +133,22 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
         d3.select(currentCircle).transition()
         .duration(750)
-        .attr("transform", "translate(" + d3.select(this).attr("originX") + "," + d3.select(this).attr("originY") + ")scale(" + scaler + ")translate(" + -d3.select(this).attr("cx") + "," + -d3.select(this).attr("cy") + ")")
-        .style("stroke-width", 1.5 / scaler + "px");
+        .attr({
+          cx: originX,
+          cy: originY,
+          r: d3.select(currentCircle).attr("r")*3.5
+        })
+        // .attr("transform", "translate(" + d3.select(this).attr("originX") + "," + d3.select(this).attr("originY") + ")scale(" + scaler + ")translate(" + -d3.select(this).attr("cx") + "," + -d3.select(this).attr("cy") + ")")
+        // .style("stroke-width", 1.5 / scaler + "px");
 
         sustainableCircle.transition()
         .duration(750)
-        .attr("transform", "translate(" + -.6*sustainableCircle.attr("cx") + "," + -.6*sustainableCircle.attr("cy") + ")scale(" + .3*scaler + ")")
+        .attr({
+            cx: originX - 250,
+            cy: originY + 200,
+            r: sustainableCircle.attr("r")*.3
+          })
+        // .attr("transform", "translate(" + -.6*sustainableCircle.attr("cx") + "," + -.6*sustainableCircle.attr("cy") + ")scale(" + .3*scaler + ")")
         // d3.selectAll("circle").transition
 
 
@@ -145,12 +159,6 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
 
         ourLines.attr({"opacity": 0});
-
-        // console.log("our currentCircle bounding box is:", currentCircle.getBBox());
-        // console.log("our originCircle bounding box is:", originCircle[0][0]);
-        // console.log("sustainableCircle x position", sustainableCircle.attr("cx"))
-
-        // var newPointOrbitter, newPointSustainable;
 
         function newConnectorLine(){
             newCLine = svg.append("line").attr({
@@ -170,8 +178,22 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         isTransformed = true;
       }else{
         console.log("isTransformed is currently", isTransformed);
-        sustainableCircle.attr("transform", null);
-        d3.select(currentCircle).attr("transform", null);
+        sustainableCircle.transition()
+        .duration(750)
+        .attr({
+          cx: originX,
+          cy: originY,
+          r: sustainableCircle.attr("originalScale")
+        });
+
+        d3.select(currentCircle).transition()
+        .duration(750)
+        .attr({
+          cx: d3.select(currentCircle).attr("initialX"),
+          cy: d3.select(currentCircle).attr("initialY"),
+          r: d3.select(currentCircle).attr("initialR")
+
+        });
         d3.select(".newCLine").remove();
         ourCircles.attr("opacity", 1);
         ourLines.attr("opacity", 1);
