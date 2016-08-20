@@ -52,42 +52,28 @@ router.get('/profile', function(request,response){
 
 router.post('/newKpi', function(request,response){
   console.log('kpi', request.body);
+  var user = request.user;
   var data = request.body;
   var init = request.user.initiatives;
   var id = request.body.id;
   // console.log(id);
 
-  for (var i = 0; i < init.length; i++) {
-    // console.log(init[i]._id);
-    if(data.id === init[i]._id){
+  User.findById(user._id, function(err, user){
+    // console.log('user', user);
 
-      var createdMilestone = new KPI ({
-        label: data.label,
-        milestone: data.measurement,
-        final: data.final,
-        progress: data.progress
-      })
-      createdMilestone.save(function(err){
-        if(err){
-          console.log(err);
-          response.sendStatus(500);
-        } else {
-          Initiative.findById(id, function(err, user){
-            if(err){
-              console.log(err);
-            }
-          Initiatives.kpi.push(createdMilestone);
-          Initiatives.save(function(err){
-            if(err){
-              console.log(err);
-            }
-          })
-          })
-          response.sendStatus(200);
-        }
-      })
-    }
-  }
+    var currentInit = user.initiatives.id(id);
+    console.log(currentInit.kpi);
+    currentInit.kpi.push(data);
+
+    user.save(function(err){
+      if(err){
+        console.log(err);
+        response.sendStatus(500);
+      } else {
+        response.sendStatus(200);
+      }
+    })
+  })
 
 
 })
