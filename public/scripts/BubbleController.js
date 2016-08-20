@@ -12,6 +12,11 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     var height = window.innerHeight;
     var centered;
     var isTransformed = false;
+    var isIniativeBoxDisplayed = false;
+    var isSCircleClicked = false;
+    var currentCircle;
+    var ourCircles;
+    var ourLines;
     // var zoom = d3.behavior.zoom()
     //     .scaleExtent([1, 32])
     //     .on("zoom", zoomed);
@@ -19,15 +24,16 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     var svg = d3.select("#canvas").append("svg")
     .attr("width", width)
     .attr("height", height)
-    .attr("id", "root")
-    .append("g")
+    .attr("id", "root");
+    // .append("g")
     // .call(d3.behavior.zoom().scaleExtent([1, 8]).on('zoom', zoomed))
     // .append("g");
 
     // function zoomed() {
     //   svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
     // }
-
+    var layerBack = svg.append('g');
+    var layerFront = svg.append('g');
 
     // var svg = d3.select('svg');
     var originX = .5*width;
@@ -35,7 +41,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     var innerCircleRadius = 125;
     var outerCircleRadius = 300;
 
-    var pillarLine1 = svg.append("line").attr({
+    var pillarLine1 = layerBack.append("line").attr({
       x1: originX,
       y1: originY,
       x2: width,
@@ -44,7 +50,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       'stroke-width': 5
     });
 
-    var pillarLine2 = svg.append("line").attr({
+    var pillarLine2 = layerBack.append("line").attr({
       x1: originX,
       y1: originY,
       x2: 0,
@@ -53,7 +59,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       'stroke-width': 5
     });
 
-    var pillarLine2 = svg.append("line").attr({
+    var pillarLine2 = layerBack.append("line").attr({
       x1: originX,
       y1: originY,
       x2: .5*width,
@@ -63,12 +69,8 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     });
 
 
-    arcGenerator(0,120,10);
-    arcGenerator(120,240,20);
-    arcGenerator(240,360,30);
 
-
-    var sustainableCircle = svg.append("circle").attr({
+    var sustainableCircle = layerFront.append("circle").attr({
         class: "originCircle",
         cx: originX,
         cy: originY,
@@ -79,7 +81,12 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     });
 
 
-    function arcGenerator(initialDegree, finalDegree, gapBetweenDegree){
+    arcGenerator(0,120,10, "pink");
+    arcGenerator(120,240,20, "orange");
+    arcGenerator(240,360,30, "purple");
+
+
+    function arcGenerator(initialDegree, finalDegree, gapBetweenDegree, color){
       for(var i = initialDegree - 80; i < finalDegree -100; i+=gapBetweenDegree){
         if(leveler == true){
           leveler = false;
@@ -91,19 +98,20 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         var orbitterY = (originY + ((outerCircleRadius * (leveler ? .9:1.25)) * Math.sin(i*(Math.PI/180))));
 
         var orbitRadius = 50;
-        var orbitterLine = svg.append("line").attr({
+        var orbitterLine = layerBack.append("line").attr({
           x1: orbitterX,
           y1: orbitterY,
           x2: originX,
           y2: originY,
           stroke: "black"
         });
-        var orbitter = svg.append("circle").attr({
+        var orbitter = layerFront.append("circle").attr({
+            class: "orbitter",
             cx: orbitterX,
             cy: orbitterY,
             r: orbitRadius,
             opacity: 1,
-            fill: "aqua",
+            fill: color,
             stroke: "black",
             originX: originX,
             originY: originY,
@@ -114,23 +122,24 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       }
     }
     //adding new code for zooming on 8/19. Anything after this is not guarenteed to work.
-    var orbitters = svg.selectAll("circle").on('click', clicked);
+    var orbitters = d3.selectAll(".orbitter").on('click', clickedOrbitter);
+    var ssCircle = d3.selectAll(".originCircle").on('click', clickedSustainableCircle);
 
-
-    function clicked(){
-      var currentCircle = this;
+    function clickedOrbitter(){
+      currentCircle = this;
       var originCircle = d3.select(".originCircle");
-      var ourCircles = d3.selectAll("circle");
-      var ourLines = d3.selectAll("line")
+      ourCircles = d3.selectAll("circle");
+      ourLines = d3.selectAll("line")
       var newCLine;
-
+      d3.selectAll(".infoRectangle").remove();
       if(!isTransformed){
+
         console.log("isTransformed is currently", isTransformed);
         console.log("we clicked x position", d3.select(this).attr("cx"), "and y position", d3.select(this).attr("cy"));
         var scaler = 4;
 
         // console.log("this is our originCircle", originCircle[0][0]);
-
+        setTimeout(newConnectorLine, 749);
         d3.select(currentCircle).transition()
         .duration(750)
         .attr({
@@ -160,23 +169,34 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
         ourLines.attr({"opacity": 0});
 
-        function newConnectorLine(){
-            newCLine = svg.append("line").attr({
-            class: "newCLine",
-            x1: d3.select(currentCircle).attr("cx"),
-            y1: d3.select(currentCircle).attr("cy"),
-            x2: sustainableCircle.attr("cx"),
-            y2: sustainableCircle.attr("cy"),
-            opacity: 1,
-            stroke: "black"
-          });
+
           // newCLine.transition()
           // .duration(35)
           // .attr("transform", "translate(" + d3.select(currentCircle).attr("originX") + "," + d3.select(currentCircle).attr("originY") + ")scale(" + scaler + ")translate(" + -d3.select(currentCircle).attr("cx") + "," + -d3.select(currentCircle).attr("cy") + ")")
+
+          isTransformed = true;
+        }else if(!isIniativeBoxDisplayed){
+          var initiativeRectangle = layerFront.append("rect").attr({
+            class: "initiativeRectangle",
+            x: .8*width,
+            y: 0,
+            rx: 20,
+            ry: 20,
+            width: .2*width,
+            height: height,
+            stroke: "black",
+            fill: "aqua"
+          });
+          isIniativeBoxDisplayed = true;
+        }else{
+          d3.selectAll(".initiativeRectangle").remove();
+          isIniativeBoxDisplayed = false;
         }
-        setTimeout(newConnectorLine, 750);
-        isTransformed = true;
-      }else{
+
+    }
+
+    function clickedSustainableCircle(){
+      if(isTransformed){
         console.log("isTransformed is currently", isTransformed);
         sustainableCircle.transition()
         .duration(750)
@@ -195,12 +215,48 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
         });
         d3.select(".newCLine").remove();
-        ourCircles.attr("opacity", 1);
-        ourLines.attr("opacity", 1);
-        isTransformed = false;
-      }
+        function returnOpacityTo1(){
+          ourCircles.attr("opacity", 1);
+          ourLines.attr("opacity", 1);
 
+        }
+        setTimeout(returnOpacityTo1, 600);
+        d3.selectAll(".initiativeRectangle").remove();
+        isTransformed = false;
+      }else if(!isSCircleClicked){
+        console.log("sustainableCircle is clicked and is", isSCircleClicked);
+          var infoRectangle = layerFront.append("rect").attr({
+            class: "infoRectangle",
+            x: 0,
+            y: .8*height,
+            rx: 20,
+            ry: 20,
+            width: width,
+            height: .2*height,
+            stroke: "black",
+            fill: "aqua"
+          });
+        isSCircleClicked = true;
+      }else{
+        console.log("sustainableCircle is clicked and is", isSCircleClicked);
+        d3.selectAll(".infoRectangle").remove();
+        isSCircleClicked = false;
+      }
     }
+
+    function newConnectorLine(){
+        newCLine = layerBack.append("line").attr({
+        class: "newCLine",
+        x1: d3.select(currentCircle).attr("cx"),
+        y1: d3.select(currentCircle).attr("cy"),
+        x2: sustainableCircle.attr("cx"),
+        y2: sustainableCircle.attr("cy"),
+        opacity: 1,
+        stroke: "black"
+      });
+    }
+
+
       //end new code.
   };  }
 ])
