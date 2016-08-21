@@ -50,6 +50,22 @@ router.get('/profile', function(request,response){
   // console.log('user', user);
 })
 
+//
+// DONOVAN ADDED THIS FUNCTIONALITY 8/21 to retrieve all users
+//
+router.get('/allUsers', function(request,response){
+  User.find({}, function(err, allUsers){
+      if(err){
+        response.sendStatus(500);
+      }else{
+        console.log('sending allUsers', allUsers);
+        response.send(allUsers);
+      }
+    })
+})
+
+
+
 router.post('/newKpi', function(request,response){
   console.log('kpi', request.body);
   var user = request.user;

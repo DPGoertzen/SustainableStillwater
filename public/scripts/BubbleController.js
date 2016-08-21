@@ -2,9 +2,28 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
   var $ctrl = this;
   //THIS MAY NEED TO CHANGE. This should watch for angular changes, but needs testing
-  var data = DataService.data;
-  $ctrl.createBubbles = createBubbles;
-  createBubbles();
+  var data;
+  var firstPillarData;
+  var secondPillarData;
+  var thirdPillarData;
+  var myUserPromise = DataService.getAllUserData();
+  myUserPromise.then(function(resultingData){
+    data = resultingData;
+    firstPillarData = data.firstPillarData;
+    secondPillarData = data.secondPillarData;
+    thirdPillarData = data.thirdPillarData;
+    $ctrl.createBubbles = createBubbles;
+    createBubbles();
+    console.log("our data after the .then", data);
+    console.log("inside bubble controller, our firstPillarData.array is", firstPillarData.array);
+    console.log("inside bubble controller, the length of firstPillarData.array is", firstPillarData.array.length);
+
+  })
+
+  // var data = DataService.data;
+
+
+
 
   function createBubbles() {
     // global variables needed for our sketch
@@ -42,8 +61,8 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     // set the middle of the canvas
     var originX = .5*width;
     var originY = .5*height;
-    var innerCircleRadius = 125;
-    var outerCircleRadius = 300;
+    var innerCircleRadius = 100;
+    var outerCircleRadius = 225;
 
 
     // build our pillar dividers
@@ -87,10 +106,12 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     });
 
     // generate our pillars
-    arcGenerator(0,120,10, "pink");
-    arcGenerator(120,240,20, "orange");
-    arcGenerator(240,360,30, "purple");
-
+    arcGenerator(0, 120, 120/firstPillarData.array.length, "pink");
+    arcGenerator(120, 240, 120/secondPillarData.array.length, "orange");
+    arcGenerator(240, 360, 120/thirdPillarData.array.length, "purple");
+    // arcGenerator(0, 120, 10, "pink");
+    // arcGenerator(120, 240, 20, "orange");
+    // arcGenerator(240, 360, 30, "purple");
     // specifies where we start, where we end, the distant between orbitters and
     // what color we want our pillar to be
     function arcGenerator(initialDegree, finalDegree, gapBetweenDegree, color){
