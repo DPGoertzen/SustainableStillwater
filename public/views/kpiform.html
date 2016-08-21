@@ -1,12 +1,12 @@
 
-<form>
+<form name="kpiForm" novalidate ng-submit="kpiForm.$valid && kpi.submit()">
   <label for="Label">KPI Name:</label>
-  <input type="text" ng-model="kpi.label"/>
+  <input type="text" ng-model="kpi.label" ng-required="true"/>
   <br />
   <label for="Milestone">Milestone Measurement:</label>
-  <select ng-model="kpi.milestone" ng-options="x for x in kpi.milestones"></select>
+  <select ng-model="kpi.milestone" ng-options="x for x in kpi.milestones" ng-required="true"></select>
   <label for="Milestone Goal">End Goal: </label>
-  <input type="number" ng-model="kpi.final"/>
+  <input type="number" ng-model="kpi.final" ng-required="true"/>
   <br />
-  <button type="submit" ng-click="kpi.submit()">Submit</button>
+  <button type="submit">Submit</button>
 </form>

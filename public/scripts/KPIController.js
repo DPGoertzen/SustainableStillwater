@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('KPIController', function($http, $location, init){
+angular.module('ssmnApp').controller('KPIController', function($http, $location, init, $mdDialog){
   var vm = this;
 
   vm.milestones = ["Monetary", "CheckBox", "Number"]
@@ -25,6 +25,7 @@ angular.module('ssmnApp').controller('KPIController', function($http, $location,
     console.log('kpi',sendData);
     $http.post('/init/newKpi', sendData).then(function(response){
       console.log('Success', response);
+      $mdDialog.hide();
     }, function(response){
       console.log('Failed');
     })
