@@ -106,16 +106,18 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     });
 
     // generate our pillars
-    arcGenerator(0, 120, 120/firstPillarData.array.length, "pink");
-    arcGenerator(120, 240, 120/secondPillarData.array.length, "orange");
-    arcGenerator(240, 360, 120/thirdPillarData.array.length, "purple");
+    arcGenerator(0, 120, 120/firstPillarData.array.length, "pink", firstPillarData);
+    arcGenerator(120, 240, 120/secondPillarData.array.length, "orange", secondPillarData);
+    arcGenerator(240, 360, 120/thirdPillarData.array.length, "purple", thirdPillarData);
     // arcGenerator(0, 120, 10, "pink");
     // arcGenerator(120, 240, 20, "orange");
     // arcGenerator(240, 360, 30, "purple");
     // specifies where we start, where we end, the distant between orbitters and
     // what color we want our pillar to be
-    function arcGenerator(initialDegree, finalDegree, gapBetweenDegree, color){
+    function arcGenerator(initialDegree, finalDegree, gapBetweenDegree, color, currentPillar){
       // since the unit circle starts at 3 o'clock, shift it back
+      var whichText = 0;
+
       for(var i = initialDegree - 80; i < finalDegree -100; i+=gapBetweenDegree){
         // use this to alternate heights
         if(leveler == true){
@@ -157,6 +159,22 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             initialY: orbitterY,
             initialR: orbitRadius
         });
+        var orbitterText = layerFront.append("text").attr({
+          x: orbitterX,
+          y: orbitterY,
+          "font-family": "sans-serif",
+          "font-size": "12px",
+          // text: "asdf",
+          stroke: "black",
+          fill: "black",
+          opacity: 1,
+          originX: originX,
+          originY: originY,
+          initialX: orbitterX,
+          initialY: orbitterY
+        }).style("text-anchor", "middle")
+        .text(currentPillar.array[whichText].name);
+        whichText++;
       }
     }
     // set up our click handlers for our orbitters and sustainableCircle
@@ -189,6 +207,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
           cy: originY,
           r: d3.select(currentCircle).attr("r")*3.5
         })
+        
         // Do the same to the sustainableCircle, but offset it down and to the
         // left
         sustainableCircle.transition()
