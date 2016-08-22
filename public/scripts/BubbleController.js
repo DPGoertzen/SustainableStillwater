@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('BubbleController', ['DataService', '$element', function(DataService, $element){
+angular.module('ssmnApp').controller('BubbleController', ['DataService', '$element', '$mdMedia', '$mdDialog', function(DataService, $element, $mdMedia, $mdDialog){
 
   var $ctrl = this;
   //THIS MAY NEED TO CHANGE. This should watch for angular changes, but needs testing
@@ -20,10 +20,6 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
   })
 
-  // var data = DataService.data;
-
-
-
 
   function createBubbles() {
     // global variables needed for our sketch
@@ -39,6 +35,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     var ourCircles;
     var ourLines;
     var whichOrbitter = 0;
+    var useFullScreen;
     // create our canvas
     var svg = d3.select("#canvas").append("svg")
     .attr("width", width)
@@ -110,15 +107,15 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     arcGenerator(0, 120, 120/firstPillarData.array.length, "pink", firstPillarData);
     arcGenerator(120, 240, 120/secondPillarData.array.length, "orange", secondPillarData);
     arcGenerator(240, 360, 120/thirdPillarData.array.length, "purple", thirdPillarData);
-    // arcGenerator(0, 120, 10, "pink");
-    // arcGenerator(120, 240, 20, "orange");
-    // arcGenerator(240, 360, 30, "purple");
+
+
     // specifies where we start, where we end, the distant between orbitters and
     // what color we want our pillar to be
-
+    var whichText;
     function arcGenerator(initialDegree, finalDegree, gapBetweenDegree, color, currentPillar){
       // since the unit circle starts at 3 o'clock, shift it back
-      var whichText = 0;
+      whichText = 0;
+      console.log("our array length is", currentPillar.array.length);
       if(currentPillar.array.length != 0){
         for(var i = initialDegree - 80; i < finalDegree -100; i+=gapBetweenDegree){
           // use this to alternate heights
@@ -160,16 +157,16 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             originY: originY,
             initialX: orbitterX,
             initialY: orbitterY,
-            initialR: orbitRadius,
-            initiativeData: currentPillar.array[whichText]
-          });
+            initialR: orbitRadius
+          }).datum(currentPillar.array[whichText]);
+
+
           var orbitterText = layerFront.append("text").attr({
             class: "orbitter" + whichOrbitter,
             x: orbitterX,
             y: orbitterY,
             "font-family": "sans-serif",
             "font-size": "12px",
-            // text: "asdf",
             stroke: "black",
             fill: "black",
             opacity: 1,
@@ -260,6 +257,21 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         isTransformed = true;
         // if our initiativeRectangle is not displayed, display it.
         }else if(!isIniativeBoxDisplayed){
+          useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+          console.log("d3.select(currentCircle).attr('initiativeData') is currently", d3.select(currentCircle).datum());
+          $mdDialog.show({
+            templateUrl: 'views/initview.html',
+            controller: 'InitViewController',
+            controllerAs: 'initview',
+            fullscreen: useFullScreen,
+            clickOutsideToClose: true,
+            ariaLabel: 'Good',
+            locals: {
+             init: d3.select(currentCircle).datum()
+            }
+          })
+
+
           var initiativeRectangle = layerFront.append("rect").attr({
             class: "initiativeRectangle",
             x: .8*width,
