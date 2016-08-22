@@ -271,18 +271,6 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             }
           })
 
-
-          var initiativeRectangle = layerFront.append("rect").attr({
-            class: "initiativeRectangle",
-            x: .8*width,
-            y: 0,
-            rx: 20,
-            ry: 20,
-            width: .2*width,
-            height: height,
-            stroke: "black",
-            fill: "aqua"
-          });
           isIniativeBoxDisplayed = true;
         // we've clicked currentCircle twice, so get rid of the
         // initiativeRectangle
