@@ -71,6 +71,9 @@ passport.use('local', new LocalStrategy({
       return done(null, false);
     }
     user.comparePassword(password, function(err, isMatch){
+      if(err){
+        throw err;
+      }
       if (isMatch) {
         // successfully auth the user
         return done(null, user);

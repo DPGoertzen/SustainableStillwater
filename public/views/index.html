@@ -36,8 +36,8 @@
 
 
 
-    <a href="/login" ng-if="ssmn.loggedInStatus='false'">Login</a>
-    <a href="/logout" ng-if="ssmn.loggedInStatus='true'">Logout</a>
+    <a href="/login" ng-show="!loggedIn">Login</a>
+    <a href="/logout" ng-show="loggedIn">Logout</a>
     <!-- <md-button class="md-primary md-raised" ng-click="ssmn.login()">Login</md-button> -->
     <div ng-view>
 

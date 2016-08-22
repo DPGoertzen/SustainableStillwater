@@ -2,9 +2,13 @@ angular.module('ssmnApp').controller('SSMNController', function(DataService,User
   var vm = this;
 
 
-  vm.loggedInStatus = UserService.data.loggedIn;
+  if(UserService.data.loggedIn == false){
+    vm.loggedIn = false;
+  } else {
+    vm.loggedIn = true;
+  }
 
-  console.log(vm.loggedInStatus);
+
 
   // vm.login = function() {
   //
