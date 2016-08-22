@@ -1,5 +1,9 @@
 angular.module('ssmnApp').config(function($routeProvider, $locationProvider){
   $routeProvider
+  .when('/', {
+    controller: 'SSMNController',
+    controllerAs: 'ssmn'
+  })
   .when('/login', {
     templateUrl: 'views/login.html',
     controller: 'LoginController',

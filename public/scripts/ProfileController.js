@@ -18,7 +18,7 @@ angular.module('ssmnApp').controller('ProfileController', function($http, $locat
   }
   findInitiatives();
 
-  vm.action = function(init) {
+  vm.initModal = function(init) {
     console.log('ya clicked it');
     console.log('The initiative is', init);
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));

@@ -1,8 +1,9 @@
-angular.module('ssmnApp').controller('LoginController', function($http, $location){
+angular.module('ssmnApp').controller('LoginController', function($http, $location, UserService){
   var vm = this;
 
   vm.username = '';
   vm.password = '';
+
 
   vm.login = function(){
 
@@ -16,6 +17,8 @@ angular.module('ssmnApp').controller('LoginController', function($http, $locatio
 
   function handleSuccess(response){
     console.log('Success', response);
+    UserService.data.loggedIn = true;
+    // console.log('UserService', UserService.data.loggedIn);
     $location.path('/profile');
   };
 

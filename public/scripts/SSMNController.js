@@ -1,5 +1,10 @@
-angular.module('ssmnApp').controller('SSMNController', function(DataService, $mdMedia, $mdDialog){
+angular.module('ssmnApp').controller('SSMNController', function(DataService,UserService, $mdMedia, $mdDialog){
   var vm = this;
+
+
+  vm.loggedInStatus = UserService.data.loggedIn;
+
+  console.log(vm.loggedInStatus);
 
   // vm.login = function() {
   //
