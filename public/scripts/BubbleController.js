@@ -119,69 +119,70 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     function arcGenerator(initialDegree, finalDegree, gapBetweenDegree, color, currentPillar){
       // since the unit circle starts at 3 o'clock, shift it back
       var whichText = 0;
+      if(currentPillar.array.length != 0){
+        for(var i = initialDegree - 80; i < finalDegree -100; i+=gapBetweenDegree){
+          // use this to alternate heights
+          if(leveler == true){
+            leveler = false;
+          } else {
+            leveler = true;
+          }
 
-      for(var i = initialDegree - 80; i < finalDegree -100; i+=gapBetweenDegree){
-        // use this to alternate heights
-        if(leveler == true){
-          leveler = false;
-        } else {
-          leveler = true;
+          // do the hard math (THANKS RYAN MULCAHY) to position our orbitters at a
+          // height based on whether leveler is true or false
+          var orbitterX = (originX + ((outerCircleRadius * (leveler ? .9:1.25)) * Math.cos(i*(Math.PI/180))));
+          var orbitterY = (originY + ((outerCircleRadius * (leveler ? .9:1.25)) * Math.sin(i*(Math.PI/180))));
+
+          // set our orbitter's radii.
+          var orbitRadius = 50;
+          // generate a line from the center of the orbitter to the center of
+          // our origin.
+          var orbitterLine = layerBack.append("line").attr({
+            x1: orbitterX,
+            y1: orbitterY,
+            x2: originX,
+            y2: originY,
+            stroke: "black"
+          });
+          // create our orbitting circles, storing information about initial
+          // placement so we can retrieve it when we shift them around the
+          // screen
+          var orbitter = layerFront.append("circle").attr({
+            id: "orbitter" + whichOrbitter,
+            class: "orbitter",
+            cx: orbitterX,
+            cy: orbitterY,
+            r: orbitRadius,
+            opacity: 1,
+            fill: color,
+            stroke: "black",
+            originX: originX,
+            originY: originY,
+            initialX: orbitterX,
+            initialY: orbitterY,
+            initialR: orbitRadius,
+            initiativeData: currentPillar.array[whichText]
+          });
+          var orbitterText = layerFront.append("text").attr({
+            class: "orbitter" + whichOrbitter,
+            x: orbitterX,
+            y: orbitterY,
+            "font-family": "sans-serif",
+            "font-size": "12px",
+            // text: "asdf",
+            stroke: "black",
+            fill: "black",
+            opacity: 1,
+            originX: originX,
+            originY: originY,
+            initialX: orbitterX,
+            initialY: orbitterY,
+            initialFontSize: "12px"
+          }).style("text-anchor", "middle")
+          .text(currentPillar.array[whichText].name);
+          whichText++;
+          whichOrbitter++;
         }
-        // console.log("whichOrbitter is", whichOrbitter);
-
-        // do the hard math (THANKS RYAN MULCAHY) to position our orbitters at a
-        // height based on whether leveler is true or false
-        var orbitterX = (originX + ((outerCircleRadius * (leveler ? .9:1.25)) * Math.cos(i*(Math.PI/180))));
-        var orbitterY = (originY + ((outerCircleRadius * (leveler ? .9:1.25)) * Math.sin(i*(Math.PI/180))));
-
-        // set our orbitter's radii.
-        var orbitRadius = 50;
-        // generate a line from the center of the orbitter to the center of
-        // our origin.
-        var orbitterLine = layerBack.append("line").attr({
-          x1: orbitterX,
-          y1: orbitterY,
-          x2: originX,
-          y2: originY,
-          stroke: "black"
-        });
-        // create our orbitting circles, storing information about initial
-        // placement so we can retrieve it when we shift them around the
-        // screen
-        var orbitter = layerFront.append("circle").attr({
-          id: "orbitter" + whichOrbitter,
-          class: "orbitter",
-          cx: orbitterX,
-          cy: orbitterY,
-          r: orbitRadius,
-          opacity: 1,
-          fill: color,
-          stroke: "black",
-          originX: originX,
-          originY: originY,
-          initialX: orbitterX,
-          initialY: orbitterY,
-          initialR: orbitRadius
-        });
-        var orbitterText = layerFront.append("text").attr({
-          class: "orbitter" + whichOrbitter,
-          x: orbitterX,
-          y: orbitterY,
-          "font-family": "sans-serif",
-          "font-size": "12px",
-          // text: "asdf",
-          stroke: "black",
-          fill: "black",
-          opacity: 1,
-          originX: originX,
-          originY: originY,
-          initialX: orbitterX,
-          initialY: orbitterY,
-          initialFontSize: "12px"
-        }).style("text-anchor", "middle")
-        .text(currentPillar.array[whichText].name);
-        whichText++;
-        whichOrbitter++;
       }
     }
     // set up our click handlers for our orbitters and sustainableCircle
