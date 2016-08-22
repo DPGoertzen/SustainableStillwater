@@ -35,9 +35,10 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     var isIniativeBoxDisplayed = false;
     var isSCircleClicked = false;
     var currentCircle;
+    var currentText;
     var ourCircles;
     var ourLines;
-
+    var whichOrbitter = 0;
     // create our canvas
     var svg = d3.select("#canvas").append("svg")
     .attr("width", width)
@@ -114,6 +115,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     // arcGenerator(240, 360, 30, "purple");
     // specifies where we start, where we end, the distant between orbitters and
     // what color we want our pillar to be
+
     function arcGenerator(initialDegree, finalDegree, gapBetweenDegree, color, currentPillar){
       // since the unit circle starts at 3 o'clock, shift it back
       var whichText = 0;
@@ -125,6 +127,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         } else {
           leveler = true;
         }
+        // console.log("whichOrbitter is", whichOrbitter);
 
         // do the hard math (THANKS RYAN MULCAHY) to position our orbitters at a
         // height based on whether leveler is true or false
@@ -146,20 +149,22 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         // placement so we can retrieve it when we shift them around the
         // screen
         var orbitter = layerFront.append("circle").attr({
-            class: "orbitter",
-            cx: orbitterX,
-            cy: orbitterY,
-            r: orbitRadius,
-            opacity: 1,
-            fill: color,
-            stroke: "black",
-            originX: originX,
-            originY: originY,
-            initialX: orbitterX,
-            initialY: orbitterY,
-            initialR: orbitRadius
+          id: "orbitter" + whichOrbitter,
+          class: "orbitter",
+          cx: orbitterX,
+          cy: orbitterY,
+          r: orbitRadius,
+          opacity: 1,
+          fill: color,
+          stroke: "black",
+          originX: originX,
+          originY: originY,
+          initialX: orbitterX,
+          initialY: orbitterY,
+          initialR: orbitRadius
         });
         var orbitterText = layerFront.append("text").attr({
+          class: "orbitter" + whichOrbitter,
           x: orbitterX,
           y: orbitterY,
           "font-family": "sans-serif",
@@ -171,10 +176,12 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
           originX: originX,
           originY: originY,
           initialX: orbitterX,
-          initialY: orbitterY
+          initialY: orbitterY,
+          initialFontSize: "12px"
         }).style("text-anchor", "middle")
         .text(currentPillar.array[whichText].name);
         whichText++;
+        whichOrbitter++;
       }
     }
     // set up our click handlers for our orbitters and sustainableCircle
@@ -184,7 +191,14 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     function clickedOrbitter(){
       // setting up some local vars and initializing some global vars
       currentCircle = this;
+      currentCircleID = d3.select(this).attr("id");
+      console.log("currentCircleID", currentCircleID);
+
+      currentText = d3.select("." + currentCircleID)//.select("text");
+
+      console.log("currentText", currentText);
       var originCircle = d3.select(".originCircle");
+      ourText = d3.selectAll("text");
       ourCircles = d3.selectAll("circle");
       ourLines = d3.selectAll("line")
       var newCLine;
@@ -207,7 +221,16 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
           cy: originY,
           r: d3.select(currentCircle).attr("r")*3.5
         })
-        
+
+
+        currentText.transition()
+        .duration(750)
+        .attr({
+          x: originX,
+          y: originY,
+          "font-size": "36px"
+        })
+
         // Do the same to the sustainableCircle, but offset it down and to the
         // left
         sustainableCircle.transition()
@@ -225,6 +248,11 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         ourCircles.attr({"opacity": function(){
           return (this === currentCircle || d3.select(this).attr("fill") == "green") ? 1 : 0;
         }});
+
+        ourText.attr({"opacity": 0});
+
+        currentText.attr({"opacity": 1})
+
         // drop the extraneous lines to 0 opacity.
         ourLines.attr({"opacity": 0});
 
@@ -266,6 +294,8 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
           cy: originY,
           r: sustainableCircle.attr("originalScale")
         });
+
+
         // Do the same here -- initialX,Y,R are stored on creation of the
         // orbitter
         d3.select(currentCircle).transition()
@@ -275,6 +305,14 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
           cy: d3.select(currentCircle).attr("initialY"),
           r: d3.select(currentCircle).attr("initialR")
         });
+
+        currentText.transition()
+        .duration(750)
+        .attr({
+          x: currentText.attr("initialX"),
+          y: currentText.attr("initialY"),
+          "font-size": currentText.attr("initialFontSize")
+        })
         // delete our connective line
         d3.select(".newCLine").remove();
         // a helper function to restore our opacity, needs to be a function
@@ -282,7 +320,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         function returnOpacityTo1(){
           ourCircles.attr("opacity", 1);
           ourLines.attr("opacity", 1);
-
+          ourText.attr("opacity", 1);
         }
         // ...we're using setTimeout!
         setTimeout(returnOpacityTo1, 600);
