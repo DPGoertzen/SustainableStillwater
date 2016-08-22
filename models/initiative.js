@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var kpi = require('./kpi').schema;
+var phase = require('./phase').schema;
 
 var initiativeSchema = new Schema ({
   pillar: Number,
@@ -12,7 +12,8 @@ var initiativeSchema = new Schema ({
   image: String,
   website: String,
   otherData: String,
-  kpi: [kpi]
+  approved: Boolean,
+  phase: [phase]
 });
 
 var Initiative = mongoose.model('Initiative', initiativeSchema);

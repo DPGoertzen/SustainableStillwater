@@ -5,12 +5,12 @@ angular.module('ssmnApp').controller('InitViewController', function($http,init,$
   vm.init = init;
   console.log('test', init);
 
-  vm.add = function() {
+  vm.addPhase = function() {
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
     $mdDialog.show({
-      controller: 'KPIController',
-      controllerAs: 'kpi',
-      templateUrl: 'views/kpiform.html',
+      controller: 'PhaseController',
+      controllerAs: 'phase',
+      templateUrl: 'views/phaseform.html',
       fullscreen: useFullScreen,
       clickOutsideToClose: true,
       ariaLabel: 'Good',

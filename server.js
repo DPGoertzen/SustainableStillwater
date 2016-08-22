@@ -14,8 +14,8 @@ var register = require('./routes/register');
 
 var initiativeRouter = require('./routes/init');
 var Initiative = require('./models/initiative');
-var kpiRouter = require('./routes/init');
-var KPI = require('./models/kpi');
+var phaseRouter = require('./routes/init');
+var Phase = require('./models/phase');
 
 
 var mongoURI;
@@ -53,7 +53,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.use('/init', initiativeRouter);
-app.use('/kpi', kpiRouter);
+app.use('/phase', phaseRouter);
 app.use('/login', login);
 app.use('/register', register);
 

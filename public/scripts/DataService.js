@@ -47,7 +47,7 @@ function userRetrievalFail(){
 }
 
 function getAllUserData(){
-  var promise = $http.get('/kpi/allUsers/').then(userRetrievalSuccess, userRetrievalFail);
+  var promise = $http.get('/phase/allUsers/').then(userRetrievalSuccess, userRetrievalFail);
   return promise;
 }
 

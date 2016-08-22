@@ -15,9 +15,9 @@ angular.module('ssmnApp').config(function($routeProvider, $locationProvider){
     controller: 'RegisterController',
     controllerAs: 'register'
   })
-  .when('/kpi', {
-    templateUrl: 'views/kpiform.html',
-    controller: 'KPIController',
+  .when('/phase', {
+    templateUrl: 'views/phaseform.html',
+    controller: 'PhaseController',
     controllerAs: 'kpi'
   })
   .when('/profile', {
@@ -29,6 +29,11 @@ angular.module('ssmnApp').config(function($routeProvider, $locationProvider){
     templateUrl: 'views/initview.html',
     controller: 'InitViewController.js',
     controllerAs: 'initview'
+  })
+  .when('/milestone', {
+    templateUrl: 'views/milestoneform.html',
+    controller: 'MilestoneController.js',
+    controllerAs: 'milestone'
   })
 
   $locationProvider.html5Mode(true);

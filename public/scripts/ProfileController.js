@@ -7,7 +7,8 @@ angular.module('ssmnApp').controller('ProfileController', function($http, $locat
   findInitiatives = function(){
     $http.get('/init/profile').then(function(response){
       console.log('profile', response);
-      var inits = response.data.initiatives;
+      vm.data = response.data;
+      var inits = vm.data.initiatives;
 
       for (var i = 0; i < inits.length; i++) {
         vm.initiativeList.push(inits[i]);

@@ -1,0 +1,11 @@
+<form name="milestoneForm" novalidate ng-submit="milestoneForm.$valid && milestone.submit()">
+  <label for="Label">Phase Name:</label>
+  <input type="text" ng-model="milestone.milestoneName" ng-required="true"/>
+  <br />
+  <label for="Milestone">Milestone Measurement:</label>
+  <select ng-model="milestone.milestoneValue" ng-options="x for x in milestone.milestones" ng-required="true"></select>
+  <label for="Milestone Goal">End Goal: </label>
+  <input type="number" ng-model="milestone.milestoneGoal" ng-required="true"/>
+  <br />
+  <button type="submit">Submit</button>
+</form>

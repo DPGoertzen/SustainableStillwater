@@ -1,7 +1,8 @@
 var router = require('express').Router();
 var User = require('../models/User');
 var Initiative = require('../models/initiative').model;
-var KPI = require('../models/kpi').model;
+var Phase = require('../models/phase').model;
+var Milestone = require('../models/milestone').model;
 
 router.post('/newInit', function(request,response){
   console.log('New Initiative', request.data);
@@ -15,7 +16,8 @@ router.post('/newInit', function(request,response){
     contactName: data.contactName,
     contactPhone: data.contactPhone,
     contactEmail: data.contactEmail,
-    website: data.website
+    website: data.website,
+    approved: false
   })
   createdInitiative.save(function(err){
     if(err){
@@ -39,7 +41,7 @@ router.post('/newInit', function(request,response){
   })
 });
 
-router.get('/userKpi', function(request,response){
+router.get('/userPhase', function(request,response){
   var user = request.user;
   // console.log('user is', user);
 })
@@ -66,8 +68,8 @@ router.get('/allUsers', function(request,response){
 
 
 
-router.post('/newKpi', function(request,response){
-  console.log('kpi', request.body);
+router.post('/newPhase', function(request,response){
+  console.log('phase', request.body);
   var user = request.user;
   var data = request.body;
   var init = request.user.initiatives;
@@ -78,8 +80,8 @@ router.post('/newKpi', function(request,response){
     // console.log('user', user);
 
     var currentInit = user.initiatives.id(id);
-    console.log(currentInit.kpi);
-    currentInit.kpi.push(data);
+    console.log(currentInit.phase);
+    currentInit.phase.push(data);
 
     user.save(function(err){
       if(err){

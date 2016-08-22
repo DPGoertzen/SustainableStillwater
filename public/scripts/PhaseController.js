@@ -1,10 +1,8 @@
-angular.module('ssmnApp').controller('KPIController', function($http, $location, init, $mdDialog){
+angular.module('ssmnApp').controller('PhaseController', function($http, $location, init, $mdDialog){
   var vm = this;
 
-  vm.milestones = ["Monetary", "CheckBox", "Number"]
 
-
-  $http.get('/init/userKpi').then(function(response){
+  $http.get('/init/userPhase').then(function(response){
     console.log('http kpi',response);
   })
 
@@ -22,8 +20,8 @@ angular.module('ssmnApp').controller('KPIController', function($http, $location,
 
 
 
-    console.log('kpi',sendData);
-    $http.post('/init/newKpi', sendData).then(function(response){
+    console.log('phase',sendData);
+    $http.post('/init/newPhase', sendData).then(function(response){
       console.log('Success', response);
       $mdDialog.hide();
     }, function(response){
