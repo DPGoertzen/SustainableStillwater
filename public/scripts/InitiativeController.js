@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('InitiativeController', function($http, $location,$mdDialog){
+angular.module('ssmnApp').controller('InitiativeController', function($http, $location,$mdDialog, UserService){
   var vm = this;
 
   vm.pillars = [1,2,3];
@@ -22,6 +22,7 @@ angular.module('ssmnApp').controller('InitiativeController', function($http, $lo
     $http.post('/init/newInit', sendData).then(function(response){
       console.log('Successfully posted', response);
       $mdDialog.hide();
+      UserService.findInitiatives();
     }, function(response){
       console.log('Fail to post');
     });

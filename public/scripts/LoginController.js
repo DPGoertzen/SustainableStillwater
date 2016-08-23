@@ -17,8 +17,7 @@ angular.module('ssmnApp').controller('LoginController', function($http, $locatio
 
   function handleSuccess(response){
     console.log('Success', response);
-    UserService.data.loggedIn = true;
-    console.log('UserService', UserService.data.loggedIn);
+    UserService.updateLoggedInStatus(true);
     $location.path('/profile');
   };
 

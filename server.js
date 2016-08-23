@@ -59,6 +59,13 @@ app.use('/phase', phaseRouter);
 app.use('/login', login);
 app.use('/register', register);
 
+app.get('/logout', function(request, response){
+  console.log('Logging Out');
+  request.session.destroy();
+  request.logout();
+  response.redirect('/');
+})
+
 passport.use('local', new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password'

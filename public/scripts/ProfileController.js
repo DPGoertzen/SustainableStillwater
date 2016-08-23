@@ -1,22 +1,18 @@
-angular.module('ssmnApp').controller('ProfileController', function($http, $location, $mdMedia, $mdDialog){
+angular.module('ssmnApp').controller('ProfileController', function($http, $location, $mdMedia, $mdDialog, UserService){
 
   var vm = this;
-
-  vm.initiativeList = [];
 
   findInitiatives = function(){
     $http.get('/init/profile').then(function(response){
       console.log('profile', response);
-      vm.data = response.data;
-      var inits = vm.data.initiatives;
+      vm.data = response.data.initiatives;
+      console.log(vm.data);
 
-      for (var i = 0; i < inits.length; i++) {
-        vm.initiativeList.push(inits[i]);
-      }
-      console.log(vm.initiativeList);
     })
   }
   findInitiatives();
+  // vm.data = UserService.findInitiatives();
+  // console.log(vm.data);
 
   vm.initModal = function(init) {
     console.log('ya clicked it');
@@ -45,6 +41,5 @@ angular.module('ssmnApp').controller('ProfileController', function($http, $locat
       clickOutsideToClose: true,
       ariaLabel: 'Good'
     })
-
   }
 })

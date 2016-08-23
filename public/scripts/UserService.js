@@ -9,6 +9,7 @@ angular.module('ssmnApp').factory('UserService', function($http){
     data.loggedIn = status;
   }
 
+
   return {
     data: data,
     updateLoggedInStatus: updateLoggedInStatus

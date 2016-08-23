@@ -3,7 +3,7 @@ angular.module('ssmnApp').controller('PhaseController', function($http, $locatio
 
 
   $http.get('/init/userPhase').then(function(response){
-    console.log('http kpi',response);
+    console.log('http phase',response);
   })
 
   // console.log(init);;
@@ -13,9 +13,7 @@ angular.module('ssmnApp').controller('PhaseController', function($http, $locatio
     var sendData = {};
 
     sendData.label = vm.label;
-    sendData.measurement = vm.milestone;
-    sendData.final = vm.final;
-    sendData.progress = 0;
+    sendData.phaseValue = 0;
     sendData.id = init._id;
 
 

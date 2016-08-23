@@ -9,6 +9,10 @@ angular.module('ssmnApp').config(function($routeProvider, $locationProvider){
     controller: 'LoginController',
     controllerAs: 'login'
   })
+  .when('/logout', {
+    controller: 'SSMNController',
+    controllerAs: 'ssmn'
+  })
   .when('/initiative', {
     templateUrl: 'views/initform.html',
     controller: 'InitiativeController',
