@@ -5,23 +5,25 @@
 
 <ul>
   <li>
-    {{initview.init.objectives}}
+    Objectives: {{initview.init.objectives}}
   </li>
   <li>
-    {{initview.init.website}}
+    Website: <a href="{{initview.init.website}}">{{initview.init.website}}</a>
   </li>
   <li>
-    {{initview.init.pillar}}
+    Pillar: {{initview.init.pillar}}
   </li>
   <li>
-    {{initview.init.contactName}}
-    {{initview.init.contactEmail}}
-    {{initview.init.contactPhone}}
+    Contact Name: {{initview.init.contactName}}
+  <br/>
+    Contact Email: {{initview.init.contactEmail}}
+    <br />
+    Contact Phone: {{initview.init.contactPhone}}
   </li>
 </ul>
-<div ng-repeat="goal in initview.init.phase">
-  {{goal.label}}
+<div ng-repeat="phase in initview.init.phase">
+  <md-button class="md-info" ng-click="initview.phaseView(phase)">{{phase.label}}</md-button>
 </div>
 
-<md-button class="md-primary md-raised" ng-click="initview.addPhase()">Add Phase</md-button>
+<md-button class="md-primary md-raised" ng-if="initview.data.loggedIn" ng-click="initview.addPhase()">Add Phase</md-button>
 </div>
