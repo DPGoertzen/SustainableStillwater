@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('InitViewController', function($http,init,$mdMedia,$mdDialog){
+angular.module('ssmnApp').controller('InitViewController', function($http,init,$mdMedia,$mdDialog,UserService){
 
   var vm = this;
 
@@ -18,5 +18,23 @@ angular.module('ssmnApp').controller('InitViewController', function($http,init,$
         init: init
       }
     })
+  }
+
+  vm.viewPhase = function(phase) {
+    console.log('ya clicked it');
+    console.log('The phase is', phase);
+    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+    $mdDialog.show({
+      templateUrl: 'views/phaseview.html',
+      controller: 'PhaseViewController',
+      controllerAs: 'phaseview',
+      fullscreen: useFullScreen,
+      clickOutsideToClose: true,
+      ariaLabel: 'Good',
+      locals: {
+      init: init
+      }
+    })
+
   }
 })
