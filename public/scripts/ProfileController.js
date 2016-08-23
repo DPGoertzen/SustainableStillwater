@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('ProfileController', function($http, $scope, $location, $mdMedia, $mdDialog){
+angular.module('ssmnApp').controller('ProfileController', function($http, $scope, $location, $mdMedia, $mdDialog, UserService){
 
   var vm = this;
 
@@ -10,6 +10,8 @@ angular.module('ssmnApp').controller('ProfileController', function($http, $scope
     })
   }
 
+  vm.data = UserService.data;
+  console.log(vm.data.username);
   // findInitiatives();
 
   vm.initModal = function(init) {

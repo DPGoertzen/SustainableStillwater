@@ -23,7 +23,7 @@ angular.module('ssmnApp').controller('InitiativeController', function($http, $lo
 
       console.log('Successfully posted', response);
       $mdDialog.hide();
-      UserService.findInitiatives();
+      // UserService.findInitiatives();
     }, function(response){
       console.log('Fail to post');
     });
