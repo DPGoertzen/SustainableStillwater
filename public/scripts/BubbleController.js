@@ -64,7 +64,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
 
     // build our pillar dividers
-    var pillarLine1 = layerBack.append("line").attr({
+    var pillarLineRight = layerBack.append("line").attr({
       x1: originX,
       y1: originY,
       x2: width,
@@ -73,7 +73,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       'stroke-width': 5
     });
 
-    var pillarLine2 = layerBack.append("line").attr({
+    var pillarLineLeft = layerBack.append("line").attr({
       x1: originX,
       y1: originY,
       x2: 0,
@@ -82,7 +82,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       'stroke-width': 5
     });
 
-    var pillarLine2 = layerBack.append("line").attr({
+    var pillarLineUp = layerBack.append("line").attr({
       x1: originX,
       y1: originY,
       x2: .5*width,
@@ -117,7 +117,9 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       whichText = 0;
       console.log("our array length is", currentPillar.array.length);
       if(currentPillar.array.length != 0){
-        for(var i = initialDegree - 80; i < finalDegree -100; i+=gapBetweenDegree){
+        var i = initialDegree -90
+        for(var j = 0; j<currentPillar.array.length; j++){
+
           // use this to alternate heights
           if(leveler == true){
             leveler = false;
@@ -179,6 +181,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
           .text(currentPillar.array[whichText].name);
           whichText++;
           whichOrbitter++;
+          i+=gapBetweenDegree;
         }
       }
     }

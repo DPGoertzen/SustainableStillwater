@@ -1,14 +1,21 @@
-angular.module('ssmnApp').controller('ProfileController', function($http, $scope, $location, $mdMedia, $mdDialog){
+angular.module('ssmnApp').controller('ProfileController', function($http, $scope, $location, $mdMedia, $mdDialog, UserService){
 
   var vm = this;
+  vm.findInitiatives = UserService.findInitiatives;
+  vm.findInitiatives();
+  vm.data = UserService.data;
+  // console.log("our vm.data initially is", vm.data);
 
-  findInitiatives = function(){
-    $http.get('/init/profile').then(function(response){
-      console.log('profile', response);
-      vm.data = response.data.initiatives;
-      console.log(vm.data);
-    })
-  }
+
+  console.log("and outside the promise vm.data is going to be undefined, like so:", vm.data);
+
+  // findInitiatives = function(){
+  //   $http.get('/init/profile').then(function(response){
+  //     console.log('profile', response);
+  //     vm.data = response.data.initiatives;
+  //     console.log(vm.data);
+  //   })
+  // }
 
   // findInitiatives();
 
@@ -40,8 +47,5 @@ angular.module('ssmnApp').controller('ProfileController', function($http, $scope
       ariaLabel: 'Good'
     })
   }
-  $scope.$watchCollection('vm.initiativeList', function(){
-    console.log("the watch listener fired");
-    findInitiatives();
-  })
+
 })
