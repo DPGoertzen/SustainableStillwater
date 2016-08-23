@@ -1,21 +1,5 @@
 <div class="container">
   <h1>{{initview.init.name}}</h1>
-  <ul>
-      <li>
-        {{initview.init.objectives}}
-      </li>
-      <li>
-        {{initview.init.website}}
-      </li>
-      <li>
-        {{initview.init.pillar}}
-      </li>
-      <li>
-        {{initview.init.contactName}}
-        {{initview.init.contactEmail}}
-        {{initview.init.contactPhone}}
-      </li>
-  </ul>
   <div ng-repeat="goal in initview.init.phase">
       {{goal.label}}
   </div>
