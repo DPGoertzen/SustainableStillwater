@@ -18,8 +18,14 @@ angular.module('ssmnApp').controller('LoginController', function($http, $locatio
   function handleSuccess(response){
     console.log('Success', response);
     UserService.updateLoggedInStatus(true);
-    
-    $location.path('/profile');
+    UserService.getUsername(response.config.data.username)
+
+    if(response.config.data.username == 'admin'){
+      $location.path('/admin')
+    } else {
+      $location.path('/profile');
+    }
+
   };
 
   function handleFailure(response){

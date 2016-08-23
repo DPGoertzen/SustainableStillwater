@@ -17,6 +17,8 @@ angular.module('ssmnApp').controller('ProfileController', function($http, $scope
   //   })
   // }
 
+  vm.data = UserService.data;
+  console.log(vm.data.username);
   // findInitiatives();
 
   vm.initModal = function(init) {

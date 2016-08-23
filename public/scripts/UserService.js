@@ -12,6 +12,10 @@ angular.module('ssmnApp').factory('UserService', function($http){
     data.loggedIn = status;
   }
 
+  function getUsername(username){
+    data.username = username;
+  }
+
   findInitiatives = function(){
     return $http.get('/init/profile').then(function(response){
       console.log('profile', response);
@@ -21,10 +25,10 @@ angular.module('ssmnApp').factory('UserService', function($http){
     })
   }
 
-
   return {
     data: data,
     updateLoggedInStatus: updateLoggedInStatus,
+    getUsername: getUsername,
     findInitiatives: findInitiatives
   }
 })

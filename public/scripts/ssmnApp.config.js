@@ -33,6 +33,11 @@ angular.module('ssmnApp').config(function($routeProvider, $locationProvider){
     controller: 'ProfileController',
     controllerAs: 'profile'
   })
+  .when('/admin', {
+    templateUrl: 'views/admin.html',
+    controller: 'AdminController',
+    controllerAs: 'admin'
+  })
   .when('/initView', {
     templateUrl: 'views/initview.html',
     controller: 'InitViewController.js',
