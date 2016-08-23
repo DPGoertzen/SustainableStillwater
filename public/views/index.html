@@ -18,7 +18,7 @@
     <script src="scripts/InitViewController.js" charset="utf-8"></script>
     <script src="scripts/LoginController.js" charset="utf-8"></script>
     <script src="scripts/RegisterController.js" charset="utf-8"></script>
-    <script src="scripts/PhaseController.js" charset="utf-8"></script>
+    <script src="scripts/KPIController.js" charset="utf-8"></script>
     <script src="scripts/DataService.js" charset="utf-8"></script>
     <script src="scripts/UserService.js" charset="utf-8"></script>
     <script src="scripts/client.js" charset="utf-8"></script>
@@ -30,6 +30,7 @@
     <title>Sustainable Stillwater Data Visualization</title>
   </head>
   <body ng-controller="SSMNController as ssmn">
+
     <a href="/login" ng-if="!ssmn.data.loggedIn">Login</a>
     <a href="/logout" ng-if="ssmn.data.loggedIn" ng-click="ssmn.logout()">Logout</a>
     <!-- <md-button class="md-primary md-raised" ng-click="ssmn.login()">Login</md-button> -->
@@ -40,8 +41,6 @@
     <bubbles>
       <div id="canvas"></div>
     </bubbles>
-
-
 
 
   </body>

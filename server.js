@@ -26,7 +26,9 @@ var app = express();
 
 if(process.env.MONGODB_URI != undefined){
   mongoURI = process.env.MONGODB_URI
-} else {
+}else if (process.env.NODE_ENV == 'test'){
+  mongoURI = 'mongodb://localhost:27017/sustainableStillwater_test';
+}else {
   mongoURI = 'mongodb://localhost:27017/sustainableStillwater';
 }
 
@@ -37,7 +39,7 @@ MongoDB.on('error', function(err) {
 });
 
 MongoDB.once('open', function(){
-  console.log('Mongo is ready to go, boys');
+  console.log('Mongo is ready to go, folks');
 });
 
 app.use(session({
@@ -113,3 +115,5 @@ var port = process.env.PORT || 3000;
 var server = app.listen(port, function () {
   console.log('Server listening on ' + server.address().port);
 });
+
+module.exports = server;
