@@ -52,9 +52,11 @@ function getAllUserData(){
 }
 
 
+
 return{
   data: data,
-  getAllUserData: getAllUserData
+  getAllUserData: getAllUserData,
+
 
 }
 });
