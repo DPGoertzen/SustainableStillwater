@@ -30,18 +30,19 @@
     <title>Sustainable Stillwater Data Visualization</title>
   </head>
   <body ng-controller="SSMNController as ssmn">
-    <h1>Test. {{3+3}}</h1>
-    <bubbles>
-      <div id="canvas"></div>
-    </bubbles>
-
-
-
     <a href="/login" ng-if="!ssmn.data.loggedIn">Login</a>
     <a href="/logout" ng-if="ssmn.data.loggedIn" ng-click="ssmn.logout()">Logout</a>
     <!-- <md-button class="md-primary md-raised" ng-click="ssmn.login()">Login</md-button> -->
     <div ng-view>
 
     </div>
+
+    <bubbles>
+      <div id="canvas"></div>
+    </bubbles>
+
+
+
+
   </body>
 </html>
