@@ -1,5 +1,8 @@
-angular.module('ssmnApp').controller('AdminController', function($http, DataService){
+angular.module('ssmnApp').controller('AdminController', function($http, UserService){
+  var vm = this;
 
-  console.log(DataService.data);
+
+  vm.pending = UserService.getAllInitsPending();
+  console.log(vm.pending);
 
 })
