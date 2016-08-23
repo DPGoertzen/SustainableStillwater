@@ -20,6 +20,7 @@ angular.module('ssmnApp').controller('InitiativeController', function($http, $lo
 
 
     $http.post('/init/newInit', sendData).then(function(response){
+
       console.log('Successfully posted', response);
       $mdDialog.hide();
       UserService.findInitiatives();

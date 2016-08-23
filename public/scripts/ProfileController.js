@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('ProfileController', function($http, $location, $mdMedia, $mdDialog, UserService){
+angular.module('ssmnApp').controller('ProfileController', function($http, $scope, $location, $mdMedia, $mdDialog){
 
   var vm = this;
 
@@ -7,12 +7,10 @@ angular.module('ssmnApp').controller('ProfileController', function($http, $locat
       console.log('profile', response);
       vm.data = response.data.initiatives;
       console.log(vm.data);
-
     })
   }
-  findInitiatives();
-  // vm.data = UserService.findInitiatives();
-  // console.log(vm.data);
+
+  // findInitiatives();
 
   vm.initModal = function(init) {
     console.log('ya clicked it');
@@ -42,4 +40,8 @@ angular.module('ssmnApp').controller('ProfileController', function($http, $locat
       ariaLabel: 'Good'
     })
   }
+  $scope.$watchCollection('vm.initiativeList', function(){
+    console.log("the watch listener fired");
+    findInitiatives();
+  })
 })
