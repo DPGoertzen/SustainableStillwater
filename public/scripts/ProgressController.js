@@ -7,8 +7,6 @@ angular.module('ssmnApp').controller('ProgressController', ['DataService', '$ele
   $scope.createDials = createDials;
   createDials();
 
-  vm.message = "Hello!"
-
   function createDials() {
 
 
@@ -172,9 +170,9 @@ angular.module('ssmnApp').controller('ProgressController', ['DataService', '$ele
         for (var j = 0; j < vm.initPhases[i].mileStones.length; j++) {
           // console.log('Each Milestone',vm.initPhases[i].mileStones[j].value);
           values.push(vm.initPhases[i].mileStones[j].value);
-          // console.log('Values array', values);
         }
       }
+      console.log('Values array', values);
       return values;
     }, function() {
         for(var k = 0; k < vm.initPhases.length; k++){
@@ -183,12 +181,13 @@ angular.module('ssmnApp').controller('ProgressController', ['DataService', '$ele
           for (var l = 0; l < vm.initPhases[k].mileStones.length; l++) {
             var milestone = vm.initPhases[k].mileStones[l];
             console.log('MS value', milestone.value);
-            arrayMsPercent.push((milestone.value/milestone.msOptions.max)/(vm.initPhases[k].mileStones.length)*100);
-            console.log('milestone percent', arrayMsPercent);
+            tempValue += (milestone.value/milestone.msOptions.max)/(vm.initPhases[k].mileStones.length)*100;
+            // console.log('milestone percent', arrayMsPercent);
           }
-          for (var m = 0; m < arrayMsPercent.length; m++) {
-           tempValue += arrayMsPercent.pop();
-          }
+          // for (var m = 0; m < arrayMsPercent.length; m++) {
+          //  tempValue += arrayMsPercent.pop();
+          // m--
+          // }
         //  console.log('Total Percent', tempValue);
          vm.initPhases[k].phaseValue = tempValue;
         }
