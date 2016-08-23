@@ -102,17 +102,33 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         stroke: "black",
         originalScale: innerCircleRadius
     });
+    var sustainableText = layerFront.append("text").attr({
+      class: "orbitter" + whichOrbitter,
+      x: originX,
+      y: originY,
+      "font-family": "Raleway",
+      "font-size": "24px",
+      stroke: "white",
+      fill: "white",
+      opacity: 1,
+      originX: originX,
+      originY: originY,
+      initialX: originX,
+      initialY: originY,
+      initialFontSize: "24px"
+    }).style("text-anchor", "middle")
+    .text("SSMN");
 
     // generate our pillars
-    arcGenerator(0, 120, 120/firstPillarData.array.length, "pink", firstPillarData);
-    arcGenerator(120, 240, 120/secondPillarData.array.length, "orange", secondPillarData);
-    arcGenerator(240, 360, 120/thirdPillarData.array.length, "purple", thirdPillarData);
+    arcGenerator(0, 120, 120/firstPillarData.array.length, "pink", firstPillarData, "black");
+    arcGenerator(120, 240, 120/secondPillarData.array.length, "orange", secondPillarData, "black");
+    arcGenerator(240, 360, 120/thirdPillarData.array.length, "purple", thirdPillarData, "white");
 
 
     // specifies where we start, where we end, the distant between orbitters and
     // what color we want our pillar to be
     var whichText;
-    function arcGenerator(initialDegree, finalDegree, gapBetweenDegree, color, currentPillar){
+    function arcGenerator(initialDegree, finalDegree, gapBetweenDegree, color, currentPillar, textColor){
       // since the unit circle starts at 3 o'clock, shift it back
       whichText = 0;
       console.log("our array length is", currentPillar.array.length);
@@ -167,10 +183,10 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             class: "orbitter" + whichOrbitter,
             x: orbitterX,
             y: orbitterY,
-            "font-family": "sans-serif",
+            "font-family": "Raleway",
             "font-size": "12px",
-            stroke: "black",
-            fill: "black",
+            stroke: textColor,
+            fill: textColor,
             opacity: 1,
             originX: originX,
             originY: originY,
@@ -242,6 +258,13 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             r: sustainableCircle.attr("r")*.3
           })
 
+        sustainableText.transition()
+        .duration(750)
+        .attr({
+          x: originX - 250,
+          y: originY + 200,
+          "font-size": "12px"
+        })
 
         // if ourCircles are the current circle OR it's the central
         // sustainableCircle, make their opacity full
@@ -252,8 +275,8 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
         ourText.attr({"opacity": 0});
 
-        currentText.attr({"opacity": 1})
-
+        currentText.attr({"opacity": 1});
+        sustainableText.attr({opacity: 1});
         // drop the extraneous lines to 0 opacity.
         ourLines.attr({"opacity": 0});
 
@@ -296,6 +319,13 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
           r: sustainableCircle.attr("originalScale")
         });
 
+        sustainableText.transition()
+        .duration(750)
+        .attr({
+          x: originX,
+          y: originY,
+          "font-size": "36px"
+        })
 
         // Do the same here -- initialX,Y,R are stored on creation of the
         // orbitter
