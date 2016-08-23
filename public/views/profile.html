@@ -1,12 +1,15 @@
 
+<div layout="row" layout-wrap layout-margin layout-align="center">
+  <div ng-repeat="init in profile.data.initiatives">
+    <md-button class="md-primary md-raised" ng-click="profile.initModal(init)">Initiative: {{init.name}}</md-button>
 
-<div ng-repeat="init in profile.data.initiatives">
-  <md-button class="md-primary md-raised" ng-click="profile.initModal(init)">Initiative: {{init.name}}</md-button>
-  <!-- <a href="/kpi">Add a Milestone</a> -->
-  <div hide-gt-sm layout="row" layout-align="center center" flex="100">
+  </div>
+  <div >
+    <md-button class="md-primary md-raised" layout-wrap layout-margin layout-align="center" ng-click="profile.newInit()">Create a New Initiative</md-button>
 
   </div>
 </div>
 
-<md-button class="md-primary md-raised" ng-click="profile.newInit()">Create a New Initiative</md-button>
+
+<!-- <md-button class="md-primary md-raised" layout-wrap layout-margin layout-align="center" ng-click="profile.newInit()">Create a New Initiative</md-button> -->
 <!-- <a href="/initiative">Create a New Initiative</a> -->
