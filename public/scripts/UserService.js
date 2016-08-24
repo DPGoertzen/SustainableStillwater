@@ -6,9 +6,6 @@ angular.module('ssmnApp').factory('UserService', function($http){
 
   };
 
-  var initApprovedArray = [];
-  var initPendingArray = [];
-
   data.loggedIn = false;
 
 
@@ -53,7 +50,7 @@ angular.module('ssmnApp').factory('UserService', function($http){
     console.log('error retrieving users');
   }
 
-  function getAllInitsPending(){
+  function getPendingInits(){
     var promise = $http.get('/phase/allUsers/').then(userRetrievalSuccess, userRetrievalFail);
     return promise;
   }
@@ -63,6 +60,6 @@ angular.module('ssmnApp').factory('UserService', function($http){
     updateLoggedInStatus: updateLoggedInStatus,
     getUsername: getUsername,
     findInitiatives: findInitiatives,
-    getAllInitsPending: getAllInitsPending
+    getPendingInits: getPendingInits
   }
 })
