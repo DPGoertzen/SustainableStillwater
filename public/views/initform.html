@@ -7,8 +7,26 @@
     <label for="Objectives">Objectives:</label>
     <input type="text" ng-model="init.objectives" ng-required="true"/>
     <br />
-    <label for="Pillar">Pillar:</label>
-    <select ng-model="init.pillar" ng-options="x for x in init.pillars" ></select>
+    <h3>Pillars</h3>
+    <ol>
+      <li>
+        <h4>Healthy and Connected Community</h4>
+        <p>Healthy, active living. Equitable, accessible and socially connected communities</p>
+        <input type="radio" ng-value="1" ng-model="init.pillar" />
+      </li>
+      <li>
+        <h4>Local Business Vitality</h4>
+          <p>Socially conscious and earth friendtly local businesses supported by local consumers and destination-minded tourists</p>
+        <input type="radio" ng-value="2" ng-model="init.pillar" />
+      </li>
+      <li>
+        <h4>Resource & Environmental Stewardship</h4>
+          <p>Resource conservation, energy and waster reduction. Supporting renewablees and earth-friendly practices.</p>
+        <input type="radio" ng-value="3" ng-model="init.pillar" />
+      </li>
+    </ol>
+    <!-- <label for="Pillar">Pillar:</label>
+    <select ng-model="init.pillar" ng-options="x for x in init.pillars" ></select> -->
     <label for="Website">Website:</label>
     <input type="text" ng-model="init.website" ng-required="true" ng-required="true"/>
     <br />

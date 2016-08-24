@@ -5,6 +5,9 @@ angular.module('ssmnApp').controller('InitViewController', function($http,init,$
   vm.init = init;
   console.log('test', init);
 
+  vm.data = UserService.data;
+  console.log(vm.data);
+
   vm.addPhase = function() {
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
     $mdDialog.show({
