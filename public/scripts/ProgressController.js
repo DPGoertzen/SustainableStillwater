@@ -47,14 +47,14 @@ angular.module('ssmnApp').controller('ProgressController', ['DataService', '$ele
         msOptions: {
           skin: {
             type: 'tron',
-            width: 5,
+            width: 3,
             spaceWidth: 2
           },
-          size: 90,
+          size: 100,
           unit: '$',
           max: 4000,
           trackWidth: 20,
-          barWidth: 20,
+          barWidth: 15,
           trackColor: 'rgba(255,0,0,.1)',
           prevBarColor: 'rgba(0,0,0,.2)',
           readOnly: false,
@@ -68,14 +68,14 @@ angular.module('ssmnApp').controller('ProgressController', ['DataService', '$ele
         msOptions: {
           skin: {
             type: 'tron',
-            width: 5,
+            width: 3,
             spaceWidth: 2
           },
-          size: 90,
+          size: 100,
           unit: '%',
           max: 100,
           trackWidth: 20,
-          barWidth: 20,
+          barWidth: 15,
           trackColor: 'rgba(255,0,0,.1)',
           prevBarColor: 'rgba(0,0,0,.2)',
           readOnly: false,
@@ -89,14 +89,14 @@ angular.module('ssmnApp').controller('ProgressController', ['DataService', '$ele
         msOptions:{
           skin: {
             type: 'tron',
-            width: 5,
+            width: 3,
             spaceWidth: 2
           },
           size: 100,
           unit: '',
           max: 1,
           trackWidth: 20,
-          barWidth: 20,
+          barWidth: 15,
           trackColor: 'rgba(255,0,0,.1)',
           prevBarColor: 'rgba(0,0,0,.2)',
           readOnly: false,
