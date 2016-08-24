@@ -22,15 +22,9 @@ angular.module('ssmnApp').controller('AdminController', function($http, $mdMedia
       }
     })
   }
-  // var pendingPromise = UserService.getPendingInits();
-  // pendingPromise.then(function(resultingData){
-  //   data = resultingData;
-  //   pendingInits = data.initPendingArray;
-  //   approvedInits = data.initApprovedArray;
+
 
     console.log('Inits pending approval are', vm.data.initPendingArray);
     console.log('Inits that are approved are', vm.data.initApprovedArray);
-
-  // })
 
 })
