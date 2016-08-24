@@ -19,6 +19,7 @@ router.post('/newInit', function(request,response){
     website: data.website,
     approved: false
   })
+  console.log('here is the new init',createdInitiative);
   createdInitiative.save(function(err){
     if(err){
       console.log(err);

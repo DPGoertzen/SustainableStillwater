@@ -5,26 +5,23 @@
     <input type="text" ng-model="init.name" ng-required="true"/>
     <br />
     <label for="Objectives">Objectives:</label>
-    <input type="text" ng-model="init.objectives" ng-required="true"/>
+    <input type="text" style="width: 500px; " ng-model="init.objectives" ng-required="true"/>
     <br />
     <h3>Pillars</h3>
-    <ol>
+    <ul style="list-style:none">
       <li>
-        <h4>Healthy and Connected Community</h4>
+        <label><input type="radio" ng-value="1" ng-model="init.pillar" />Healthy and Connected Community</label>
         <p>Healthy, active living. Equitable, accessible and socially connected communities</p>
-        <input type="radio" ng-value="1" ng-model="init.pillar" />
       </li>
       <li>
-        <h4>Local Business Vitality</h4>
-          <p>Socially conscious and earth friendtly local businesses supported by local consumers and destination-minded tourists</p>
-        <input type="radio" ng-value="2" ng-model="init.pillar" />
+        <label><input type="radio" ng-value="2" ng-model="init.pillar" />Local Business Vitality</label>
+          <p>Socially conscious and earth friendly local businesses supported by local consumers and destination-minded tourists</p>
       </li>
       <li>
-        <h4>Resource & Environmental Stewardship</h4>
-          <p>Resource conservation, energy and waster reduction. Supporting renewablees and earth-friendly practices.</p>
-        <input type="radio" ng-value="3" ng-model="init.pillar" />
+        <label><input type="radio" ng-value="3" ng-model="init.pillar" />Resource & Environmental Stewardship</label>
+          <p>Resource conservation, energy and waster reduction. Supporting renewables and earth-friendly practices.</p>
       </li>
-    </ol>
+    </ul>
     <!-- <label for="Pillar">Pillar:</label>
     <select ng-model="init.pillar" ng-options="x for x in init.pillars" ></select> -->
     <label for="Website">Website:</label>
@@ -33,9 +30,9 @@
     <label for="contactName">Contact Full Name: </label>
     <input type="text" ng-model="init.contactName" ng-required="true"/>
     <label for="contactEmail">Contact Email: </label>
-    <input type="text" ng-model="init.contactEmail" ng-required="true" />
+    <input type="email" ng-model="init.contactEmail" ng-required="true" />
     <label for="contactPhone">Contact Phone: </label>
-    <input type="text" ng-model="init.contactPhone" ng-required="true" />
+    <input type="tel" ng-model="init.contactPhone" ng-required="true" />
     <br />
     <button type="submit">Submit</button>
   </form>

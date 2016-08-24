@@ -13,6 +13,7 @@ angular.module('ssmnApp').controller('ProgressController', ['DataService', '$ele
     var arrayMsPercent = [];
     var tempValue = 0;
 
+    // this is standard to all phases
     var phaseOptions = {
       skin: {
         type: 'tron'
@@ -33,13 +34,12 @@ angular.module('ssmnApp').controller('ProgressController', ['DataService', '$ele
     }
 
     vm.initPhases = [{
-      // These two valuses will be binding
-      phaseName: 'Phase One',
+      phaseName: 'Phase One', //variable value
       phaseValue: 0,
-      phaseOptions: phaseOptions,
+      phaseOptions: phaseOptions, //var above
       mileStones: [{
-        name: 'Fundraising',
-        value: 350,
+        name: 'Fundraising', //variable value
+        value: 350, //variable value
         msOptions: {
           skin: {
             type: 'tron',
@@ -47,14 +47,14 @@ angular.module('ssmnApp').controller('ProgressController', ['DataService', '$ele
             spaceWidth: 2
           },
           size: 100,
-          unit: '$',
-          max: 4000,
+          unit: '$', //variable value
+          max: 4000, //variable value
           trackWidth: 20,
           barWidth: 15,
           trackColor: 'rgba(255,0,0,.1)',
           prevBarColor: 'rgba(0,0,0,.2)',
           readOnly: false,
-          step: 10,
+          step: 10, //variable value based on 'unit'
           displayPrevious: true
         }
       },
