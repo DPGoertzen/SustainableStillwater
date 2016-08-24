@@ -3,14 +3,8 @@ angular.module('ssmnApp').factory('UserService', function($http){
 
   var data = {
     initiatives: [],
-<<<<<<< HEAD
-    initPendingArray: [],
-    initApprovedArray: []
-
-=======
     initApprovedArray: [],
     initPendingArray: []
->>>>>>> 4498cb4734ecc19f7a97cfcfb4edf4f7316aacee
   };
 
 

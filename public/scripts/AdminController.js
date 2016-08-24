@@ -27,6 +27,4 @@ angular.module('ssmnApp').controller('AdminController', function($http, $mdMedia
     console.log('Inits pending approval are', vm.data.initPendingArray);
     console.log('Inits that are approved are', vm.data.initApprovedArray);
 
-  // })
-
 })
