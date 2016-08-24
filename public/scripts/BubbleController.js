@@ -276,7 +276,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         ourText.attr({"opacity": 0});
 
         currentText.attr({"opacity": 1});
-        sustainableText.attr({opacity: 1});
+        sustainableText.attr({"opacity": 1});
         // drop the extraneous lines to 0 opacity.
         ourLines.attr({"opacity": 0});
 
