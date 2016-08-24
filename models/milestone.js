@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var milestoneSchema = new Schema ({
-  milestoneName: String,
-  milestoneValue: Number,
+  name: String,
+  value: Number,
   milestoneGoal: Number,
 })
 

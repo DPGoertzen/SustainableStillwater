@@ -1,5 +1,6 @@
 <md-toolbar layout="row" class="md-display-1 md-whiteframe-3dp" layout-padding>
     <span class="bold">{{initview.init.name}}</span>
+    <button ng-if="initview.admin">Hi Admin</button>
 </md-toolbar>
 
 <div flex layout="row" ng-controller="ProgressController as pc">

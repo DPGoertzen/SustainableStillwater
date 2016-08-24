@@ -6,7 +6,13 @@ angular.module('ssmnApp').controller('InitViewController', function($http,init,$
   console.log('test', init);
 
   vm.data = UserService.data;
-  console.log(vm.data);
+
+  vm.admin = false;
+
+  if(vm.data.username == 'admin'){
+    vm.admin = true;
+  }
+
 
   vm.addPhase = function() {
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
