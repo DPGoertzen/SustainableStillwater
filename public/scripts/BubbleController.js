@@ -145,8 +145,8 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
           // do the hard math (THANKS RYAN MULCAHY) to position our orbitters at a
           // height based on whether leveler is true or false
-          var orbitterX = (originX + ((outerCircleRadius * (leveler ? 1.1:1.45)) * Math.cos(i*(Math.PI/180))));
-          var orbitterY = (originY + ((outerCircleRadius * (leveler ? 1.1:1.45)) * Math.sin(i*(Math.PI/180))));
+          var orbitterX = (originX + ((outerCircleRadius * (leveler ? 1:1.4)) * Math.cos(i*(Math.PI/180))));
+          var orbitterY = (originY + ((outerCircleRadius * (leveler ? 1:1.4)) * Math.sin(i*(Math.PI/180))));
 
           // set our orbitter's radii.
           var orbitRadius = 50;
