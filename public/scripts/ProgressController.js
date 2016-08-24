@@ -1,7 +1,5 @@
 angular.module('ssmnApp').controller('ProgressController', ['DataService', '$element', '$scope', function(DataService, $element, $scope){
 
-  // var $ctrl = this;
-  //THIS MAY NEED TO CHANGE. This should watch for angular changes, but needs testing
   var vm = this;
   var data = DataService.data;
   $scope.createDials = createDials;
@@ -28,18 +26,16 @@ angular.module('ssmnApp').controller('ProgressController', ['DataService', '$ele
       fontSize: 30,
       subText: {
         enabled: true,
-        text: 'Phase One'
+        text: 'Complete'
       },
       step: 0.1,
       displayPrevious: true
     }
 
-    // Preloading values for Initiative array
     vm.initPhases = [{
       // These two valuses will be binding
       phaseName: 'Phase One',
       phaseValue: 0,
-      // no longer binding data (this is repeated)
       phaseOptions: phaseOptions,
       mileStones: [{
         name: 'Fundraising',
@@ -156,19 +152,13 @@ angular.module('ssmnApp').controller('ProgressController', ['DataService', '$ele
 
     }]
 
-    // console.log('Phases Array:', initPhases);
-
-    // vm.initPhases = initPhases;
-
     console.log('vm.initPhases', vm.initPhases);
-    console.log($scope);
 
     $scope.$watchCollection(function(){
       var values =[];
       for (var i = 0; i < vm.initPhases.length; i++) {
         console.log('Each vm.initPhases', vm.initPhases[i]);
         for (var j = 0; j < vm.initPhases[i].mileStones.length; j++) {
-          // console.log('Each Milestone',vm.initPhases[i].mileStones[j].value);
           values.push(vm.initPhases[i].mileStones[j].value);
         }
       }
@@ -182,18 +172,12 @@ angular.module('ssmnApp').controller('ProgressController', ['DataService', '$ele
             var milestone = vm.initPhases[k].mileStones[l];
             console.log('MS value', milestone.value);
             tempValue += (milestone.value/milestone.msOptions.max)/(vm.initPhases[k].mileStones.length)*100;
-            // console.log('milestone percent', arrayMsPercent);
           }
-          // for (var m = 0; m < arrayMsPercent.length; m++) {
-          //  tempValue += arrayMsPercent.pop();
-          // m--
-          // }
-        //  console.log('Total Percent', tempValue);
-         vm.initPhases[k].phaseValue = tempValue;
+          vm.initPhases[k].phaseValue = Math.round(10*tempValue)/10;
+          console.log(tempValue);
         }
 
     })
-}
-    //  HERE IS WHERE ALL OF BRIAN'S PROGRESS DIAL CODE GOES
+  }
 
 }])

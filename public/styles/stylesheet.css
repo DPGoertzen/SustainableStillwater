@@ -64,8 +64,11 @@ html, body {
 }
 
 .dial-container {
-  padding-bottom: 10px;
-  /*border-bottom: 1px solid #D3D3D3;*/
+  padding-bottom: 15px;
+}
+
+.underline {
+  border-bottom: 1px solid #D3D3D3;
 }
 
 .uppercase {
