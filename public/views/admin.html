@@ -1,10 +1,6 @@
 <h1>Hello!</h1>
-
-  <ul>Initiatives In Need of Approval
-    <li>
-      
-    </li>
-
-
-
-  </ul>
+<div layout="row" layout-wrap layout-margin layout-align="center">
+  <div ng-repeat="init in admin.data.initPendingArray">
+    <md-button class="md-primary md-raised" ng-click="admin.initModal(init)">Initiative: {{init.name}}</md-button>
+  </div>
+</div>
