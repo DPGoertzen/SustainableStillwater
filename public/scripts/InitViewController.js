@@ -13,6 +13,20 @@ angular.module('ssmnApp').controller('InitViewController', function($http,init,$
     vm.admin = true;
   }
 
+  vm.approve = function(init) {
+    console.log('boop', init);
+    var sendData = {};
+    sendData.approved = true;
+    sendData.initId = init._id;
+
+
+    $http.post('/init/approved', sendData).then(function(response){
+
+    },function(response){
+      console.log('failed to approve');
+    })
+  }
+
 
   vm.addPhase = function() {
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));

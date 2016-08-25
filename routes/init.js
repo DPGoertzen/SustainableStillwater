@@ -67,7 +67,27 @@ router.get('/allUsers', function(request,response){
     })
 })
 
-
+router.post('/approved', function(request, response){
+  console.log('approval and stuff', request.body);
+  var data = request.body;
+  var approved = data.approved;
+  var user = request.user
+  console.log(approved);
+  var id = data.initId;
+  console.log(user);
+  User.findById(user.initiatives._id, function(err, user){
+    var currentInit = user.initiatives.id(id);
+    currentInit.approved = approved;
+    user.save(function(err){
+      if(err){
+        console.log(err);
+        response.sendStatus(500);
+      }else{
+        response.sendStatus(200);
+      }
+    })
+  })
+})
 
 router.post('/newPhase', function(request,response){
   console.log('phase', request.body);
