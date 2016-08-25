@@ -29,7 +29,7 @@ router.post('/newInit', function(request,response){
         if(err){
           console.log(err);
         };
-
+        // console.log('user inits', user.initiatives);
         user.initiatives.push(createdInitiative);
         user.save(function(err){
           if(err){

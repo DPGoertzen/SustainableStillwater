@@ -13,10 +13,7 @@ var login = require('./routes/login');
 var register = require('./routes/register');
 
 var initiativeRouter = require('./routes/init');
-var Initiative = require('./models/initiative');
 var phaseRouter = require('./routes/init');
-var Phase = require('./models/phase');
-var Milestone = require('./models/milestone');
 var milestoneRouter = require('./routes/init');
 
 

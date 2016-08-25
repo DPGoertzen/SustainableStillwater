@@ -5,7 +5,8 @@ var milestone = require('./milestone').schema;
 var phaseSchema = new Schema ({
   label: String,
   phaseValue: Number,
-  milestones: [milestone]
+  milestones: [milestone],
+  phaseOpitions: {}
 
 });
 

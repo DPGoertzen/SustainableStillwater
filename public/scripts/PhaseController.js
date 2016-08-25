@@ -16,8 +16,6 @@ angular.module('ssmnApp').controller('PhaseController', function($http, $locatio
     sendData.phaseValue = 0;
     sendData.id = init._id;
 
-
-
     console.log('phase',sendData);
     $http.post('/init/newPhase', sendData).then(function(response){
       console.log('Success', response);
