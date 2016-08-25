@@ -35,7 +35,7 @@ angular.module('ssmnApp').factory('UserService', function($http){
     for (var i = 0; i < data.users.length; i++) {
       if(data.users[i].initiatives != null){
         for (var j = 0; j < data.users[i].initiatives.length; j++) {
-          if(data.users[i].initiatives.approved == true){
+          if(data.users[i].initiatives[j].approved == true){
             data.initApprovedArray.push(data.users[i].initiatives[j]);
           } else {
             data.initPendingArray.push(data.users[i].initiatives[j]);

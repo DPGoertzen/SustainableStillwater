@@ -20,11 +20,7 @@ router.post('/newInit', function(request,response){
     approved: false
   })
   console.log('here is the new init',createdInitiative);
-  createdInitiative.save(function(err){
-    if(err){
-      console.log(err);
-      response.sendStatus(500);
-    } else {
+
       User.findById(id, function(err, user){
         if(err){
           console.log(err);
@@ -38,8 +34,6 @@ router.post('/newInit', function(request,response){
         })
       })
       response.sendStatus(200);
-    }
-  })
 });
 
 router.get('/userPhase', function(request,response){
@@ -67,7 +61,57 @@ router.get('/allUsers', function(request,response){
     })
 })
 
+router.post('/approved', function(request, response){
+  console.log('approval and stuff', request.body);
+  var data = request.body;
+  var approved = data.approved;
 
+  console.log(approved);
+  var id = data.initId;
+
+  User.findOne({"initiatives._id": id}, function(err, user){
+    currentInitiative = user.initiatives.id(id);
+
+    currentInitiative.approved = approved;
+    user.save(function(err){
+      if(err){
+        console.log(err);
+        response.sendStatus(500);
+      }else{
+        response.sendStatus(200);
+      }
+    })
+  })
+})
+
+router.delete('/deleted/:id', function(request, response){
+  console.log(request.params);
+
+  var user = request.user;
+  var id = request.params.id;
+  console.log('user', user + 'id', id);
+
+  User.findOne({"initiatives._id": id}, function(err, user){
+    if(err){
+      console.log(err);
+    }
+    user.initiatives.id(id).remove();
+    user.save(function(err){
+      if(err){
+        console.log(err);
+      }
+    })
+  })
+  Initiative.findByIdAndRemove(id, function(err){
+    if(err){
+      console.log(err);
+      response.sendStatus(500);
+    } else {
+      console.log('Init Deleted');
+      response.sendStatus(200);
+    }
+  })
+})
 
 router.post('/newPhase', function(request,response){
   console.log('phase', request.body);
