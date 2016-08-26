@@ -220,8 +220,8 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
           whichOrbitter++;
           i+=gapBetweenDegree;
         }
-      whichPillar++
       }
+      whichPillar++;
     }
 
 
