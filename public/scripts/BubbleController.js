@@ -24,8 +24,8 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
   function createBubbles() {
     // global variables needed for our sketch
     var leveler = true;
-    var width = window.innerWidth;
-    var height = window.innerHeight;
+    var width = Math.min(1500, window.innerWidth);
+    var height = Math.min(800, window.innerHeight);
     var centered;
     var isTransformed = false;
     var isIniativeBoxDisplayed = false;
@@ -36,19 +36,21 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     var ourLines;
     var whichOrbitter = 0;
     var useFullScreen;
+    var orbitRadius = 50;
+    var whichPillar = 1;
     // create our canvas
     var svg = d3.select("#canvas").append("svg")
     .attr("width", width)
     .attr("height", height)
-    .attr("id", "root");
+    .attr("id", "root")
     // might add these lines back in for zooming later.
-    // .append("g")
-    // .call(d3.behavior.zoom().scaleExtent([1, 8]).on('zoom', zoomed))
+    .append("g")
+    // .call(d3.behavior.zoom().center([width / 2, height * .75]).scaleExtent([1, 8]).on('zoom', zoomed))
     // .append("g");
 
-    // function zoomed() {
-    //   svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-    // }
+    function zoomed() {
+      svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    }
 
     // the only way we can set the z-depth with SVG's in D3 is by drawing
     // the top layer last, so we group things (that's what the 'g' does)
@@ -100,6 +102,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         r: innerCircleRadius,
         fill: "green",
         stroke: "black",
+        "stroke-width": "3px",
         originalScale: innerCircleRadius
     });
     var sustainableText = layerFront.append("text").attr({
@@ -128,8 +131,10 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     // specifies where we start, where we end, the distant between orbitters and
     // what color we want our pillar to be
     var whichText;
+
     function arcGenerator(initialDegree, finalDegree, gapBetweenDegree, color, currentPillar, textColor){
       // since the unit circle starts at 3 o'clock, shift it back
+
       whichText = 0;
       console.log("our array length is", currentPillar.array.length);
       if(currentPillar.array.length != 0){
@@ -148,8 +153,6 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
           var orbitterX = (originX + ((outerCircleRadius * (leveler ? 1:1.4)) * Math.cos(i*(Math.PI/180))));
           var orbitterY = (originY + ((outerCircleRadius * (leveler ? 1:1.4)) * Math.sin(i*(Math.PI/180))));
 
-          // set our orbitter's radii.
-          var orbitRadius = 50;
           // generate a line from the center of the orbitter to the center of
           // our origin.
           var orbitterLine = layerBack.append("line").attr({
@@ -162,22 +165,40 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
           // create our orbitting circles, storing information about initial
           // placement so we can retrieve it when we shift them around the
           // screen
-          var orbitter = layerFront.append("circle").attr({
+          // var outerOrbitter = layerFront
+          // .append("circle").attr({
+          //   class: "outerOrbitter",
+          //   cx: orbitterX,
+          //   cy: orbitterY,
+          //   r: orbitRadius*1.1,
+          //   opacity: 1,
+          //   fill: "white",
+          //   stroke: "black",
+          //   "stroke-width": "2px",
+          //   originX: originX,
+          //   originY: originY,
+          //   initialX: orbitterX,
+          //   initialY: orbitterY,
+          //   initialR: orbitRadius
+          // })
+
+          var orbitter = layerFront
+          .append("circle").attr({
             id: "orbitter" + whichOrbitter,
-            class: "orbitter",
+            class: "orbitter pillar" + whichPillar,
             cx: orbitterX,
             cy: orbitterY,
             r: orbitRadius,
             opacity: 1,
             fill: color,
             stroke: "black",
+            "stroke-width": "2px",
             originX: originX,
             originY: originY,
             initialX: orbitterX,
             initialY: orbitterY,
             initialR: orbitRadius
-          }).datum(currentPillar.array[whichText]);
-
+          }).datum(currentPillar.array[whichText])
 
           var orbitterText = layerFront.append("text").attr({
             class: "orbitter" + whichOrbitter,
@@ -199,11 +220,59 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
           whichOrbitter++;
           i+=gapBetweenDegree;
         }
+      whichPillar++
       }
     }
+
+
+
+
+
+
+
+
     // set up our click handlers for our orbitters and sustainableCircle
     var orbitters = d3.selectAll(".orbitter").on('click', clickedOrbitter);
     var ssCircle = d3.selectAll(".originCircle").on('click', clickedSustainableCircle);
+
+    var orbittersGrow = d3.selectAll(".orbitter").on('mouseover', clickedOrbitterGrow);
+    var orbittersShrinkBack = d3.selectAll(".orbitter").on('mouseleave', clickedOrbitterShrinkBack);
+
+    function clickedOrbitterGrow(){
+      // if(!isTransformed){
+        var zoomCurrentCircle = d3.select(this);
+
+        zoomCurrentCircle
+        .transition()
+        .duration(375)
+        .attr({
+          r: orbitRadius *1.25
+        })
+        // .transition()
+        // .duration(375)
+        // .attr({
+        //   r: orbitRadius
+        // });
+
+      // }
+    }
+    function clickedOrbitterShrinkBack(){
+      // if(!isTransformed){
+        var zoomCurrentCircle = d3.select(this);
+
+        zoomCurrentCircle
+        // .transition()
+        // .duration(375)
+        // .attr({
+        //   r: orbitRadius *1.25
+        // })
+        .transition()
+        .duration(375)
+        .attr({
+          r: orbitRadius
+        });
+      // }
+    }
 
     function clickedOrbitter(){
       // setting up some local vars and initializing some global vars
@@ -222,63 +291,88 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       d3.selectAll(".infoRectangle").remove();
       // If we're not transformed, begin the transformation
       if(!isTransformed){
+        switch(d3.select(currentCircle).attr("class")){
+          case "orbitter pillar1":
+            console.log("we clicked a pillar 1 orbitter");
+            svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
+            // .transition().duration(750).attr("transform", "translate(" + [width * .4, height * .9] + ")scale(" + 1 + ")")
+            break;
+          case "orbitter pillar2":
+            console.log("we clicked a pillar 2 orbitter");
+            svg.transition().duration(750).attr("transform", "translate(" + [-width * .4, -height * .6] + ")scale(" + 1.5 + ")");
+            break;
+          case "orbitter pillar3":
+            console.log("we clicked a pillar 3 orbitter");
+            svg.transition().duration(750).attr("transform", "translate(" + [width * .2, -height * .1] + ")scale(" + 1.5 + ")");
+            break;
+        }
+        // d3.select(currentCircle).
+        // call(d3.behavior.zoom().center([width * .66, height * .33]).scaleExtent([1.5, 8]).on('zoom', zoomed))
+
+
+
+
 
         console.log("isTransformed is currently", isTransformed);
         console.log("we clicked x position", d3.select(this).attr("cx"), "and y position", d3.select(this).attr("cy"));
 
         // create new connection line just after everything else slots into
         // place
-        setTimeout(newConnectorLine, 780);
+
+
+        // setTimeout(newConnectorLine, 780);
+
+
         // move our currentCircle(the one that was clicked) to the center of
         // the viewport and make it big. No. BIGGER.
-        d3.select(currentCircle).transition()
-        .duration(750)
-        .attr({
-          cx: originX,
-          cy: originY,
-          r: d3.select(currentCircle).attr("r")*3.5
-        })
+        // d3.select(currentCircle).transition()
+        // .duration(750)
+        // .attr({
+        //   cx: originX,
+        //   cy: originY,
+        //   r: d3.select(currentCircle).attr("r")*3.5
+        // })
 
 
-        currentText.transition()
-        .duration(750)
-        .attr({
-          x: originX,
-          y: originY,
-          "font-size": "36px"
-        })
-
-        // Do the same to the sustainableCircle, but offset it down and to the
-        // left
-        sustainableCircle.transition()
-        .duration(750)
-        .attr({
-            cx: originX - 350,
-            cy: originY + 250,
-            r: sustainableCircle.attr("r")*.3
-          })
-
-        sustainableText.transition()
-        .duration(750)
-        .attr({
-          x: originX - 350,
-          y: originY + 250,
-          "font-size": "12px"
-        })
+        // currentText.transition()
+        // .duration(750)
+        // .attr({
+        //   x: originX,
+        //   y: originY,
+        //   "font-size": "36px"
+        // })
+        //
+        // // Do the same to the sustainableCircle, but offset it down and to the
+        // // left
+        // sustainableCircle.transition()
+        // .duration(750)
+        // .attr({
+        //     cx: originX - 350,
+        //     cy: originY + 250,
+        //     r: sustainableCircle.attr("r")*.3
+        //   })
+        //
+        // sustainableText.transition()
+        // .duration(750)
+        // .attr({
+        //   x: originX - 350,
+        //   y: originY + 250,
+        //   "font-size": "12px"
+        // })
 
         // if ourCircles are the current circle OR it's the central
         // sustainableCircle, make their opacity full
         // CHANGE THE SELECTOR ON THE BACK HALF OF THE || TO CLASS, NOT COLOR!!!
-        ourCircles.attr({"opacity": function(){
-          return (this === currentCircle || d3.select(this).attr("fill") == "green") ? 1 : 0;
-        }});
+        // ourCircles.attr({"opacity": function(){
+        //   return (this === currentCircle || d3.select(this).attr("fill") == "green") ? 1 : 0;
+        // }});
 
-        ourText.attr({"opacity": 0});
-
-        currentText.attr({"opacity": 1});
-        sustainableText.attr({"opacity": 1});
-        // drop the extraneous lines to 0 opacity.
-        ourLines.attr({"opacity": 0});
+        // ourText.attr({"opacity": 0});
+        //
+        // currentText.attr({"opacity": 1});
+        // sustainableText.attr({"opacity": 1});
+        // // drop the extraneous lines to 0 opacity.
+        // ourLines.attr({"opacity": 0});
 
         isTransformed = true;
         // if our initiativeRectangle is not displayed, display it.

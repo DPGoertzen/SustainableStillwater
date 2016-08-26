@@ -161,3 +161,10 @@ md-select .md-select-value.md-select-placeholder {
     color: rgba(44, 65, 164, 0.96);
     transition: 0.3s;
 }
+#canvas{
+  border: solid black;
+  /*width: 70%;*/
+  max-width: 1500px;
+  max-height: 800px;
+  margin: 0 auto 0 auto;
+}
