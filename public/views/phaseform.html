@@ -1,7 +1,66 @@
+<div id="formContent" ng-controller="MilestoneController as msc" layout="column" ng-cloak>
+  <md-content layout-padding flex>
+    <form name="phaseForm">
+      <md-input-container class="md-block">
+        <label class="form-font">Phase Name</label>
+        <input required name="phaseName" ng-model="msc.phaseName">
+        <div ng-messages="phaseForm.description.$error">
+          <div ng-message="required">Please add your phase name.</div>
+        </div>
+      </md-input-container>
 
-<form name="phaseForm" novalidate ng-submit="phaseForm.$valid && phase.submit()">
-  <label for="Label">Phase Name:</label>
-  <input type="text" ng-model="phase.label" ng-required="true"/>
-  <br />
-  <button type="submit">Submit</button>
-</form>
+      <div data-ng-repeat="milestone in msc.milestones" class="form-box">
+        <md-input-container class="md-block">
+          <label class="form-font">Milestone Name</label>
+          <input required name="msName" ng-model="msc.msName">
+          <div ng-messages="phaseForm.description.$error">
+            <div ng-message="required">Please add your phase name.</div>
+          </div>
+        </md-input-container>
+        <div layout="row">
+          <md-input-container flex="65">
+            <label class="form-font">Goal</label>
+            <input required name="msGoal" ng-model="msc.msGoal">
+            <p style="font-size:.8em; width: 100%;">
+              Measurable as monetary, percentage or completed.
+            </p>
+            <div ng-messages="phaseForm.msGoal.$error">
+              <div ng-message="required">Please fill out this milestone goal.</div>
+            </div>
+          </md-input-container>
+          <md-input-container flex="35">
+            <label class="form-font">How to Measure</label>
+            <md-select name="type" ng-model="project.type" required>
+              <md-option value="money">Monetary</md-option>
+              <md-option value="percent">Percentage</md-option>
+              <md-option value="bolean">Complete</md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+
+        <div layout="row">
+          <md-input-container flex="50">
+            <label class="form-font">Starting Spot</label>
+            <input name="msStartValue" ng-model="msc.msGoal">
+            <p style="font-size:.8em; width: 100%;">
+              How far toward your goal are you currently.
+            </p>
+          </md-input-container>
+
+          <div class="center" flex="50">
+            <md-button class="groupY only" ng-click="msc.addNewMilestone()">Add Another Milestone</md-button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <section layout="row" layout-align="center">
+          <md-button class="groupY left">Save Phase</md-button>
+          <md-button class="groupY middle">Clear Form</md-button>
+          <md-button class="groupY right">Exit</md-button>
+        </section>
+      </div>
+
+    </form>
+  </md-content>
+</div>

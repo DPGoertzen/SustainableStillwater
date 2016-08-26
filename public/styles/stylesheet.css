@@ -12,6 +12,10 @@ html, body {
   padding-top: 5px;
 }
 
+#formContent {
+  width: 500px;
+}
+
 /*colors for testing layout*/
 .lightgreen {
   background-color: lightgreen;
@@ -25,8 +29,12 @@ html, body {
   background-color: pink;
 }
 
+.lightgrey {
+  background-color: #DCDCDC;
+}
 
-/*back to actual stylesheets*/
+
+/*font styles*/
 .lite {
   font-weight: 300;
 }
@@ -53,6 +61,27 @@ html, body {
   font-weight: 900;
 }
 
+.form-font {
+  color: steelblue;
+  font-weight: 700;
+  border-color: steelblue;
+}
+
+
+md-input-container {
+  margin-top: 12px;
+}
+
+md-input-container.md-default-theme .md-input, md-input-container .md-input,
+md-select.md-default-theme .md-select-value, md-select .md-select-value,
+md-input-container:not(.md-input-invalid).md-input-focused .md-input,
+md-select.md-default-theme .md-select-value.md-select-placeholder,
+md-select .md-select-value.md-select-placeholder {
+  color: steelblue;
+  border-color: steelblue;
+  font-weight: 700;
+}
+
 .center {
   text-align: center;
   /*margin: 0 auto;
@@ -65,6 +94,12 @@ html, body {
 
 .dial-container {
   padding-bottom: 15px;
+}
+
+.form-box {
+  border: 1px solid steelblue;
+  background-color: rgba(224, 224, 224, 0.96);
+;
 }
 
 .underline {
@@ -93,8 +128,25 @@ html, body {
     font-weight: 700;
     min-width:100px;
 }
+
+.groupY {
+    font-size: 14px;
+    margin: 8px 0;
+    padding: 3px 5px 3px 5px;
+    color: rgb(49, 46, 46);
+    background-color: rgba(224, 224, 224, 0.96);
+    text-transform: none;
+    font-weight: 700;
+    min-width:75px;
+}
+
+.md-button.only {
+  border-radius: 5px;
+  border: 1px solid steelblue;
+}
+
 .md-button.left {
-    border-radius: 10px 0 0 10px;
+    border-radius: 5px 0 0 5px;
 }
 .md-button.middle {
     border-radius: 0;
@@ -102,7 +154,7 @@ html, body {
     border-right: 1px solid rgba(230, 230, 230, 0.96);
 }
 .md-button.right {
-    border-radius: 0 10px 10px 0;
+    border-radius: 0 5px 5px 0;
 }
 .md-button:not([disabled]):hover {
     background-color: rgba(193, 193, 193, 0.96);
