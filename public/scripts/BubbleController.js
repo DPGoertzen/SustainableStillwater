@@ -225,12 +225,6 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     }
 
 
-
-
-
-
-
-
     // set up our click handlers for our orbitters and sustainableCircle
     var orbitters = d3.selectAll(".orbitter").on('click', clickedOrbitter);
     var ssCircle = d3.selectAll(".originCircle").on('click', clickedSustainableCircle);
@@ -296,16 +290,56 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             console.log("we clicked a pillar 1 orbitter");
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
             // .transition().duration(750).attr("transform", "translate(" + [width * .4, height * .9] + ")scale(" + 1 + ")")
+            useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+            console.log("d3.select(currentCircle).attr('initiativeData') is currently", d3.select(currentCircle).datum());
+            $mdDialog.show({
+              templateUrl: 'views/initview.html',
+              controller: 'InitViewController',
+              controllerAs: 'initview',
+              fullscreen: useFullScreen,
+              clickOutsideToClose: true,
+              ariaLabel: 'Good',
+              locals: {
+               init: d3.select(currentCircle).datum()
+              }
+            })
             break;
           case "orbitter pillar2":
             console.log("we clicked a pillar 2 orbitter");
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .4, -height * .6] + ")scale(" + 1.5 + ")");
+            useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+            console.log("d3.select(currentCircle).attr('initiativeData') is currently", d3.select(currentCircle).datum());
+            $mdDialog.show({
+              templateUrl: 'views/initview.html',
+              controller: 'InitViewController',
+              controllerAs: 'initview',
+              fullscreen: useFullScreen,
+              clickOutsideToClose: true,
+              ariaLabel: 'Good',
+              locals: {
+               init: d3.select(currentCircle).datum()
+              }
+            })
             break;
           case "orbitter pillar3":
             console.log("we clicked a pillar 3 orbitter");
             svg.transition().duration(750).attr("transform", "translate(" + [width * .2, -height * .1] + ")scale(" + 1.5 + ")");
+            useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+            console.log("d3.select(currentCircle).attr('initiativeData') is currently", d3.select(currentCircle).datum());
+            $mdDialog.show({
+              templateUrl: 'views/initview.html',
+              controller: 'InitViewController',
+              controllerAs: 'initview',
+              fullscreen: useFullScreen,
+              clickOutsideToClose: true,
+              ariaLabel: 'Good',
+              locals: {
+               init: d3.select(currentCircle).datum()
+              }
+            })
             break;
         }
+
         // d3.select(currentCircle).
         // call(d3.behavior.zoom().center([width * .66, height * .33]).scaleExtent([1.5, 8]).on('zoom', zoomed))
 
@@ -403,55 +437,59 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       // therefore we need to unzoom.
       if(isTransformed){
         console.log("isTransformed is currently", isTransformed);
-        // transition to our original position (originX, originY are both the
-        // middle points on our canvas.
-        sustainableCircle.transition()
-        .duration(750)
-        .attr({
-          cx: originX,
-          cy: originY,
-          r: sustainableCircle.attr("originalScale")
-        });
+        svg.transition().duration(750).attr("transform", "translate(" + [0, 0] + ")scale(" + 1 + ")");
 
-        sustainableText.transition()
-        .duration(750)
-        .attr({
-          x: originX,
-          y: originY,
-          "font-size": "36px"
-        })
 
-        // Do the same here -- initialX,Y,R are stored on creation of the
-        // orbitter
-        d3.select(currentCircle).transition()
-        .duration(750)
-        .attr({
-          cx: d3.select(currentCircle).attr("initialX"),
-          cy: d3.select(currentCircle).attr("initialY"),
-          r: d3.select(currentCircle).attr("initialR")
-        });
 
-        currentText.transition()
-        .duration(750)
-        .attr({
-          x: currentText.attr("initialX"),
-          y: currentText.attr("initialY"),
-          "font-size": currentText.attr("initialFontSize")
-        })
-        // delete our connective line
-        d3.select(".newCLine").remove();
-        // a helper function to restore our opacity, needs to be a function
-        // because...
-        function returnOpacityTo1(){
-          ourCircles.attr("opacity", 1);
-          ourLines.attr("opacity", 1);
-          ourText.attr("opacity", 1);
-        }
-        // ...we're using setTimeout!
-        setTimeout(returnOpacityTo1, 600);
-        // if an initiativeRectangle is on screen, delete it.
-        d3.selectAll(".initiativeRectangle").remove();
-        // we're no longer transformed!
+        // // transition to our original position (originX, originY are both the
+        // // middle points on our canvas.
+        // sustainableCircle.transition()
+        // .duration(750)
+        // .attr({
+        //   cx: originX,
+        //   cy: originY,
+        //   r: sustainableCircle.attr("originalScale")
+        // });
+        //
+        // sustainableText.transition()
+        // .duration(750)
+        // .attr({
+        //   x: originX,
+        //   y: originY,
+        //   "font-size": "36px"
+        // })
+        //
+        // // Do the same here -- initialX,Y,R are stored on creation of the
+        // // orbitter
+        // d3.select(currentCircle).transition()
+        // .duration(750)
+        // .attr({
+        //   cx: d3.select(currentCircle).attr("initialX"),
+        //   cy: d3.select(currentCircle).attr("initialY"),
+        //   r: d3.select(currentCircle).attr("initialR")
+        // });
+        //
+        // currentText.transition()
+        // .duration(750)
+        // .attr({
+        //   x: currentText.attr("initialX"),
+        //   y: currentText.attr("initialY"),
+        //   "font-size": currentText.attr("initialFontSize")
+        // })
+        // // delete our connective line
+        // d3.select(".newCLine").remove();
+        // // a helper function to restore our opacity, needs to be a function
+        // // because...
+        // function returnOpacityTo1(){
+        //   ourCircles.attr("opacity", 1);
+        //   ourLines.attr("opacity", 1);
+        //   ourText.attr("opacity", 1);
+        // }
+        // // ...we're using setTimeout!
+        // setTimeout(returnOpacityTo1, 600);
+        // // if an initiativeRectangle is on screen, delete it.
+        // d3.selectAll(".initiativeRectangle").remove();
+        // // we're no longer transformed!
         isTransformed = false;
         // if isSCircleClicked is false, we need to create our infoRectangle.
       }else if(!isSCircleClicked){
