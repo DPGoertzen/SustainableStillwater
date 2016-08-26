@@ -167,10 +167,11 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
           // screen
           // var outerOrbitter = layerFront
           // .append("circle").attr({
+          //   id: "orbitter" + whichOrbitter,
           //   class: "outerOrbitter",
           //   cx: orbitterX,
           //   cy: orbitterY,
-          //   r: orbitRadius*1.1,
+          //   r: orbitRadius * 1.1,
           //   opacity: 1,
           //   fill: "white",
           //   stroke: "black",
@@ -234,20 +235,24 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
     function clickedOrbitterGrow(){
       // if(!isTransformed){
-        var zoomCurrentCircle = d3.select(this);
+        var zoomCurrentCircleID = d3.select(this).attr("id");
+        var zoomCurrentInnerCircle = d3.select(this);
+        // var zoomCurrentOuterCircle = d3.selectAll("#" + zoomCurrentCircleID).select("[fill=white]");
+        // console.log("zoom inner and outer circle", zoomCurrentInnerCircle, zoomCurrentOuterCircle);
 
-        zoomCurrentCircle
+        zoomCurrentInnerCircle
         .transition()
         .duration(375)
         .attr({
-          r: orbitRadius *1.25
-        })
+          r: orbitRadius * 1.25
+        });
+
+        // zoomCurrentOuterCircle
         // .transition()
         // .duration(375)
         // .attr({
-        //   r: orbitRadius
+        //   r: orbitRadius * 1.45
         // });
-
       // }
     }
     function clickedOrbitterShrinkBack(){
