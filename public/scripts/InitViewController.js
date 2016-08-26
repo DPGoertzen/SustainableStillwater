@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('InitViewController', function($http,init,$mdMedia,$mdDialog,UserService){
+angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$mdMedia', '$mdDialog', 'UserService', function($http,init,$mdMedia,$mdDialog,UserService){
 
   var vm = this;
 
@@ -21,6 +21,7 @@ angular.module('ssmnApp').controller('InitViewController', function($http,init,$
 
 
     $http.post('/init/approved', sendData).then(function(response){
+      $mdDialog.hide();
 
     },function(response){
       console.log('failed to approve');
@@ -30,6 +31,7 @@ angular.module('ssmnApp').controller('InitViewController', function($http,init,$
   vm.delete = function(init){
 
     $http.delete('/init/deleted/' + init._id).then(function(response){
+      $mdDialog.hide();
 
     }, function(response){
       console.log('Could not delete');
@@ -41,8 +43,8 @@ angular.module('ssmnApp').controller('InitViewController', function($http,init,$
   vm.addPhase = function() {
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
     $mdDialog.show({
-      controller: 'PhaseController',
-      controllerAs: 'phase',
+      controller: 'MilestoneController',
+      controllerAs: 'msc',
       templateUrl: 'views/phaseform.html',
       fullscreen: useFullScreen,
       clickOutsideToClose: true,
@@ -70,4 +72,4 @@ angular.module('ssmnApp').controller('InitViewController', function($http,init,$
     })
 
   }
-})
+}])

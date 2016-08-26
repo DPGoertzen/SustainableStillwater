@@ -112,20 +112,20 @@ router.delete('/deleted/:id', function(request, response){
     }
   })
 })
-
+//posting to db information on a new phase with milestones - ak
 router.post('/newPhase', function(request,response){
   console.log('phase', request.body);
   var user = request.user;
   var data = request.body;
+  // console.log('user', user);
   var init = request.user.initiatives;
-  var id = request.body.id;
-  // console.log(id);
+  var id = data.id;
 
   User.findById(user._id, function(err, user){
     // console.log('user', user);
 
     var currentInit = user.initiatives.id(id);
-    console.log(currentInit.phase);
+    // console.log(currentInit);
     currentInit.phase.push(data);
 
     user.save(function(err){
@@ -137,8 +137,6 @@ router.post('/newPhase', function(request,response){
       }
     })
   })
-
-
 })
 
 

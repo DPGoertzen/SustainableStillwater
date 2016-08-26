@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('AdminController', function($http, $mdMedia, $mdDialog, UserService){
+angular.module('ssmnApp').controller('AdminController', ['$http', '$mdMedia', '$mdDialog', 'UserService', function($http, $mdMedia, $mdDialog, UserService){
   var vm = this;
 
   vm.getPendingInits = UserService.getPendingInits;
@@ -27,4 +27,4 @@ angular.module('ssmnApp').controller('AdminController', function($http, $mdMedia
     console.log('Inits pending approval are', vm.data.initPendingArray);
     console.log('Inits that are approved are', vm.data.initApprovedArray);
 
-})
+}])

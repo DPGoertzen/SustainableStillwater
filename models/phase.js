@@ -6,8 +6,6 @@ var phaseSchema = new Schema ({
   label: String,
   phaseValue: Number,
   milestones: [milestone],
-  phaseOpitions: {}
-
 });
 
 

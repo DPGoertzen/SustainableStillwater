@@ -3,8 +3,9 @@ var Schema = mongoose.Schema;
 
 var milestoneSchema = new Schema ({
   name: String,
-  value: Number,
-  milestoneGoal: Number,
+  milestoneGoal: String,
+  measurement: String,
+  startingPoint: Number
 })
 
 var Milestone = mongoose.model('Milestone', milestoneSchema);

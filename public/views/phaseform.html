@@ -1,4 +1,4 @@
-<div id="formContent" ng-controller="MilestoneController as msc" layout="column" ng-cloak>
+<div id="formContent" layout="column" ng-cloak>
   <md-content layout-padding flex>
     <form name="phaseForm">
       <md-input-container class="md-block">
@@ -9,10 +9,10 @@
         </div>
       </md-input-container>
 
-      <div data-ng-repeat="milestone in msc.milestones" class="form-box">
+      <div data-ng-repeat="milestone in msc.milestones track by $index" class="form-box">
         <md-input-container class="md-block">
           <label class="form-font">Milestone Name</label>
-          <input required name="msName" ng-model="msc.msName">
+          <input required name="msName" ng-model="milestone.msName">
           <div ng-messages="phaseForm.description.$error">
             <div ng-message="required">Please add your phase name.</div>
           </div>
@@ -20,7 +20,7 @@
         <div layout="row">
           <md-input-container flex="65">
             <label class="form-font">Goal</label>
-            <input required name="msGoal" ng-model="msc.msGoal">
+            <input required name="msGoal" ng-model="milestone.msGoal">
             <p style="font-size:.8em; width: 100%;">
               Measurable as monetary, percentage or completed.
             </p>
@@ -30,7 +30,7 @@
           </md-input-container>
           <md-input-container flex="35">
             <label class="form-font">How to Measure</label>
-            <md-select name="type" ng-model="project.type" required>
+            <md-select name="type" ng-model="milestone.msMeasure" required>
               <md-option value="money">Monetary</md-option>
               <md-option value="percent">Percentage</md-option>
               <md-option value="bolean">Complete</md-option>
@@ -41,7 +41,7 @@
         <div layout="row">
           <md-input-container flex="50">
             <label class="form-font">Starting Spot</label>
-            <input name="msStartValue" ng-model="msc.msGoal">
+            <input name="msStartValue" ng-model="milestone.msStart">
             <p style="font-size:.8em; width: 100%;">
               How far toward your goal are you currently.
             </p>
@@ -55,7 +55,7 @@
 
       <div>
         <section layout="row" layout-align="center">
-          <md-button class="groupY left">Save Phase</md-button>
+          <md-button class="groupY left" ng-click="msc.save(init)">Save Phase</md-button>
           <md-button class="groupY middle">Clear Form</md-button>
           <md-button class="groupY right">Exit</md-button>
         </section>
