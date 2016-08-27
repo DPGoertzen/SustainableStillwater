@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('BubbleController', ['DataService', '$element', '$mdMedia', '$mdDialog', function(DataService, $element, $mdMedia, $mdDialog){
+angular.module('ssmnApp').controller('BubbleController', ['DataService', '$element', '$mdMedia', '$mdDialog', '$mdSidenav', function(DataService, $element, $mdMedia, $mdDialog, $mdSidenav){
 
   var $ctrl = this;
   //THIS MAY NEED TO CHANGE. This should watch for angular changes, but needs testing
@@ -298,7 +298,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
 
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
-            $mdDialog.show({
+            $mdSidenav('right', true).toggle({
               templateUrl: 'views/initview.html',
               controller: 'InitViewController',
               controllerAs: 'initview',

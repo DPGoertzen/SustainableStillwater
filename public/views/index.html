@@ -46,7 +46,63 @@
     </div>
 
     <bubbles>
+
       <div id="canvas"></div>
+      <md-Sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
+        <md-toolbar layout="row" class="md-display-1 md-whiteframe-3dp" layout-padding>
+            <span class="bold">{{initview.init.name}}</span>
+            <md-button class="md-warn md-raised" ng-if="initview.admin" ng-click="initview.approve(initview.init)">Approve</md-button>
+            <md-button class="md-warn md-raised" ng-if="initview.admin" ng-click="initview.delete(initview.init)">Delete</md-button>
+        </md-toolbar>
+
+        <div flex layout="row" ng-controller="ProgressController as pc">
+          <md-sidenav flex="35" md-is-locked-open="true" class="md-whiteframe-3dp" layout-padding>
+            <img src="https://static.wixstatic.com/media/05086b_e184c2229f21477e8f95d529d501ad84~mv2.jpg/v1/fill/w_244,h_161,al_c,q_80,usm_0.66_1.00_0.01/05086b_e184c2229f21477e8f95d529d501ad84~mv2.jpg" />
+            <p>
+              <span>{{initview.init.objectives}}</span>
+            <br /><br />
+              <span class="uppercase bold">Website: </span>
+              <a href="{{initview.init.website}}">{{initview.init.website}}</a>
+            <br /><br />
+              <span class="uppercase bold">Contact:</span>
+              {{initview.init.contactName}}
+            <br /><br />
+              <span class="uppercase bold">Email:</span>
+              {{initview.init.contactEmail}}
+            <br /><br />
+              <span class="uppercase bold">Phone:</span>
+              {{initview.init.contactPhone}}
+            </p>
+            <p ng-repeat="phase in pc.initPhases">
+              <span class="md-title underline">{{phase.phaseName}}:</span><br />
+              Percent Complete: {{phase.phaseValue}}%
+            </p>
+          </md-sidenav>
+
+          <md-content layout="column" flex>
+
+            <div ng-repeat="phase in pc.initPhases" layout-align="space-around center" class="md-whiteframe-1dp dial-container center">
+              <h4 class="md-headline bold uppercase">{{phase.phaseName}}</h4>
+              <ui-knob value="phase.phaseValue" options="phase.phaseOptions"></ui-knob><br />
+              <div layout="row" layout-align="space-around center" class="top-padding">
+                <div ng-repeat="mileStone in phase.mileStones track by $index"  >
+                  <ui-knob value="mileStone.value" options="mileStone.msOptions"></ui-knob> <br />
+                  <span class="regItal">{{mileStone.name}}</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <section layout="row" layout-align="center">
+                <md-button class="groupX left">Save Changes</md-button>
+                <md-button class="groupX middle">Edit Milestones</md-button>
+                <md-button class="groupX right" ng-click="initview.addPhase()">Add Phase</md-button>
+              </section>
+            </div>
+
+          </md-content>
+        </div>
+      </md-Sidenav>
     </bubbles>
 
 
