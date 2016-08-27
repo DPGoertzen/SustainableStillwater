@@ -354,10 +354,11 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             var panelPosition = $mdPanel.newPanelPosition()
                 .absolute()
-                .top('0%')
-                .left('50%');
+                .top('15px')
+                .left('55%');
 
             $mdPanel.open({
+              attachTo: angular.element(document.querySelector('#canvas')),
               templateUrl: 'views/initview.html',
               controller: 'InitViewController',
               controllerAs: 'initview',
@@ -385,8 +386,8 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             var panelPosition = $mdPanel.newPanelPosition()
                 .absolute()
-                .top('0%')
-                .left('50%');
+                .top('15px')
+                .left('55%');
 
             $mdPanel.open({
               templateUrl: 'views/initview.html',
@@ -416,7 +417,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             console.log("d3.select(currentCircle).attr('initiativeData') is currently", d3.select(currentCircle).datum());
             var panelPosition = $mdPanel.newPanelPosition()
                 .absolute()
-                .top('0%')
+                .top('15px')
                 .left('0%');
 
             $mdPanel.open({
@@ -632,6 +633,6 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         stroke: "black"
       });
     }
-  console.log("hsl .l", d3.hsl(100, .7, .8).l);
+  console.log("document.body.bubbles", document.querySelector('#canvas'));
   };  }
 ])
