@@ -54,5 +54,7 @@ angular.module('ssmnApp').config(function($routeProvider, $locationProvider){
 .config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')
     .primaryPalette('teal')
-    .accentPalette('lime');
+    .accentPalette('lime',{
+      'default': '700'
+    });
 });
