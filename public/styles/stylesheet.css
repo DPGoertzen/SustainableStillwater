@@ -62,13 +62,11 @@ html, body {
 }
 
 .form-font {
-  color: steelblue;
   font-weight: 700;
-  border-color: steelblue;
 }
 
 
-md-input-container {
+/*md-input-container {
   margin-top: 12px;
 }
 
@@ -80,32 +78,9 @@ md-select .md-select-value.md-select-placeholder {
   color: steelblue;
   border-color: steelblue;
   font-weight: 700;
-}
+}*/
 
-.inputdemoErrorsAdvanced {
-  /* NOTE: Check the demo's HTML to see some additional RTL support CSS */
-  /* Setup animations similar to the ng-messages */ }
-  .inputdemoErrorsAdvanced .hint {
-    /* Position the hint */
-    position: absolute;
-    left: 2px;
-    right: auto;
-    bottom: 7px;
-    /* Copy styles from ng-messages */
-    font-size: 12px;
-    line-height: 14px;
-    transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
-    /* Set our own color */
-    color: grey; }
-  .inputdemoErrorsAdvanced .hint.ng-hide,
-  .inputdemoErrorsAdvanced .hint.ng-enter,
-  .inputdemoErrorsAdvanced .hint.ng-leave.ng-leave-active {
-    bottom: 26px;
-    opacity: 0; }
-  .inputdemoErrorsAdvanced .hint.ng-leave,
-  .inputdemoErrorsAdvanced .hint.ng-enter.ng-enter-active {
-    bottom: 7px;
-    opacity: 1; }
+
 
 .center {
   text-align: center;
@@ -147,8 +122,8 @@ md-select .md-select-value.md-select-placeholder {
     font-size: 16px;
     margin: 20px 0;
     padding: 3px 15px 3px 15px;
-    color: rgb(49, 46, 46);
-    background-color: rgba(224, 224, 224, 0.96);
+    /*color: rgb(49, 46, 46);
+    background-color: rgba(224, 224, 224, 0.96);*/
     text-transform: none;
     font-weight: 700;
     min-width:100px;
