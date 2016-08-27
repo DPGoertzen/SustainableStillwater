@@ -51,3 +51,8 @@ angular.module('ssmnApp').config(function($routeProvider, $locationProvider){
 
   $locationProvider.html5Mode(true);
 })
+.config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('default')
+    .primaryPalette('teal')
+    .accentPalette('lime');
+});
