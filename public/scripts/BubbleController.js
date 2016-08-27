@@ -123,9 +123,9 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     .text("SSMN");
 
     // generate our pillars
-    arcGenerator(0, 120, 120/firstPillarData.array.length, d3.hsl(177, 1, .5), d3.hsl(177, 1, .3), firstPillarData, "black");
-    arcGenerator(120, 240, 120/secondPillarData.array.length, d3.hsl(100, 1, .5), d3.hsl(100, 1, .3), secondPillarData, "black");
-    arcGenerator(240, 360, 120/thirdPillarData.array.length, d3.hsl(256, 1, .5), d3.hsl(256, 1, .3), thirdPillarData, "white");
+    arcGenerator(0, 120, 120/firstPillarData.array.length, "#00D8C4", "#009688", firstPillarData, "black");
+    arcGenerator(120, 240, 120/secondPillarData.array.length, "#03A9F4", "#0271A3", secondPillarData, "black");
+    arcGenerator(240, 360, 120/thirdPillarData.array.length, "#CDDC39", "#767f21", thirdPillarData, "black");
 
 
     // specifies where we start, where we end, the distant between orbitters and
@@ -295,13 +295,14 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
             pillar = "pillar1";
 
-            // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
+            d3.selectAll(".pillar2").attr("fill", d3.selectAll(".pillar2").attr("initialColor"));
+            d3.selectAll(".pillar3").attr("fill", d3.selectAll(".pillar3").attr("initialColor"));
 
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             var panelPosition = $mdPanel.newPanelPosition()
                 .absolute()
                 .top('0%')
-                .left('45%');
+                .left('50%');
 
             $mdPanel.open({
               templateUrl: 'views/initview.html',
@@ -324,14 +325,25 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             pillar = "pillar2";
 
             // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
+            d3.selectAll(".pillar1").attr("fill", d3.selectAll(".pillar1").attr("initialColor"));
+            d3.selectAll(".pillar3").attr("fill", d3.selectAll(".pillar3").attr("initialColor"));
+
 
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
-            console.log("d3.select(currentCircle).attr('initiativeData') is currently", d3.select(currentCircle).datum());
-            $mdDialog.show({
+            var panelPosition = $mdPanel.newPanelPosition()
+                .absolute()
+                .top('0%')
+                .left('50%');
+
+            $mdPanel.open({
               templateUrl: 'views/initview.html',
               controller: 'InitViewController',
               controllerAs: 'initview',
+              disableParentScroll: true,
+              position: panelPosition,
               fullscreen: useFullScreen,
+              trapFocus: true,
+              focusOnOpen: true,
               clickOutsideToClose: true,
               ariaLabel: 'Good',
               locals: {
@@ -344,14 +356,25 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             pillar = "pillar3";
 
             // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
+            d3.selectAll(".pillar2").attr("fill", d3.selectAll(".pillar2").attr("initialColor"));
+            d3.selectAll(".pillar1").attr("fill", d3.selectAll(".pillar1").attr("initialColor"));
 
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             console.log("d3.select(currentCircle).attr('initiativeData') is currently", d3.select(currentCircle).datum());
-            $mdDialog.show({
+            var panelPosition = $mdPanel.newPanelPosition()
+                .absolute()
+                .top('0%')
+                .left('0%');
+
+            $mdPanel.open({
               templateUrl: 'views/initview.html',
               controller: 'InitViewController',
               controllerAs: 'initview',
+              disableParentScroll: true,
+              position: panelPosition,
               fullscreen: useFullScreen,
+              trapFocus: true,
+              focusOnOpen: true,
               clickOutsideToClose: true,
               ariaLabel: 'Good',
               locals: {
@@ -463,7 +486,9 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       if(isTransformed){
         console.log("isTransformed is currently", isTransformed);
         svg.transition().duration(750).attr("transform", "translate(" + [0, 0] + ")scale(" + 1 + ")");
-
+        d3.selectAll(".pillar1").attr("fill", d3.selectAll(".pillar1").attr("initialColor"));
+        d3.selectAll(".pillar2").attr("fill", d3.selectAll(".pillar2").attr("initialColor"));
+        d3.selectAll(".pillar3").attr("fill", d3.selectAll(".pillar3").attr("initialColor"));
 
 
         // // transition to our original position (originX, originY are both the
