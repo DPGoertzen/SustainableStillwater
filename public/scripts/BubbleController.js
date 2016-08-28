@@ -251,7 +251,8 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             y1: orbitterY,
             x2: originX,
             y2: originY,
-            stroke: "black"
+            stroke: "black",
+            "stroke-width": "2px"
           });
           // create our orbitting circles, storing information about initial
           // placement so we can retrieve it when we shift them around the
