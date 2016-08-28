@@ -1,6 +1,6 @@
 <!-- <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right"> -->
 
-<div style="max-height: 800px; overflow-y: scroll;">
+<div style="height:auto; max-height:100%; overflow:auto;">
   <md-toolbar layout="row" class="md-display-1 md-whiteframe-3dp" layout-padding>
       <span class="bold">{{initview.init.name}}</span>
       <md-button class="md-warn md-raised" ng-if="initview.admin" ng-click="initview.approve(initview.init)">Approve</md-button>
@@ -31,9 +31,9 @@
       </p>
     </md-sidenav>
 
-    <md-content layout="column" flex>
+    <md-content layout="column" flex style="height:auto; max-height:100%; overflow:auto;">
 
-      <div ng-repeat="phase in pc.initPhases" layout-align="space-around center" class="md-whiteframe-1dp dial-container center" style="overflow: scroll;">
+      <div ng-repeat="phase in pc.initPhases" layout-align="space-around center" class="md-whiteframe-1dp dial-container center">
         <h4 class="md-headline bold uppercase">{{phase.phaseName}}</h4>
         <ui-knob value="phase.phaseValue" options="phase.phaseOptions"></ui-knob><br />
         <div layout="row" layout-align="space-around center" class="top-padding">

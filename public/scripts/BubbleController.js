@@ -116,34 +116,72 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     var innerCircleRadius = 100;
     var outerCircleRadius = 225;
 
+    var arcPillar1 = d3.svg.arc()
+    .innerRadius(0)
+    .outerRadius(1200)
+    .startAngle(0 * (Math.PI/180)) //converting from degs to radians
+    .endAngle(120 * (Math.PI/180))
 
-    // build our pillar dividers
-    var pillarLineRight = layerBack.append("line").attr({
-      x1: originX,
-      y1: originY,
-      x2: width,
-      y2: height,
-      stroke: 'darkBlue',
-      'stroke-width': 5
-    });
+    var arcPillar2 = d3.svg.arc()
+    .innerRadius(0)
+    .outerRadius(1200)
+    .startAngle(120 * (Math.PI/180)) //converting from degs to radians
+    .endAngle(240 * (Math.PI/180))
 
-    var pillarLineLeft = layerBack.append("line").attr({
-      x1: originX,
-      y1: originY,
-      x2: 0,
-      y2: height,
-      stroke: 'darkBlue',
-      'stroke-width': 5
-    });
+    var arcPillar3 = d3.svg.arc()
+    .innerRadius(0)
+    .outerRadius(1200)
+    .startAngle(240 * (Math.PI/180)) //converting from degs to radians
+    .endAngle(360 * (Math.PI/180))
 
-    var pillarLineUp = layerBack.append("line").attr({
-      x1: originX,
-      y1: originY,
-      x2: .5*width,
-      y2: 0,
-      stroke: 'darkBlue',
-      'stroke-width': 5
-    });
+    layerBack.append("path")
+    .attr("d", arcPillar1)
+    .attr("fill", "#B2DFDB")
+    .attr("stroke", "black")
+    .attr("stroke-width", "4px")
+    .attr("transform", "translate(" + [width/2,height/2] + ")")
+
+    layerBack.append("path")
+    .attr("d", arcPillar2)
+    .attr("fill", "#B3E5FC")
+    .attr("stroke", "black")
+    .attr("stroke-width", "4px")
+    .attr("transform", "translate(" + [width/2,height/2] + ")")
+
+    layerBack.append("path")
+    .attr("d", arcPillar3)
+    .attr("fill", "#F0F4C3")
+    .attr("stroke", "black")
+    .attr("stroke-width", "4px")
+    .attr("transform", "translate(" + [width/2,height/2] + ")")
+
+    // // build our pillar dividers
+    // var pillarLineRight = layerBack.append("line").attr({
+    //   x1: originX,
+    //   y1: originY,
+    //   x2: width,
+    //   y2: height,
+    //   stroke: 'darkBlue',
+    //   'stroke-width': 5
+    // });
+    //
+    // var pillarLineLeft = layerBack.append("line").attr({
+    //   x1: originX,
+    //   y1: originY,
+    //   x2: 0,
+    //   y2: height,
+    //   stroke: 'darkBlue',
+    //   'stroke-width': 5
+    // });
+    //
+    // var pillarLineUp = layerBack.append("line").attr({
+    //   x1: originX,
+    //   y1: originY,
+    //   x2: .5*width,
+    //   y2: 0,
+    //   stroke: 'darkBlue',
+    //   'stroke-width': 5
+    // });
 
 
     // build our central circle for the organization.
@@ -190,7 +228,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       whichText = 0;
       console.log("our array length is", currentPillar.array.length);
       if(currentPillar.array.length != 0){
-        var i = initialDegree -90
+        var i = initialDegree -85
         for(var j = 0; j<currentPillar.array.length; j++){
 
           // use this to alternate heights
