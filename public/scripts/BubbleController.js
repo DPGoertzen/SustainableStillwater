@@ -210,7 +210,8 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       initialY: originY,
       initialFontSize: "24px"
     }).style("text-anchor", "middle")
-    .text("SSMN");
+    .text("Sustainable Stillwater Minnesota")
+    .call(d3.util.wrap(100, originX, originY-55));
 
     // generate our pillars
     arcGenerator(0, 120, 120/firstPillarData.array.length, "#00D8C4", "#009688", firstPillarData, "black");
