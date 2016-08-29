@@ -85,10 +85,10 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
 
     $scope.$watchCollection(function(){
       var values =[];
-      for (var i = 0; i < vm.initPhases.length; i++) {
-        console.log('Each vm.initPhases', vm.initPhases[i]);
-        for (var j = 0; j < vm.initPhases[i].milestones.length; j++) {
-          values.push(vm.initPhases[i].milestones[j].value);
+      for (var m = 0; m < vm.initPhases.length; m++) {
+        console.log('Each vm.initPhases', vm.initPhases[m]);
+        for (var n = 0; n < vm.initPhases[m].milestones.length; n++) {
+          values.push(vm.initPhases[m].milestones[n].value);
         }
       }
       console.log('Values array', values);
@@ -100,7 +100,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
           for (var l = 0; l < vm.initPhases[k].milestones.length; l++) {
             var milestone = vm.initPhases[k].milestones[l];
             console.log('MS value', milestone.value);
-            tempValue += (milestone.value/milestone.msOptions.max)/(vm.initPhases[k].milestones.length)*100;
+            tempValue += (milestones.value/milestone.msOptions.max)/(vm.initPhases[k].milestones.length)*100;
           }
           vm.initPhases[k].phaseValue = Math.round(10*tempValue)/10;
           console.log(tempValue);

@@ -5,6 +5,7 @@ angular.module('ssmnApp').controller('AdminController', ['$http', '$mdMedia', '$
   vm.getPendingInits();
   vm.data = UserService.data;
 
+  
 
 
   vm.initModal = function(init) {

@@ -6,7 +6,7 @@ var initiativeSchema = new Schema ({
   pillar: Number,
   name: String,
   contactName: String,
-  contactPhone: Number,
+  contactPhone: String,
   contactEmail: String,
   objectives: String,
   image: String,

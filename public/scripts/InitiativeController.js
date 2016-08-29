@@ -1,7 +1,7 @@
 angular.module('ssmnApp').controller('InitiativeController', function($http, $location,$mdDialog, UserService){
   var vm = this;
 
-  vm.pillars = [1,2,3];
+
 
   vm.showHints = true;
 
@@ -19,7 +19,7 @@ angular.module('ssmnApp').controller('InitiativeController', function($http, $lo
     sendData.website = vm.website;
 
     console.log('sendData',sendData);
-
+    
 
     $http.post('/init/newInit', sendData).then(function(response){
 
@@ -34,6 +34,9 @@ angular.module('ssmnApp').controller('InitiativeController', function($http, $lo
       console.log('Fail to post');
     });
   };
+  vm.exit = function(){
+    $mdDialog.hide();
+  }
 
 
 })

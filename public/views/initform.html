@@ -25,16 +25,16 @@
       </md-input-container>
 
       <h3 class="md-title form-font underline">Initiative Pillars</h3>
-      <md-radio-group ng-model="data.group1">
-        <md-radio-button ng-value="1" ng-model="init.pillar">
+      <md-radio-group ng-model="init.pillar">
+        <md-radio-button ng-value="1" >
           <p><span class="form-font">Healthy and Connected Community:</span><br />
           Healthy, active living. Equitable, accessible and socially connected communities.</p>
         </md-radio-button>
-        <md-radio-button ng-value="2" ng-model="init.pillar">
+        <md-radio-button ng-value="2" >
           <p><span class="form-font">Local Business Vitality:</span><br />
           Socially conscious and earth friendly local businesses supported by local consumers and destination-minded tourists.</p>
         </md-radio-button>
-        <md-radio-button ng-value="3" ng-model="init.pillar">
+        <md-radio-button ng-value="3" >
           <p><span class="form-font">Resource and Environmental Stewardship:</span><br />
           Resource conservation, energy and waster reduction. Supporting renewables and earth-friendly practices.</p>
         </md-radio-button>
@@ -81,9 +81,9 @@
 
       <div>
         <section layout="row" layout-align="center">
-          <md-button type="submit" class="groupY left">Save Initiative</md-button>
+          <md-button type="submit" class="groupY left" ng-click="init.submit()">Save Initiative</md-button>
           <md-button class="groupY middle">Clear Form</md-button>
-          <md-button class="groupY right">Exit</md-button>
+          <md-button class="groupY right" ng-click="init.exit()">Exit</md-button>
         </section>
       </div>
 
