@@ -155,33 +155,31 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     .attr("stroke-width", "4px")
     .attr("transform", "translate(" + [width/2,height/2] + ")")
 
-    // // build our pillar dividers
-    // var pillarLineRight = layerBack.append("line").attr({
-    //   x1: originX,
-    //   y1: originY,
-    //   x2: width,
-    //   y2: height,
-    //   stroke: 'darkBlue',
-    //   'stroke-width': 5
-    // });
-    //
-    // var pillarLineLeft = layerBack.append("line").attr({
-    //   x1: originX,
-    //   y1: originY,
-    //   x2: 0,
-    //   y2: height,
-    //   stroke: 'darkBlue',
-    //   'stroke-width': 5
-    // });
-    //
-    // var pillarLineUp = layerBack.append("line").attr({
-    //   x1: originX,
-    //   y1: originY,
-    //   x2: .5*width,
-    //   y2: 0,
-    //   stroke: 'darkBlue',
-    //   'stroke-width': 5
-    // });
+
+    var community = layerFront.append('image')
+      .attr('xlink:href','assets/community.svg')
+      .attr('height', 150)
+      .attr('width', 150)
+      .attr('opacity', .33)
+      .attr('x', width * .8)
+      .attr('y', height * .2)
+
+    var business = layerFront.append('image')
+      .attr('xlink:href','assets/business.svg')
+      .attr('height', 150)
+      .attr('width', 150)
+      .attr('opacity', .33)
+      .attr('x', width * .65)
+      .attr('y', height * .8)
+
+    var stewardship = layerFront.append('image')
+      .attr('xlink:href','assets/stewardship.svg')
+      .attr('height', 120)
+      .attr('width', 120)
+      .attr('opacity', .33)
+      .attr('x', width * .1)
+      .attr('y', height * .18)
+
 
 
     // build our central circle for the organization.
