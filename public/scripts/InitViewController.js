@@ -6,6 +6,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
   vm.data = UserService.data;
   vm.admin = false;
   vm.loggedIn = false;
+  console.log('this is data', vm.data);
 
   var phaseOptions = {
     skin: {
@@ -41,6 +42,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
       milestones: []
     }
     for (var j = 0; j < tempPhases[i].milestones.length; j++) {
+      var tempValue = 0;
       var tempMilestone = {
         name: tempPhases[i].milestones[j].name,
         value: tempPhases[i].milestones[j].startingPoint,
@@ -77,11 +79,14 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
         tempMilestone.msOptions.step = 1;
         tempMilestone.msOptions.max = 1;
       }
+      // tempValue += (tempMilestone.value/tempMilestone.msOptions.max)/(tempPhases[i].milestones.length)*100;
+      // tempPhases[i].phaseValue = Math.round(10*tempValue)/10;
+      // console.log(tempValue);
       tempPhaseObject.milestones.push(tempMilestone);
     }
     vm.initPhases.push(tempPhaseObject);
   };
-  console.log(vm.initPhases);
+  console.log('initphases are ',vm.initPhases);
 
     $scope.$watchCollection(function(){
       var values =[];
@@ -100,7 +105,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
           for (var l = 0; l < vm.initPhases[k].milestones.length; l++) {
             var milestone = vm.initPhases[k].milestones[l];
             console.log('MS value', milestone.value);
-            tempValue += (milestones.value/milestone.msOptions.max)/(vm.initPhases[k].milestones.length)*100;
+            tempValue += (milestone.value/milestone.msOptions.max)/(vm.initPhases[k].milestones.length)*100;
           }
           vm.initPhases[k].phaseValue = Math.round(10*tempValue)/10;
           console.log(tempValue);
@@ -109,8 +114,11 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
     })
 
 
-  vm.save = function(){
-    console.log('clicked save');
+  vm.save = function(init){
+    console.log('clicked save', init);
+    var sendData = {};
+
+
   }
 
 
@@ -120,6 +128,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
   if(vm.data.loggedIn == true ){
     vm.loggedIn = true;
   }
+
 
   vm.approve = function(init) {
     console.log('boop', init);
