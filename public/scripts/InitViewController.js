@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$mdMedia', '$mdDialog', 'UserService', function($http,init,$mdMedia,$mdDialog,UserService){
+angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$mdMedia', '$mdDialog', 'UserService', '$scope', function($http,init,$mdMedia,$mdDialog,UserService,$scope){
 
   var vm = this;
 
@@ -51,23 +51,63 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
                   spaceWidth: 2
                 },
                 size: 100,
-               unit: '%',
-               max: tempPhases[i].milestones[j].milestoneGoal,
+              //  unit: '$',
+              //  max: tempPhases[i].milestones[j].milestoneGoal,
                trackWidth: 20,
                barWidth: 15,
                trackColor: 'rgba(255,0,0,.1)',
                prevBarColor: 'rgba(0,0,0,.2)',
                readOnly: false,
-               step: 10, //variable value based on 'unit'
+              //  step: 1, //variable value based on 'unit'
                displayPrevious: true,
 
              }
+
+      }
+      if(tempPhases[i].milestones[j].measurement == 'percent'){
+        tempMilestone.msOptions.unit = '%';
+        tempMilestone.msOptions.step = 1;
+        tempMilestone.msOptions.max = 100;
+      } else if(tempPhases[i].milestones[j].measurement == 'money'){
+        tempMilestone.msOptions.unit = '$';
+        tempMilestone.msOptions.step = 10;
+        tempMilestone.msOptions.max = tempPhases[i].milestones[j].milestoneGoal;
+      } else if (tempPhases[i].milestones[j].measurement == 'complete'){
+        tempMilestone.msOptions.unit = '';
+        tempMilestone.msOptions.step = 1;
+        tempMilestone.msOptions.max = 1;
       }
       tempPhaseObject.milestones.push(tempMilestone);
     }
     vm.initPhases.push(tempPhaseObject);
   };
   console.log(vm.initPhases);
+
+    $scope.$watchCollection(function(){
+      var values =[];
+      for (var i = 0; i < vm.initPhases.length; i++) {
+        console.log('Each vm.initPhases', vm.initPhases[i]);
+        for (var j = 0; j < vm.initPhases[i].milestones.length; j++) {
+          values.push(vm.initPhases[i].milestones[j].value);
+        }
+      }
+      console.log('Values array', values);
+      return values;
+    }, function() {
+        for(var k = 0; k < vm.initPhases.length; k++){
+          console.log(vm.initPhases[k].milestones);
+          tempValue = 0;
+          for (var l = 0; l < vm.initPhases[k].milestones.length; l++) {
+            var milestone = vm.initPhases[k].milestones[l];
+            console.log('MS value', milestone.value);
+            tempValue += (milestone.value/milestone.msOptions.max)/(vm.initPhases[k].milestones.length)*100;
+          }
+          vm.initPhases[k].phaseValue = Math.round(10*tempValue)/10;
+          console.log(tempValue);
+        }
+
+    })
+
 
   vm.save = function(){
     console.log('clicked save');

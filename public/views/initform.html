@@ -1,40 +1,93 @@
-<div class="container">
-  <h2>Create a New Initiative with SSMN</h2>
-  <form name="initForm" novalidate ng-submit="initForm.$valid && init.submit()">
-    <label for="Name">Initiative Name:</label>
-    <input type="text" ng-model="init.name" ng-required="true"/>
-    <br />
-    <label for="Objectives">Objectives:</label>
-    <input type="text" style="width: 500px; " ng-model="init.objectives" ng-required="true"/>
-    <br />
-    <h3>Pillars</h3>
-    <ul style="list-style:none">
-      <li>
-        <label><input type="radio" ng-value="1" ng-model="init.pillar" />Healthy and Connected Community</label>
-        <p>Healthy, active living. Equitable, accessible and socially connected communities</p>
-      </li>
-      <li>
-        <label><input type="radio" ng-value="2" ng-model="init.pillar" />Local Business Vitality</label>
-          <p>Socially conscious and earth friendly local businesses supported by local consumers and destination-minded tourists</p>
-      </li>
-      <li>
-        <label><input type="radio" ng-value="3" ng-model="init.pillar" />Resource & Environmental Stewardship</label>
-          <p>Resource conservation, energy and waster reduction. Supporting renewables and earth-friendly practices.</p>
-      </li>
-    </ul>
-    <!-- <label for="Pillar">Pillar:</label>
-    <select ng-model="init.pillar" ng-options="x for x in init.pillars" ></select> -->
-    <label for="Website">Website:</label>
-    <input type="text" ng-model="init.website" ng-required="true" ng-required="true"/>
-    <br />
-    <label for="contactName">Contact Full Name: </label>
-    <input type="text" ng-model="init.contactName" ng-required="true"/>
-    <label for="contactEmail">Contact Email: </label>
-    <input type="email" ng-model="init.contactEmail" ng-required="true" />
-    <label for="contactPhone">Contact Phone: </label>
-    <input type="tel" ng-model="init.contactPhone" ng-required="true" />
-    <br />
-    <button type="submit">Submit</button>
-  </form>
+<div id="formContent" layout="column" ng-cloak>
+  <md-contetn layout-padding flex>
+    <h2 class="md-headline form-font underline">Create a New Initiative with SSMN</h2>
+    <form name="initForm">
 
+      <md-input-container>
+          <md-switch ng-model="showHints">Showing {{showHints ? "Hints" : "Errors"}}</md-switch>
+      </md-input-container>
+
+      <md-input-container class="md-block">
+        <label class="form-font">Initiative Name</label>
+        <input required name="initName" ng-model="init.name" />
+        <div ng-messages="initForm.description.$error">
+          <div ng-message="required">Please add your initiative name.</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-block">
+        <label class="form-font">Description</label>
+        <textarea required ng-model="init.objectives" md-maxlength="150" rows="3" md-select-on-focus>
+        </textarea>
+        <div ng-messages="initForm.description.$error">
+          <div ng-message="required">Please add a description for your initiative.</div>
+        </div>
+      </md-input-container>
+
+      <h3 class="md-title form-font underline">Initiative Pillars</h3>
+      <md-radio-group ng-model="data.group1">
+        <md-radio-button ng-value="1" ng-model="init.pillar">
+          <p><span class="form-font">Healthy and Connected Community:</span><br />
+          Healthy, active living. Equitable, accessible and socially connected communities.</p>
+        </md-radio-button>
+        <md-radio-button ng-value="2" ng-model="init.pillar">
+          <p><span class="form-font">Local Business Vitality:</span><br />
+          Socially conscious and earth friendly local businesses supported by local consumers and destination-minded tourists.</p>
+        </md-radio-button>
+        <md-radio-button ng-value="3" ng-model="init.pillar">
+          <p><span class="form-font">Resource and Environmental Stewardship:</span><br />
+          Resource conservation, energy and waster reduction. Supporting renewables and earth-friendly practices.</p>
+        </md-radio-button>
+      </md-radio-group>
+
+      <h3 class="md-title form-font underline">Contact Information</h3>
+      <md-input-container class="md-block">
+        <label class="form-font">Contact Full Name</label>
+        <input required name="initName" ng-model="init.contactName" />
+        <div ng-messages="initForm.description.$error">
+          <div ng-message="required">Please add your full name.</div>
+        </div>
+      </md-input-container>
+
+      <div layout="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label class="form-font">Email</label>
+          <input name="email" ng-model="init.contactEmail"
+                 required minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+          <!-- <div class="hint" ng-if="showHints">How can we reach you?</div> -->
+          <div ng-messages="initForm.email.$error" ng-hide="showHints">
+            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+              Your email must be between 10 and 100 characters long and look like an e-mail address.
+            </div>
+          </div>
+        </md-input-container>
+        <div flex="5" hide-xs hide-sm>
+          <!-- Spacer //-->
+        </div>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label class="form-font">Phone Number</label>
+          <input required name="phone" ng-model="init.contactPhone" ng-pattern="/^[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}$/" />
+          <div class="hint" ng-show="showHints">(###) ###-####</div>
+          <div ng-messages="userForm.phone.$error" ng-hide="showHints">
+            <div ng-message="pattern">(###) ###-#### - Please enter a valid phone number.</div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <md-input-container class="md-block">
+        <label class="form-font">Website</label>
+        <input name="website" ng-model="init.website" />
+      </md-input-container>
+
+      <div>
+        <section layout="row" layout-align="center">
+          <md-button type="submit" class="groupY left">Save Initiative</md-button>
+          <md-button class="groupY middle">Clear Form</md-button>
+          <md-button class="groupY right">Exit</md-button>
+        </section>
+      </div>
+
+
+    </form>
+  </md-contetn>
 </div>

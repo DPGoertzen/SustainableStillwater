@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('BubbleController', ['DataService', '$element', '$mdMedia', '$mdDialog', function(DataService, $element, $mdMedia, $mdDialog){
+angular.module('ssmnApp').controller('BubbleController', ['DataService', '$element', '$mdMedia', '$mdDialog', '$mdSidenav', '$mdPanel', function(DataService, $element, $mdMedia, $mdDialog, $mdSidenav, $mdPanel){
 
   var $ctrl = this;
   //THIS MAY NEED TO CHANGE. This should watch for angular changes, but needs testing
@@ -38,6 +38,58 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     var useFullScreen;
     var orbitRadius = 50;
     var whichPillar = 1;
+
+    d3.util = d3.util || {};
+
+    d3.util.wrap = function(_wrapW, xPos, yPos){
+        return function(d, i){
+            var that = this;
+
+            function tspanify(){
+                var lineH = this.node().getBBox().height;
+                this.text('')
+                    .selectAll('tspan')
+                    .data(lineArray)
+                    .enter().append('tspan')
+                    .attr({
+                        x: xPos,
+                        y: function(d, i){ return (yPos-15) + (i + 1) * lineH; }
+                    })
+                    .text(function(d, i){ return d.join(' '); })
+            }
+
+            function checkW(_text){
+                var textTmp = that
+                    .style({visibility: 'hidden'})
+                    .text(_text);
+                var textW = textTmp.node().getBBox().width;
+                that.style({visibility: 'visible'}).text(text);
+                return textW;
+            }
+
+            var text = this.text();
+            var parentNode = this.node().parentNode;
+            var textSplitted = text.split(' ');
+            var lineArray = [[]];
+            var count = 0;
+            textSplitted.forEach(function(d, i){
+                if(checkW(lineArray[count].concat(d).join(' '), parentNode) >= _wrapW){
+                    count++;
+                    lineArray[count] = [];
+                }
+                lineArray[count].push(d)
+            });
+
+            this.call(tspanify)
+        }
+    };
+
+
+
+
+
+
+
     // create our canvas
     var svg = d3.select("#canvas").append("svg")
     .attr("width", width)
@@ -64,34 +116,72 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     var innerCircleRadius = 100;
     var outerCircleRadius = 225;
 
+    var arcPillar1 = d3.svg.arc()
+    .innerRadius(0)
+    .outerRadius(1200)
+    .startAngle(0 * (Math.PI/180)) //converting from degs to radians
+    .endAngle(120 * (Math.PI/180))
 
-    // build our pillar dividers
-    var pillarLineRight = layerBack.append("line").attr({
-      x1: originX,
-      y1: originY,
-      x2: width,
-      y2: height,
-      stroke: 'darkBlue',
-      'stroke-width': 5
-    });
+    var arcPillar2 = d3.svg.arc()
+    .innerRadius(0)
+    .outerRadius(1200)
+    .startAngle(120 * (Math.PI/180)) //converting from degs to radians
+    .endAngle(240 * (Math.PI/180))
 
-    var pillarLineLeft = layerBack.append("line").attr({
-      x1: originX,
-      y1: originY,
-      x2: 0,
-      y2: height,
-      stroke: 'darkBlue',
-      'stroke-width': 5
-    });
+    var arcPillar3 = d3.svg.arc()
+    .innerRadius(0)
+    .outerRadius(1200)
+    .startAngle(240 * (Math.PI/180)) //converting from degs to radians
+    .endAngle(360 * (Math.PI/180))
 
-    var pillarLineUp = layerBack.append("line").attr({
-      x1: originX,
-      y1: originY,
-      x2: .5*width,
-      y2: 0,
-      stroke: 'darkBlue',
-      'stroke-width': 5
-    });
+    layerBack.append("path")
+    .attr("d", arcPillar1)
+    .attr("fill", "#B2DFDB")
+    .attr("stroke", "black")
+    .attr("stroke-width", "4px")
+    .attr("transform", "translate(" + [width/2,height/2] + ")")
+
+    layerBack.append("path")
+    .attr("d", arcPillar2)
+    .attr("fill", "#B3E5FC")
+    .attr("stroke", "black")
+    .attr("stroke-width", "4px")
+    .attr("transform", "translate(" + [width/2,height/2] + ")")
+
+    layerBack.append("path")
+    .attr("d", arcPillar3)
+    .attr("fill", "#F0F4C3")
+    .attr("stroke", "black")
+    .attr("stroke-width", "4px")
+    .attr("transform", "translate(" + [width/2,height/2] + ")")
+
+    // // build our pillar dividers
+    // var pillarLineRight = layerBack.append("line").attr({
+    //   x1: originX,
+    //   y1: originY,
+    //   x2: width,
+    //   y2: height,
+    //   stroke: 'darkBlue',
+    //   'stroke-width': 5
+    // });
+    //
+    // var pillarLineLeft = layerBack.append("line").attr({
+    //   x1: originX,
+    //   y1: originY,
+    //   x2: 0,
+    //   y2: height,
+    //   stroke: 'darkBlue',
+    //   'stroke-width': 5
+    // });
+    //
+    // var pillarLineUp = layerBack.append("line").attr({
+    //   x1: originX,
+    //   y1: originY,
+    //   x2: .5*width,
+    //   y2: 0,
+    //   stroke: 'darkBlue',
+    //   'stroke-width': 5
+    // });
 
 
     // build our central circle for the organization.
@@ -100,7 +190,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         cx: originX,
         cy: originY,
         r: innerCircleRadius,
-        fill: "green",
+        fill: d3.hsl(147, 1, .34),
         stroke: "black",
         "stroke-width": "3px",
         originalScale: innerCircleRadius
@@ -120,25 +210,26 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       initialY: originY,
       initialFontSize: "24px"
     }).style("text-anchor", "middle")
-    .text("SSMN");
+    .text("Sustainable Stillwater Minnesota")
+    .call(d3.util.wrap(100, originX, originY-55));
 
     // generate our pillars
-    arcGenerator(0, 120, 120/firstPillarData.array.length, "pink", firstPillarData, "black");
-    arcGenerator(120, 240, 120/secondPillarData.array.length, "orange", secondPillarData, "black");
-    arcGenerator(240, 360, 120/thirdPillarData.array.length, "purple", thirdPillarData, "white");
+    arcGenerator(0, 120, 120/firstPillarData.array.length, "#00D8C4", "#009688", firstPillarData, "black");
+    arcGenerator(120, 240, 120/secondPillarData.array.length, "#03A9F4", "#0271A3", secondPillarData, "black");
+    arcGenerator(240, 360, 120/thirdPillarData.array.length, "#CDDC39", "#767f21", thirdPillarData, "black");
 
 
     // specifies where we start, where we end, the distant between orbitters and
     // what color we want our pillar to be
     var whichText;
 
-    function arcGenerator(initialDegree, finalDegree, gapBetweenDegree, color, currentPillar, textColor){
+    function arcGenerator(initialDegree, finalDegree, gapBetweenDegree, color, secondColor, currentPillar, textColor){
       // since the unit circle starts at 3 o'clock, shift it back
 
       whichText = 0;
       console.log("our array length is", currentPillar.array.length);
       if(currentPillar.array.length != 0){
-        var i = initialDegree -90
+        var i = initialDegree -85
         for(var j = 0; j<currentPillar.array.length; j++){
 
           // use this to alternate heights
@@ -160,17 +251,19 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             y1: orbitterY,
             x2: originX,
             y2: originY,
-            stroke: "black"
+            stroke: "black",
+            "stroke-width": "2px"
           });
           // create our orbitting circles, storing information about initial
           // placement so we can retrieve it when we shift them around the
           // screen
           // var outerOrbitter = layerFront
           // .append("circle").attr({
+          //   id: "orbitter" + whichOrbitter,
           //   class: "outerOrbitter",
           //   cx: orbitterX,
           //   cy: orbitterY,
-          //   r: orbitRadius*1.1,
+          //   r: orbitRadius * 1.1,
           //   opacity: 1,
           //   fill: "white",
           //   stroke: "black",
@@ -197,7 +290,9 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             originY: originY,
             initialX: orbitterX,
             initialY: orbitterY,
-            initialR: orbitRadius
+            initialR: orbitRadius,
+            initialColor: color,
+            darkerColor: secondColor
           }).datum(currentPillar.array[whichText])
 
           var orbitterText = layerFront.append("text").attr({
@@ -215,7 +310,8 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             initialY: orbitterY,
             initialFontSize: "12px"
           }).style("text-anchor", "middle")
-          .text(currentPillar.array[whichText].name);
+          .text(currentPillar.array[whichText].name)
+          .call(d3.util.wrap(100, orbitterX, orbitterY));
           whichText++;
           whichOrbitter++;
           i+=gapBetweenDegree;
@@ -234,20 +330,24 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
     function clickedOrbitterGrow(){
       // if(!isTransformed){
-        var zoomCurrentCircle = d3.select(this);
+        var zoomCurrentCircleID = d3.select(this).attr("id");
+        var zoomCurrentInnerCircle = d3.select(this);
+        // var zoomCurrentOuterCircle = d3.selectAll("#" + zoomCurrentCircleID).select("[fill=white]");
+        // console.log("zoom inner and outer circle", zoomCurrentInnerCircle, zoomCurrentOuterCircle);
 
-        zoomCurrentCircle
+        zoomCurrentInnerCircle
         .transition()
         .duration(375)
         .attr({
-          r: orbitRadius *1.25
-        })
+          r: orbitRadius * 1.25
+        });
+
+        // zoomCurrentOuterCircle
         // .transition()
         // .duration(375)
         // .attr({
-        //   r: orbitRadius
+        //   r: orbitRadius * 1.45
         // });
-
       // }
     }
     function clickedOrbitterShrinkBack(){
@@ -272,31 +372,41 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       // setting up some local vars and initializing some global vars
       currentCircle = this;
       currentCircleID = d3.select(this).attr("id");
-      console.log("currentCircleID", currentCircleID);
-
       currentText = d3.select("." + currentCircleID)//.select("text");
-
-      console.log("currentText", currentText);
       var originCircle = d3.select(".originCircle");
       ourText = d3.selectAll("text");
-      ourCircles = d3.selectAll("circle");
+      ourCircles = d3.selectAll(".orbitter");
       ourLines = d3.selectAll("line")
       var newCLine;
+      var pillar;
       d3.selectAll(".infoRectangle").remove();
       // If we're not transformed, begin the transformation
-      if(!isTransformed){
+      // if(!isTransformed){
         switch(d3.select(currentCircle).attr("class")){
           case "orbitter pillar1":
-            console.log("we clicked a pillar 1 orbitter");
+
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
-            // .transition().duration(750).attr("transform", "translate(" + [width * .4, height * .9] + ")scale(" + 1 + ")")
+            pillar = "pillar1";
+
+            d3.selectAll(".pillar2").attr("fill", d3.selectAll(".pillar2").attr("initialColor"));
+            d3.selectAll(".pillar3").attr("fill", d3.selectAll(".pillar3").attr("initialColor"));
+
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
-            console.log("d3.select(currentCircle).attr('initiativeData') is currently", d3.select(currentCircle).datum());
-            $mdDialog.show({
+            var panelPosition = $mdPanel.newPanelPosition()
+                .absolute()
+                .top('15px')
+                .left('55%');
+
+            $mdPanel.open({
+              attachTo: angular.element(document.querySelector('#canvas')),
               templateUrl: 'views/initview.html',
               controller: 'InitViewController',
               controllerAs: 'initview',
+              disableParentScroll: true,
+              position: panelPosition,
               fullscreen: useFullScreen,
+              trapFocus: true,
+              focusOnOpen: true,
               clickOutsideToClose: true,
               ariaLabel: 'Good',
               locals: {
@@ -305,15 +415,29 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             })
             break;
           case "orbitter pillar2":
-            console.log("we clicked a pillar 2 orbitter");
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .4, -height * .6] + ")scale(" + 1.5 + ")");
+            pillar = "pillar2";
+
+            // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
+            d3.selectAll(".pillar1").attr("fill", d3.selectAll(".pillar1").attr("initialColor"));
+            d3.selectAll(".pillar3").attr("fill", d3.selectAll(".pillar3").attr("initialColor"));
+
+
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
-            console.log("d3.select(currentCircle).attr('initiativeData') is currently", d3.select(currentCircle).datum());
-            $mdDialog.show({
+            var panelPosition = $mdPanel.newPanelPosition()
+                .absolute()
+                .top('15px')
+                .left('55%');
+
+            $mdPanel.open({
               templateUrl: 'views/initview.html',
               controller: 'InitViewController',
               controllerAs: 'initview',
+              disableParentScroll: true,
+              position: panelPosition,
               fullscreen: useFullScreen,
+              trapFocus: true,
+              focusOnOpen: true,
               clickOutsideToClose: true,
               ariaLabel: 'Good',
               locals: {
@@ -322,15 +446,29 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             })
             break;
           case "orbitter pillar3":
-            console.log("we clicked a pillar 3 orbitter");
             svg.transition().duration(750).attr("transform", "translate(" + [width * .2, -height * .1] + ")scale(" + 1.5 + ")");
+            pillar = "pillar3";
+
+            // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
+            d3.selectAll(".pillar2").attr("fill", d3.selectAll(".pillar2").attr("initialColor"));
+            d3.selectAll(".pillar1").attr("fill", d3.selectAll(".pillar1").attr("initialColor"));
+
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             console.log("d3.select(currentCircle).attr('initiativeData') is currently", d3.select(currentCircle).datum());
-            $mdDialog.show({
+            var panelPosition = $mdPanel.newPanelPosition()
+                .absolute()
+                .top('15px')
+                .left('0%');
+
+            $mdPanel.open({
               templateUrl: 'views/initview.html',
               controller: 'InitViewController',
               controllerAs: 'initview',
+              disableParentScroll: true,
+              position: panelPosition,
               fullscreen: useFullScreen,
+              trapFocus: true,
+              focusOnOpen: true,
               clickOutsideToClose: true,
               ariaLabel: 'Good',
               locals: {
@@ -340,6 +478,11 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             break;
         }
 
+        // var currentColor = d3.select(currentCircle).attr("fill");
+        // var darkerColor = d3.hsl(currentColor).darker()
+        d3.selectAll("." + pillar).attr({"fill": function(){
+          return (this === currentCircle || this ===  d3.select(sustainableCircle)) ? d3.select(this).attr("initialColor") : d3.select(this).attr("darkerColor");
+        }});
         // d3.select(currentCircle).
         // call(d3.behavior.zoom().center([width * .66, height * .33]).scaleExtent([1.5, 8]).on('zoom', zoomed))
 
@@ -397,9 +540,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         // if ourCircles are the current circle OR it's the central
         // sustainableCircle, make their opacity full
         // CHANGE THE SELECTOR ON THE BACK HALF OF THE || TO CLASS, NOT COLOR!!!
-        // ourCircles.attr({"opacity": function(){
-        //   return (this === currentCircle || d3.select(this).attr("fill") == "green") ? 1 : 0;
-        // }});
+
 
         // ourText.attr({"opacity": 0});
         //
@@ -409,26 +550,27 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         // ourLines.attr({"opacity": 0});
 
         isTransformed = true;
+      // }
         // if our initiativeRectangle is not displayed, display it.
-        }else if(!isIniativeBoxDisplayed){
-          useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
-          console.log("d3.select(currentCircle).attr('initiativeData') is currently", d3.select(currentCircle).datum());
-          $mdDialog.show({
-            templateUrl: 'views/initview.html',
-            controller: 'InitViewController',
-            controllerAs: 'initview',
-            fullscreen: useFullScreen,
-            clickOutsideToClose: true,
-            ariaLabel: 'Good',
-            locals: {
-             init: d3.select(currentCircle).datum()
-            }
-          })
-
-          // isIniativeBoxDisplayed = true;
-        // we've clicked currentCircle twice, so get rid of the
-        // initiativeRectangle
-        }
+      //   if(!isIniativeBoxDisplayed){
+      //     useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+      //     console.log("d3.select(currentCircle).attr('initiativeData') is currently", d3.select(currentCircle).datum());
+      //     $mdDialog.show({
+      //       templateUrl: 'views/initview.html',
+      //       controller: 'InitViewController',
+      //       controllerAs: 'initview',
+      //       fullscreen: useFullScreen,
+      //       clickOutsideToClose: true,
+      //       ariaLabel: 'Good',
+      //       locals: {
+      //        init: d3.select(currentCircle).datum()
+      //       }
+      //     })
+       //
+      //     // isIniativeBoxDisplayed = true;
+      //   // we've clicked currentCircle twice, so get rid of the
+      //   // initiativeRectangle
+      //   }
 
     }
 
@@ -438,7 +580,9 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       if(isTransformed){
         console.log("isTransformed is currently", isTransformed);
         svg.transition().duration(750).attr("transform", "translate(" + [0, 0] + ")scale(" + 1 + ")");
-
+        d3.selectAll(".pillar1").attr("fill", d3.selectAll(".pillar1").attr("initialColor"));
+        d3.selectAll(".pillar2").attr("fill", d3.selectAll(".pillar2").attr("initialColor"));
+        d3.selectAll(".pillar3").attr("fill", d3.selectAll(".pillar3").attr("initialColor"));
 
 
         // // transition to our original position (originX, originY are both the
@@ -529,6 +673,6 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         stroke: "black"
       });
     }
-
+  console.log("document.body.bubbles", document.querySelector('#canvas'));
   };  }
 ])

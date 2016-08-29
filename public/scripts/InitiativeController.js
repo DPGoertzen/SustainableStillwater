@@ -3,6 +3,8 @@ angular.module('ssmnApp').controller('InitiativeController', function($http, $lo
 
   vm.pillars = [1,2,3];
 
+  vm.showHints = true;
+
 
   vm.submit = function(){
     console.log('You clicked it!');
