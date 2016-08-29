@@ -3,10 +3,19 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
   var vm = this;
 
   vm.init = init;
+  vm.findInitiatives = UserService.findInitiatives;
+  vm.findInitiatives();
   vm.data = UserService.data;
   vm.admin = false;
   vm.loggedIn = false;
   console.log('this is data', vm.data);
+
+  if(vm.data.username == 'admin'){
+    vm.admin = true;
+  }
+  if(vm.data.loggedIn == true ){
+    vm.loggedIn = true;
+  }
 
   var phaseOptions = {
     skin: {
@@ -59,7 +68,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
                barWidth: 15,
                trackColor: 'rgba(255,0,0,.1)',
                prevBarColor: 'rgba(0,0,0,.2)',
-               readOnly: false,
+              //  readOnly: false,
               //  step: 1, //variable value based on 'unit'
                displayPrevious: true,
 
@@ -79,9 +88,11 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
         tempMilestone.msOptions.step = 1;
         tempMilestone.msOptions.max = 1;
       }
-      // tempValue += (tempMilestone.value/tempMilestone.msOptions.max)/(tempPhases[i].milestones.length)*100;
-      // tempPhases[i].phaseValue = Math.round(10*tempValue)/10;
-      // console.log(tempValue);
+      if(vm.loggedIn == false){
+        tempMilestone.msOptions.readOnly = true;
+      } else {
+        tempMilestone.msOptions.readOnly = false;
+      }
       tempPhaseObject.milestones.push(tempMilestone);
     }
     vm.initPhases.push(tempPhaseObject);
@@ -114,20 +125,16 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
     })
 
 
-  vm.save = function(init){
-    console.log('clicked save', init);
+  vm.save = function(phase){
+    console.log('clicked save', phase);
+    vm.init = init;
+
     var sendData = {};
 
 
   }
 
 
-  if(vm.data.username == 'admin'){
-    vm.admin = true;
-  }
-  if(vm.data.loggedIn == true ){
-    vm.loggedIn = true;
-  }
 
 
   vm.approve = function(init) {

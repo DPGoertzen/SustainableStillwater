@@ -50,7 +50,7 @@ angular.module('ssmnApp').factory('UserService', function($http){
     // data.initPendingArray = initPendingArray;
     console.log('approved', data.initApprovedArray);
     console.log('not approved', data.initPendingArray);
-
+    console.log('users', data.users);
   }
   function userRetrievalFail(){
     console.log('error retrieving users');
