@@ -392,18 +392,11 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             d3.selectAll(".pillar3").attr("fill", d3.selectAll(".pillar3").attr("initialColor"));
 
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
-            var panelPosition = $mdPanel.newPanelPosition()
-                .absolute()
-                .top('15px')
-                .left('55%');
-
-            $mdPanel.open({
-              attachTo: angular.element(document.querySelector('#canvas')),
-              templateUrl: 'views/initview.html',
+            $mdDialog.show({
+              templateUrl: 'views/initviewpillar1.html',
               controller: 'InitViewController',
               controllerAs: 'initview',
               disableParentScroll: true,
-              position: panelPosition,
               fullscreen: useFullScreen,
               trapFocus: true,
               focusOnOpen: true,
@@ -424,17 +417,11 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
 
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
-            var panelPosition = $mdPanel.newPanelPosition()
-                .absolute()
-                .top('15px')
-                .left('55%');
-
-            $mdPanel.open({
-              templateUrl: 'views/initview.html',
+            $mdDialog.show({
+              templateUrl: 'views/initviewpillar2.html',
               controller: 'InitViewController',
               controllerAs: 'initview',
               disableParentScroll: true,
-              position: panelPosition,
               fullscreen: useFullScreen,
               trapFocus: true,
               focusOnOpen: true,
@@ -454,18 +441,11 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             d3.selectAll(".pillar1").attr("fill", d3.selectAll(".pillar1").attr("initialColor"));
 
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
-            console.log("d3.select(currentCircle).attr('initiativeData') is currently", d3.select(currentCircle).datum());
-            var panelPosition = $mdPanel.newPanelPosition()
-                .absolute()
-                .top('15px')
-                .left('0%');
-
-            $mdPanel.open({
-              templateUrl: 'views/initview.html',
+            $mdDialog.show({
+              templateUrl: 'views/initviewpillar3.html',
               controller: 'InitViewController',
               controllerAs: 'initview',
               disableParentScroll: true,
-              position: panelPosition,
               fullscreen: useFullScreen,
               trapFocus: true,
               focusOnOpen: true,
