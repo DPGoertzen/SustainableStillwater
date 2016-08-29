@@ -20,10 +20,10 @@ angular.module('ssmnApp').controller('MilestoneController', ['$http', 'init', fu
       milestones: []
     };
     sendData.label = vm.phaseName;
+    sendData.phaseValue = 0;
     sendData.id = init._id;
 
     for (var i = 0; i < vm.milestones.length; i++) {
-      var tempMilestoneArray = []
       var tempMilestones = {
         name: vm.milestones[i].msName,
         milestoneGoal: vm.milestones[i].msGoal,

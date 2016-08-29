@@ -30,22 +30,23 @@
 
   <md-content layout="column" flex>
 
-    <div ng-repeat="phase in pc.initPhases" layout-align="space-around center" class="md-whiteframe-1dp dial-container center">
+    <div ng-repeat="phase in initview.initPhases" layout-align="space-around center" class="md-whiteframe-1dp dial-container center">
       <h4 class="md-headline bold uppercase">{{phase.phaseName}}</h4>
       <ui-knob value="phase.phaseValue" options="phase.phaseOptions"></ui-knob><br />
       <div layout="row" layout-align="space-around center" class="top-padding">
-        <div ng-repeat="mileStone in phase.mileStones track by $index"  >
+        <div ng-repeat="mileStone in phase.milestones track by $index"  >
           <ui-knob value="mileStone.value" options="mileStone.msOptions"></ui-knob> <br />
           <span class="regItal">{{mileStone.name}}</span>
         </div>
       </div>
     </div>
 
+
     <div>
       <section layout="row" layout-align="center">
-        <md-button class="groupX left">Save Changes</md-button>
-        <md-button class="groupX middle">Edit Milestones</md-button>
-        <md-button class="groupX right" ng-click="initview.addPhase()">Add Phase</md-button>
+        <md-button class="groupX left" ng-if="initview.loggedIn" ng-click="initview.save()">Save Changes</md-button>
+        <md-button class="groupX middle" ng-if="initview.loggedIn">Edit Milestones</md-button>
+        <md-button class="groupX right" ng-if="initview.loggedIn" ng-click="initview.addPhase()">Add Phase</md-button>
       </section>
     </div>
 

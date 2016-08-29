@@ -4,7 +4,8 @@ angular.module('ssmnApp').factory('UserService', function($http){
   var data = {
     initiatives: [],
     initApprovedArray: [],
-    initPendingArray: []
+    initPendingArray: [],
+    allInitiativesArray: []
   };
 
 
@@ -34,6 +35,8 @@ angular.module('ssmnApp').factory('UserService', function($http){
 
     for (var i = 0; i < data.users.length; i++) {
       if(data.users[i].initiatives != null){
+        data.allInitiativesArray.push(data.users[i].initiatives);
+
         for (var j = 0; j < data.users[i].initiatives.length; j++) {
           if(data.users[i].initiatives[j].approved == true){
             data.initApprovedArray.push(data.users[i].initiatives[j]);
@@ -54,7 +57,7 @@ angular.module('ssmnApp').factory('UserService', function($http){
   }
 
   function getPendingInits(){
-    var promise = $http.get('/phase/allUsers/').then(userRetrievalSuccess, userRetrievalFail);
+    var promise = $http.get('/init/allUsers/').then(userRetrievalSuccess, userRetrievalFail);
     return promise;
   }
 

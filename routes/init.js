@@ -36,10 +36,6 @@ router.post('/newInit', function(request,response){
       response.sendStatus(200);
 });
 
-router.get('/userPhase', function(request,response){
-  var user = request.user;
-  // console.log('user is', user);
-})
 
 router.get('/profile', function(request,response){
   var user = request.user;

@@ -6,6 +6,7 @@ angular.module('ssmnApp').controller('AdminController', ['$http', '$mdMedia', '$
   vm.data = UserService.data;
 
 
+
   vm.initModal = function(init) {
     console.log('ya clicked it');
     console.log('The initiative is', init);
@@ -24,7 +25,5 @@ angular.module('ssmnApp').controller('AdminController', ['$http', '$mdMedia', '$
   }
 
 
-    console.log('Inits pending approval are', vm.data.initPendingArray);
-    console.log('Inits that are approved are', vm.data.initApprovedArray);
 
 }])
