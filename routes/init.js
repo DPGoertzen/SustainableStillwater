@@ -117,12 +117,41 @@ router.post('/newPhase', function(request,response){
   var init = request.user.initiatives;
   var id = data.id;
 
-  User.findById(user._id, function(err, user){
+  User.findOne({"initiatives._id": id}, function(err, user){
     // console.log('user', user);
 
     var currentInit = user.initiatives.id(id);
     // console.log(currentInit);
     currentInit.phase.push(data);
+
+    user.save(function(err){
+      if(err){
+        console.log(err);
+        response.sendStatus(500);
+      } else {
+        response.sendStatus(200);
+      }
+    })
+  })
+})
+
+router.post('/editPhase', function(request,response){
+  console.log('editing phase');
+
+  var user = request.user;
+  var data = request.body;
+
+  var savedValue = data.phaseValue;
+  var id = data.phaseId;
+
+  console.log('user data of phase is', data);
+
+
+
+  User.findOne({"phase._id": id}, function(err, user){
+    var currentPhase = user.phase.id(id);
+
+    currentPhase.phaseValue = savedValue;
 
     user.save(function(err){
       if(err){

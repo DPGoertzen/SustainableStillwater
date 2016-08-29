@@ -45,6 +45,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
       console.log(tempPhases[i].milestones);
 
       tempPhaseObject = {
+      phaseId: tempPhases[i]._id,
       phaseName: tempPhases[i].label,
       phaseValue: tempPhases[i].phaseValue,
       phaseOptions: phaseOptions,
@@ -53,6 +54,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
     for (var j = 0; j < tempPhases[i].milestones.length; j++) {
       var tempValue = 0;
       var tempMilestone = {
+        milestoneId: tempPhases[i].milestones[j]._id,
         name: tempPhases[i].milestones[j].name,
         value: tempPhases[i].milestones[j].startingPoint,
         msOptions: {
@@ -127,10 +129,29 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
 
   vm.save = function(phase){
     console.log('clicked save', phase);
-    vm.init = init;
 
-    var sendData = {};
+    var sendData = {
+      milestones: [],
+    };
+    sendData.phaseValue = phase.phaseValue;
+    sendData.phaseId = phase.phaseId;
 
+    for (var i = 0; i < phase.milestones.length; i++) {
+      var sendMilestone = {
+        id: phase.milestones[i].id,
+        value: phase.milestones[i].value,
+      }
+      sendData.milestones.push(sendMilestone);
+    }
+
+
+    console.log('sendData', sendData);
+
+    $http.post('/init/editPhase', sendData).then(function(response){
+
+    }, function(response){
+      console.log('fail to post edit');
+    })
 
   }
 
