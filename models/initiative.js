@@ -13,6 +13,7 @@ var initiativeSchema = new Schema ({
   website: String,
   otherData: String,
   approved: Boolean,
+  totalProgress: Number,
   phase: [phase]
 });
 
