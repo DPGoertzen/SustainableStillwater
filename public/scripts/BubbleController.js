@@ -30,8 +30,8 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     var isTransformed = false;
     var isIniativeBoxDisplayed = false;
     var isSCircleClicked = false;
-    var currentCircle;
-    var currentText;
+    var currentClicked;
+    // var currentText;
     var ourCircles;
     var ourLines;
     var whichOrbitter = 0;
@@ -294,7 +294,8 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
           }).datum(currentPillar.array[whichText])
 
           var orbitterText = layerFront.append("text").attr({
-            class: "orbitter" + whichOrbitter,
+            id: "orbitter" + whichOrbitter,
+            class: "orbitter pillar" + whichPillar,
             x: orbitterX,
             y: orbitterY,
             "font-family": "Raleway",
@@ -308,6 +309,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             initialY: orbitterY,
             initialFontSize: "12px"
           }).style("text-anchor", "middle")
+          .datum(currentPillar.array[whichText])
           .text(currentPillar.array[whichText].name)
           .call(d3.util.wrap(100, orbitterX, orbitterY));
           whichText++;
@@ -321,6 +323,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
     // set up our click handlers for our orbitters and sustainableCircle
     var orbitters = d3.selectAll(".orbitter").on('click', clickedOrbitter);
+    var orbitters = d3.selectAll("text").on('click', clickedOrbitter)
     var ssCircle = d3.selectAll(".originCircle").on('click', clickedSustainableCircle);
 
     var orbittersGrow = d3.selectAll(".orbitter").on('mouseover', clickedOrbitterGrow);
@@ -328,9 +331,9 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
     function clickedOrbitterGrow(){
       // if(!isTransformed){
-        var zoomCurrentCircleID = d3.select(this).attr("id");
+        // var zoomcurrentClickedID = d3.select(this).attr("id");
         var zoomCurrentInnerCircle = d3.select(this);
-        // var zoomCurrentOuterCircle = d3.selectAll("#" + zoomCurrentCircleID).select("[fill=white]");
+        // var zoomCurrentOuterCircle = d3.selectAll("#" + zoomcurrentClickedID).select("[fill=white]");
         // console.log("zoom inner and outer circle", zoomCurrentInnerCircle, zoomCurrentOuterCircle);
 
         zoomCurrentInnerCircle
@@ -350,9 +353,9 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     }
     function clickedOrbitterShrinkBack(){
       // if(!isTransformed){
-        var zoomCurrentCircle = d3.select(this);
+        var zoomcurrentClicked = d3.select(this);
 
-        zoomCurrentCircle
+        zoomcurrentClicked
         // .transition()
         // .duration(375)
         // .attr({
@@ -368,19 +371,22 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
     function clickedOrbitter(){
       // setting up some local vars and initializing some global vars
-      currentCircle = this;
-      currentCircleID = d3.select(this).attr("id");
-      currentText = d3.select("." + currentCircleID)//.select("text");
+      currentClicked = this;
+      currentClickedID = d3.select(this).attr("id");
+      currentCircle = d3.selectAll("circle").filter("#" + currentClickedID)
+      console.log("currentClickedID is", currentClickedID);
+      console.log("currentCircle ", currentCircle);
+      console.log("this is", d3.select(this));
+      currentText = d3.select("#" + currentClickedID)//.select("text");
       var originCircle = d3.select(".originCircle");
       ourText = d3.selectAll("text");
       ourCircles = d3.selectAll(".orbitter");
       ourLines = d3.selectAll("line")
-      var newCLine;
       var pillar;
-      d3.selectAll(".infoRectangle").remove();
+
       // If we're not transformed, begin the transformation
       // if(!isTransformed){
-        switch(d3.select(currentCircle).attr("class")){
+        switch(d3.select(currentClicked).attr("class")){
           case "orbitter pillar1":
 
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
@@ -401,7 +407,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
               clickOutsideToClose: true,
               ariaLabel: 'Good',
               locals: {
-               init: d3.select(currentCircle).datum()
+               init: d3.select(currentClicked).datum()
               }
             })
             break;
@@ -426,7 +432,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
               clickOutsideToClose: true,
               ariaLabel: 'Good',
               locals: {
-               init: d3.select(currentCircle).datum()
+               init: d3.select(currentClicked).datum()
               }
             })
             break;
@@ -450,18 +456,19 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
               clickOutsideToClose: true,
               ariaLabel: 'Good',
               locals: {
-               init: d3.select(currentCircle).datum()
+               init: d3.select(currentClicked).datum()
               }
             })
             break;
         }
 
-        // var currentColor = d3.select(currentCircle).attr("fill");
+        // var currentColor = d3.select(currentClicked).attr("fill");
         // var darkerColor = d3.hsl(currentColor).darker()
         d3.selectAll("." + pillar).attr({"fill": function(){
-          return (this === currentCircle || this ===  d3.select(sustainableCircle)) ? d3.select(this).attr("initialColor") : d3.select(this).attr("darkerColor");
+          return (this ===  d3.select(sustainableCircle)) ? d3.select(this).attr("initialColor") : d3.select(this).attr("darkerColor");
         }});
-        // d3.select(currentCircle).
+        currentCircle.attr({"fill": currentCircle.attr("initialColor")})
+        // d3.select(currentClicked).
         // call(d3.behavior.zoom().center([width * .66, height * .33]).scaleExtent([1.5, 8]).on('zoom', zoomed))
 
 
@@ -478,14 +485,14 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         // setTimeout(newConnectorLine, 780);
 
 
-        // move our currentCircle(the one that was clicked) to the center of
+        // move our currentClicked(the one that was clicked) to the center of
         // the viewport and make it big. No. BIGGER.
-        // d3.select(currentCircle).transition()
+        // d3.select(currentClicked).transition()
         // .duration(750)
         // .attr({
         //   cx: originX,
         //   cy: originY,
-        //   r: d3.select(currentCircle).attr("r")*3.5
+        //   r: d3.select(currentClicked).attr("r")*3.5
         // })
 
 
@@ -532,7 +539,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         // if our initiativeRectangle is not displayed, display it.
       //   if(!isIniativeBoxDisplayed){
       //     useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
-      //     console.log("d3.select(currentCircle).attr('initiativeData') is currently", d3.select(currentCircle).datum());
+      //     console.log("d3.select(currentClicked).attr('initiativeData') is currently", d3.select(currentClicked).datum());
       //     $mdDialog.show({
       //       templateUrl: 'views/initview.html',
       //       controller: 'InitViewController',
@@ -541,12 +548,12 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       //       clickOutsideToClose: true,
       //       ariaLabel: 'Good',
       //       locals: {
-      //        init: d3.select(currentCircle).datum()
+      //        init: d3.select(currentClicked).datum()
       //       }
       //     })
        //
       //     // isIniativeBoxDisplayed = true;
-      //   // we've clicked currentCircle twice, so get rid of the
+      //   // we've clicked currentClicked twice, so get rid of the
       //   // initiativeRectangle
       //   }
 
@@ -583,12 +590,12 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         //
         // // Do the same here -- initialX,Y,R are stored on creation of the
         // // orbitter
-        // d3.select(currentCircle).transition()
+        // d3.select(currentClicked).transition()
         // .duration(750)
         // .attr({
-        //   cx: d3.select(currentCircle).attr("initialX"),
-        //   cy: d3.select(currentCircle).attr("initialY"),
-        //   r: d3.select(currentCircle).attr("initialR")
+        //   cx: d3.select(currentClicked).attr("initialX"),
+        //   cy: d3.select(currentClicked).attr("initialY"),
+        //   r: d3.select(currentClicked).attr("initialR")
         // });
         //
         // currentText.transition()
@@ -638,19 +645,19 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       }
     }
 
-    // This is how we generate lines when we "zoom" in. needs to be accessible
-    // to both of our "clicked..." functions.
-    function newConnectorLine(){
-        newCLine = layerBack.append("line").attr({
-        class: "newCLine",
-        x1: d3.select(currentCircle).attr("cx"),
-        y1: d3.select(currentCircle).attr("cy"),
-        x2: sustainableCircle.attr("cx"),
-        y2: sustainableCircle.attr("cy"),
-        opacity: 1,
-        stroke: "black"
-      });
-    }
-  console.log("document.body.bubbles", document.querySelector('#canvas'));
+  //   // This is how we generate lines when we "zoom" in. needs to be accessible
+  //   // to both of our "clicked..." functions.
+  //   function newConnectorLine(){
+  //       newCLine = layerBack.append("line").attr({
+  //       class: "newCLine",
+  //       x1: d3.select(currentClicked).attr("cx"),
+  //       y1: d3.select(currentClicked).attr("cy"),
+  //       x2: sustainableCircle.attr("cx"),
+  //       y2: sustainableCircle.attr("cy"),
+  //       opacity: 1,
+  //       stroke: "black"
+  //     });
+  //   }
+  // console.log("document.body.bubbles", document.querySelector('#canvas'));
   };  }
 ])
