@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('MilestoneController', ['$http', 'init', function($http,init){
+angular.module('ssmnApp').controller('MilestoneController', ['$http', 'init', '$mdDialog', function($http,init, $mdDialog){
 
   var vm = this;
 
@@ -41,4 +41,15 @@ angular.module('ssmnApp').controller('MilestoneController', ['$http', 'init', fu
     });
   }
 
+
+
+        vm.exit = function() {
+          $mdDialog.hide();
+        }
+
+
+        vm.clear = function() {
+          vm.phaseName = null;
+          vm.milestones = [{id: 'milestone1'}];
+        }
 }]);

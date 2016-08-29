@@ -18,34 +18,50 @@
           </div>
         </md-input-container>
         <div layout="row">
-          <md-input-container flex="65">
-            <label class="form-font">Goal</label>
-            <input required name="msGoal" ng-model="milestone.msGoal">
-            <p style="font-size:.8em; width: 100%;">
-              Measurable as monetary, percentage or completed.
-            </p>
-            <div ng-messages="phaseForm.msGoal.$error">
-              <div ng-message="required">Please fill out this milestone goal.</div>
-            </div>
-          </md-input-container>
           <md-input-container flex="35">
-            <label class="form-font">How to Measure</label>
+            <label class="form-font">How to Measure {{milestone.msMeasure}}</label>
             <md-select name="type" ng-model="milestone.msMeasure" required>
               <md-option value="money">Monetary</md-option>
               <md-option value="percent">Percentage</md-option>
-              <md-option value="bolean">Complete</md-option>
+              <md-option value="boolean">Objective</md-option>
+              <md-option value="number">Numeric</md-option>
             </md-select>
           </md-input-container>
+
+            <md-input-container flex="65" ng-show="milestone.msMeasure == 'money' || milestone.msMeasure == 'number'">
+              <label class="form-font">Goal:
+                <span ng-show="milestone.msMeasure == 'money'">how much money is needed?</span>
+                <span ng-show="milestone.msMeasure == 'number'">how many do you need?</span>
+              </label>
+              <input required name="msGoal" ng-model="milestone.msGoal">
+              <p style="font-size:.8em; width: 100%;">
+                Measurable as monetary, percentage or completed.
+              </p>
+              <div ng-messages="phaseForm.msGoal.$error">
+                <div ng-message="required">Please fill out this milestone goal.</div>
+              </div>
+            </md-input-container>
+
         </div>
 
         <div layout="row">
-          <md-input-container flex="50">
-            <label class="form-font">Starting Spot</label>
+          <md-input-container flex="50" ng-show="milestone.msMeasure != 'boolean'">
+            <label class="form-font">
+              <span ng-show="milestone.msMeasure == 'percent'">Percent currently completed</span>
+              <span ng-show="milestone.msMeasure == 'money'">How much money you're starting with</span>
+              <span ng-show="milestone.msMeasure == 'number'">How many you currently have</span></label>
             <input name="msStartValue" ng-model="milestone.msStart">
-            <p style="font-size:.8em; width: 100%;">
-              How far toward your goal are you currently.
-            </p>
+            <p style="font-size:.8em; width: 100%;">Starting values</p>
           </md-input-container>
+
+          <md-input-container flex="50" ng-show="milestone.msMeasure == 'boolean'">
+            <md-switch name="msStartValue" ng-model="milestone.msStart" ng-true-value="1" ng-false-value="0">
+              <br><p style="font-size:.8em; width: 100%;">
+                Have you already acheived this objective?
+              </p>
+            </md-switch>
+          </md-input-container>
+
 
           <div class="center" flex="50">
             <md-button class="groupY only" ng-click="msc.addNewMilestone()">Add Another Milestone</md-button>
@@ -56,8 +72,8 @@
       <div>
         <section layout="row" layout-align="center">
           <md-button class="groupY left" ng-click="msc.save(init)">Save Phase</md-button>
-          <md-button class="groupY middle">Clear Form</md-button>
-          <md-button class="groupY right">Exit</md-button>
+          <md-button class="groupY middle" ng-click="msc.clear()">Clear Form</md-button>
+          <md-button class="groupY right" ng-click="msc.exit()">Exit</md-button>
         </section>
       </div>
 
