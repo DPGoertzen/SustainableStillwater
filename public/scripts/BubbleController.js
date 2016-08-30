@@ -392,9 +392,12 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
             pillar = "pillar1";
 
-            d3.selectAll(".pillar2").attr("fill", d3.selectAll(".pillar2").attr("initialColor"));
-            d3.selectAll(".pillar3").attr("fill", d3.selectAll(".pillar3").attr("initialColor"));
-
+            if(!d3.selectAll(".pillar2").empty()){
+              d3.selectAll(".pillar2").attr("fill", d3.selectAll(".pillar2").attr("initialColor"));
+            }
+            if(!d3.selectAll(".pillar3").empty()){
+              d3.selectAll(".pillar3").attr("fill", d3.selectAll(".pillar3").attr("initialColor"));
+            }
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             $mdDialog.show({
               templateUrl: 'views/initviewpillar1.html',
@@ -416,9 +419,13 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             pillar = "pillar2";
 
             // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
-            d3.selectAll(".pillar1").attr("fill", d3.selectAll(".pillar1").attr("initialColor"));
-            d3.selectAll(".pillar3").attr("fill", d3.selectAll(".pillar3").attr("initialColor"));
 
+            if(!d3.selectAll(".pillar1").empty()){
+              d3.selectAll(".pillar1").attr("fill", d3.selectAll(".pillar1").attr("initialColor"));
+            }
+            if(!d3.selectAll(".pillar3").empty()){
+              d3.selectAll(".pillar3").attr("fill", d3.selectAll(".pillar3").attr("initialColor"));
+            }
 
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             $mdDialog.show({
@@ -441,8 +448,13 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             pillar = "pillar3";
 
             // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
-            d3.selectAll(".pillar2").attr("fill", d3.selectAll(".pillar2").attr("initialColor"));
-            d3.selectAll(".pillar1").attr("fill", d3.selectAll(".pillar1").attr("initialColor"));
+
+            if(!d3.selectAll(".pillar2").empty()){
+              d3.selectAll(".pillar2").attr("fill", d3.selectAll(".pillar2").attr("initialColor"));
+            }
+            if(!d3.selectAll(".pillar1").empty()){
+              d3.selectAll(".pillar1").attr("fill", d3.selectAll(".pillar1").attr("initialColor"));
+            }
 
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             $mdDialog.show({
