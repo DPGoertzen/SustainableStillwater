@@ -194,7 +194,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         originalScale: innerCircleRadius
     });
     var sustainableText = layerFront.append("text").attr({
-      class: "orbitter" + whichOrbitter,
+      class: "originCircle",
       x: originX,
       y: originY,
       "font-family": "Raleway",
