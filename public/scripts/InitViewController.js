@@ -47,7 +47,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
       tempPhaseObject = {
       phaseId: tempPhases[i]._id,
       phaseName: tempPhases[i].label,
-      phaseValue: tempPhases[i].phaseValue,
+      // phaseValue: tempPhases[i].phaseValue,
       phaseOptions: phaseOptions,
       milestones: []
     }
@@ -105,7 +105,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
   };
   console.log('initphases are ',vm.initPhases);
 
-    $scope.$watchCollection(function(){
+  $scope.$watchCollection(function(){
       var values =[];
       for (var m = 0; m < vm.initPhases.length; m++) {
         console.log('Each vm.initPhases', vm.initPhases[m]);
@@ -113,22 +113,21 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
           values.push(vm.initPhases[m].milestones[n].value);
         }
       }
+      for(var k = 0; k < vm.initPhases.length; k++){
+        console.log(vm.initPhases[k].milestones);
+        tempValue = 0;
+        for (var l = 0; l < vm.initPhases[k].milestones.length; l++) {
+          var milestone = vm.initPhases[k].milestones[l];
+          console.log('MS value', milestone.value);
+          tempValue += (milestone.value/milestone.msOptions.max)/(vm.initPhases[k].milestones.length)*100;
+        }
+        vm.initPhases[k].phaseValue = Math.round(10*tempValue)/10;
+        console.log(tempValue);
+      }
       console.log('Values array', values);
       return values;
     }, function() {
-        for(var k = 0; k < vm.initPhases.length; k++){
-          console.log(vm.initPhases[k].milestones);
-          tempValue = 0;
-          for (var l = 0; l < vm.initPhases[k].milestones.length; l++) {
-            var milestone = vm.initPhases[k].milestones[l];
-            console.log('MS value', milestone.value);
-            tempValue += (milestone.value/milestone.msOptions.max)/(vm.initPhases[k].milestones.length)*100;
-          }
-          vm.initPhases[k].phaseValue = Math.round(10*tempValue)/10;
-          console.log(tempValue);
-        }
-
-    })
+  })
 
 
   vm.save = function(phase){

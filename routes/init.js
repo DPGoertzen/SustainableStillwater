@@ -122,6 +122,7 @@ router.post('/newPhase', function(request,response){
 
     var currentInit = user.initiatives.id(id);
     // console.log(currentInit);
+    currentInit.totalProgress = 0;
     currentInit.phase.push(data);
 
     user.save(function(err){
@@ -157,7 +158,7 @@ router.post('/editPhase', function(request,response){
 
     currentPhase = currentInit.phase.id(phaseId);
     currentPhase.phaseValue = savedValue;
-    
+
     console.log(currentPhase.milestones);
     for (var i = 0; i < currentPhase.milestones.length; i++) {
       for (var j = 0; j < data.milestones.length; j++) {

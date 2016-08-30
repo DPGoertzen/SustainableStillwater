@@ -29,6 +29,7 @@
         <span class="md-title underline">{{phase.phaseName}}:</span><br />
         Percent Complete: {{phase.phaseValue}}%
       </p>
+      <md-button class="groupX right" ng-click="initview.addPhase()">Add Phase</md-button>
     </md-sidenav>
 
   <md-content layout="column" flex style="height:auto; max-height:100%; overflow:auto;">
@@ -41,16 +42,17 @@
           <span class="regItal">{{mileStone.name}}</span>
         </div>
       </div>
+      <div>
+        <section layout="row" layout-align="center">
+          <md-button class="groupX left"  ng-click="initview.save(phase)">Save Changes</md-button>
+          <md-button class="groupX middle" >Edit Milestones</md-button>
+        </section>
+      </div>
     </div>
 
 
-    <div>
-      <section layout="row" layout-align="center">
-        <md-button class="groupX left"  ng-click="initview.save(phase)">Save Changes</md-button>
-        <md-button class="groupX middle" >Edit Milestones</md-button>
-        <md-button class="groupX right" ng-click="initview.addPhase()">Add Phase</md-button>
-      </section>
-    </div>
+
+
 
     </md-content>
   </div>
