@@ -135,6 +135,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     .endAngle(360 * (Math.PI/180))
 
     layerBack.append("path")
+    .attr("class", "arc pillar1")
     .attr("d", arcPillar1)
     .attr("fill", "#B2DFDB")
     .attr("stroke", "black")
@@ -142,6 +143,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     .attr("transform", "translate(" + [width/2,height/2] + ")")
 
     layerBack.append("path")
+    .attr("class", "arc pillar2")
     .attr("d", arcPillar2)
     .attr("fill", "#B3E5FC")
     .attr("stroke", "black")
@@ -149,6 +151,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     .attr("transform", "translate(" + [width/2,height/2] + ")")
 
     layerBack.append("path")
+    .attr("class", "arc pillar3")
     .attr("d", arcPillar3)
     .attr("fill", "#F0F4C3")
     .attr("stroke", "black")
@@ -325,6 +328,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     var orbitters = d3.selectAll(".orbitter").on('click', clickedOrbitter);
     var orbitters = d3.selectAll("text").on('click', clickedOrbitter)
     var ssCircle = d3.selectAll(".originCircle").on('click', clickedSustainableCircle);
+    var arcs = d3.selectAll(".arc").on('click', clickedArc);
 
     var orbittersGrow = d3.selectAll(".orbitter").on('mouseover', clickedOrbitterGrow);
     var orbittersShrinkBack = d3.selectAll(".orbitter").on('mouseleave', clickedOrbitterShrinkBack);
@@ -392,11 +396,11 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
             pillar = "pillar1";
 
-            if(!d3.selectAll(".pillar2").empty()){
-              d3.selectAll(".pillar2").attr("fill", d3.selectAll(".pillar2").attr("initialColor"));
+            if(!d3.selectAll("circle").filter(".pillar2").empty()){
+              d3.selectAll("circle").filter(".pillar2").attr("fill", d3.selectAll("circle").filter(".pillar2").attr("initialColor"));
             }
-            if(!d3.selectAll(".pillar3").empty()){
-              d3.selectAll(".pillar3").attr("fill", d3.selectAll(".pillar3").attr("initialColor"));
+            if(!d3.selectAll("circle").filter(".pillar3").empty()){
+              d3.selectAll("circle").filter(".pillar3").attr("fill", d3.selectAll("circle").filter(".pillar3").attr("initialColor"));
             }
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             $mdDialog.show({
@@ -420,11 +424,11 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
             // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
 
-            if(!d3.selectAll(".pillar1").empty()){
-              d3.selectAll(".pillar1").attr("fill", d3.selectAll(".pillar1").attr("initialColor"));
+            if(!d3.selectAll("circle").filter(".pillar1").empty()){
+              d3.selectAll("circle").filter(".pillar1").attr("fill", d3.selectAll("circle").filter(".pillar1").attr("initialColor"));
             }
-            if(!d3.selectAll(".pillar3").empty()){
-              d3.selectAll(".pillar3").attr("fill", d3.selectAll(".pillar3").attr("initialColor"));
+            if(!d3.selectAll("circle").filter(".pillar3").empty()){
+              d3.selectAll("circle").filter(".pillar3").attr("fill", d3.selectAll("circle").filter(".pillar3").attr("initialColor"));
             }
 
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
@@ -449,11 +453,11 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
             // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
 
-            if(!d3.selectAll(".pillar2").empty()){
-              d3.selectAll(".pillar2").attr("fill", d3.selectAll(".pillar2").attr("initialColor"));
+            if(!d3.selectAll("circle").filter(".pillar2").empty()){
+              d3.selectAll("circle").filter(".pillar2").attr("fill", d3.selectAll("circle").filter(".pillar2").attr("initialColor"));
             }
-            if(!d3.selectAll(".pillar1").empty()){
-              d3.selectAll(".pillar1").attr("fill", d3.selectAll(".pillar1").attr("initialColor"));
+            if(!d3.selectAll("circle").filter(".pillar1").empty()){
+              d3.selectAll("circle").filter(".pillar1").attr("fill", d3.selectAll("circle").filter(".pillar1").attr("initialColor"));
             }
 
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
@@ -476,98 +480,12 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
         // var currentColor = d3.select(currentClicked).attr("fill");
         // var darkerColor = d3.hsl(currentColor).darker()
-        d3.selectAll("." + pillar).attr({"fill": function(){
+        d3.selectAll("circle").filter("." + pillar).attr({"fill": function(){
           return (this ===  d3.select(sustainableCircle)) ? d3.select(this).attr("initialColor") : d3.select(this).attr("darkerColor");
         }});
         currentCircle.attr({"fill": currentCircle.attr("initialColor")})
-        // d3.select(currentClicked).
-        // call(d3.behavior.zoom().center([width * .66, height * .33]).scaleExtent([1.5, 8]).on('zoom', zoomed))
-
-
-
-
-
-        console.log("isTransformed is currently", isTransformed);
-        console.log("we clicked x position", d3.select(this).attr("cx"), "and y position", d3.select(this).attr("cy"));
-
-        // create new connection line just after everything else slots into
-        // place
-
-
-        // setTimeout(newConnectorLine, 780);
-
-
-        // move our currentClicked(the one that was clicked) to the center of
-        // the viewport and make it big. No. BIGGER.
-        // d3.select(currentClicked).transition()
-        // .duration(750)
-        // .attr({
-        //   cx: originX,
-        //   cy: originY,
-        //   r: d3.select(currentClicked).attr("r")*3.5
-        // })
-
-
-        // currentText.transition()
-        // .duration(750)
-        // .attr({
-        //   x: originX,
-        //   y: originY,
-        //   "font-size": "36px"
-        // })
-        //
-        // // Do the same to the sustainableCircle, but offset it down and to the
-        // // left
-        // sustainableCircle.transition()
-        // .duration(750)
-        // .attr({
-        //     cx: originX - 350,
-        //     cy: originY + 250,
-        //     r: sustainableCircle.attr("r")*.3
-        //   })
-        //
-        // sustainableText.transition()
-        // .duration(750)
-        // .attr({
-        //   x: originX - 350,
-        //   y: originY + 250,
-        //   "font-size": "12px"
-        // })
-
-        // if ourCircles are the current circle OR it's the central
-        // sustainableCircle, make their opacity full
-        // CHANGE THE SELECTOR ON THE BACK HALF OF THE || TO CLASS, NOT COLOR!!!
-
-
-        // ourText.attr({"opacity": 0});
-        //
-        // currentText.attr({"opacity": 1});
-        // sustainableText.attr({"opacity": 1});
-        // // drop the extraneous lines to 0 opacity.
-        // ourLines.attr({"opacity": 0});
 
         isTransformed = true;
-      // }
-        // if our initiativeRectangle is not displayed, display it.
-      //   if(!isIniativeBoxDisplayed){
-      //     useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
-      //     console.log("d3.select(currentClicked).attr('initiativeData') is currently", d3.select(currentClicked).datum());
-      //     $mdDialog.show({
-      //       templateUrl: 'views/initview.html',
-      //       controller: 'InitViewController',
-      //       controllerAs: 'initview',
-      //       fullscreen: useFullScreen,
-      //       clickOutsideToClose: true,
-      //       ariaLabel: 'Good',
-      //       locals: {
-      //        init: d3.select(currentClicked).datum()
-      //       }
-      //     })
-       //
-      //     // isIniativeBoxDisplayed = true;
-      //   // we've clicked currentClicked twice, so get rid of the
-      //   // initiativeRectangle
-      //   }
 
     }
 
@@ -577,60 +495,10 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       if(isTransformed){
         console.log("isTransformed is currently", isTransformed);
         svg.transition().duration(750).attr("transform", "translate(" + [0, 0] + ")scale(" + 1 + ")");
-        d3.selectAll(".pillar1").attr("fill", d3.selectAll(".pillar1").attr("initialColor"));
-        d3.selectAll(".pillar2").attr("fill", d3.selectAll(".pillar2").attr("initialColor"));
-        d3.selectAll(".pillar3").attr("fill", d3.selectAll(".pillar3").attr("initialColor"));
+        d3.selectAll("circle").filter(".pillar1").attr("fill", d3.selectAll("circle").filter(".pillar1").attr("initialColor"));
+        d3.selectAll("circle").filter(".pillar2").attr("fill", d3.selectAll("circle").filter(".pillar2").attr("initialColor"));
+        d3.selectAll("circle").filter(".pillar3").attr("fill", d3.selectAll("circle").filter(".pillar3").attr("initialColor"));
 
-
-        // // transition to our original position (originX, originY are both the
-        // // middle points on our canvas.
-        // sustainableCircle.transition()
-        // .duration(750)
-        // .attr({
-        //   cx: originX,
-        //   cy: originY,
-        //   r: sustainableCircle.attr("originalScale")
-        // });
-        //
-        // sustainableText.transition()
-        // .duration(750)
-        // .attr({
-        //   x: originX,
-        //   y: originY,
-        //   "font-size": "36px"
-        // })
-        //
-        // // Do the same here -- initialX,Y,R are stored on creation of the
-        // // orbitter
-        // d3.select(currentClicked).transition()
-        // .duration(750)
-        // .attr({
-        //   cx: d3.select(currentClicked).attr("initialX"),
-        //   cy: d3.select(currentClicked).attr("initialY"),
-        //   r: d3.select(currentClicked).attr("initialR")
-        // });
-        //
-        // currentText.transition()
-        // .duration(750)
-        // .attr({
-        //   x: currentText.attr("initialX"),
-        //   y: currentText.attr("initialY"),
-        //   "font-size": currentText.attr("initialFontSize")
-        // })
-        // // delete our connective line
-        // d3.select(".newCLine").remove();
-        // // a helper function to restore our opacity, needs to be a function
-        // // because...
-        // function returnOpacityTo1(){
-        //   ourCircles.attr("opacity", 1);
-        //   ourLines.attr("opacity", 1);
-        //   ourText.attr("opacity", 1);
-        // }
-        // // ...we're using setTimeout!
-        // setTimeout(returnOpacityTo1, 600);
-        // // if an initiativeRectangle is on screen, delete it.
-        // d3.selectAll(".initiativeRectangle").remove();
-        // // we're no longer transformed!
         isTransformed = false;
         // if isSCircleClicked is false, we need to create our infoRectangle.
       }else if(!isSCircleClicked){
@@ -657,19 +525,57 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       }
     }
 
-  //   // This is how we generate lines when we "zoom" in. needs to be accessible
-  //   // to both of our "clicked..." functions.
-  //   function newConnectorLine(){
-  //       newCLine = layerBack.append("line").attr({
-  //       class: "newCLine",
-  //       x1: d3.select(currentClicked).attr("cx"),
-  //       y1: d3.select(currentClicked).attr("cy"),
-  //       x2: sustainableCircle.attr("cx"),
-  //       y2: sustainableCircle.attr("cy"),
-  //       opacity: 1,
-  //       stroke: "black"
-  //     });
-  //   }
-  // console.log("document.body.bubbles", document.querySelector('#canvas'));
+
+    function clickedArc(){
+      // setting up some local vars and initializing some global vars
+      currentClicked = this;
+
+      // If we're not transformed, begin the transformation
+      // if(!isTransformed){
+        switch(d3.select(currentClicked).attr("class")){
+          case "arc pillar1":
+            svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
+
+            if(!d3.selectAll("circle").filter(".pillar1").empty()){
+              d3.selectAll("circle").filter(".pillar1").attr("fill", d3.selectAll("circle").filter(".pillar1").attr("initialColor"));
+            }
+            if(!d3.selectAll("circle").filter(".pillar2").empty()){
+              d3.selectAll("circle").filter(".pillar2").attr("fill", d3.selectAll("circle").filter(".pillar2").attr("initialColor"));
+            }
+            if(!d3.selectAll("circle").filter(".pillar3").empty()){
+              d3.selectAll("circle").filter(".pillar3").attr("fill", d3.selectAll("circle").filter(".pillar3").attr("initialColor"));
+            }
+            break;
+          case "arc pillar2":
+            svg.transition().duration(750).attr("transform", "translate(" + [-width * .4, -height * .6] + ")scale(" + 1.5 + ")");
+
+            if(!d3.selectAll("circle").filter(".pillar1").empty()){
+              d3.selectAll("circle").filter(".pillar1").attr("fill", d3.selectAll("circle").filter(".pillar1").attr("initialColor"));
+            }
+            if(!d3.selectAll("circle").filter(".pillar2").empty()){
+              d3.selectAll("circle").filter(".pillar2").attr("fill", d3.selectAll("circle").filter(".pillar2").attr("initialColor"));
+            }
+            if(!d3.selectAll("circle").filter(".pillar3").empty()){
+              d3.selectAll("circle").filter(".pillar3").attr("fill", d3.selectAll("circle").filter(".pillar3").attr("initialColor"));
+            }
+            break;
+          case "arc pillar3":
+            svg.transition().duration(750).attr("transform", "translate(" + [width * .2, -height * .1] + ")scale(" + 1.5 + ")");
+
+            if(!d3.selectAll("circle").filter(".pillar1").empty()){
+              d3.selectAll("circle").filter(".pillar1").attr("fill", d3.selectAll("circle").filter(".pillar1").attr("initialColor"));
+            }
+            if(!d3.selectAll("circle").filter(".pillar2").empty()){
+              d3.selectAll("circle").filter(".pillar2").attr("fill", d3.selectAll("circle").filter(".pillar2").attr("initialColor"));
+            }
+            if(!d3.selectAll("circle").filter(".pillar3").empty()){
+              d3.selectAll("circle").filter(".pillar3").attr("fill", d3.selectAll("circle").filter(".pillar3").attr("initialColor"));
+            }
+            break;
+        }
+
+        isTransformed = true;
+    }
+
   };  }
 ])
