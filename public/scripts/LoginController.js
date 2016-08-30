@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('LoginController', function($http, $location, UserService){
+angular.module('ssmnApp').controller('LoginController', function($http, $location, UserService, $mdToast){
   var vm = this;
 
   vm.username = '';
@@ -30,6 +30,12 @@ angular.module('ssmnApp').controller('LoginController', function($http, $locatio
 
   function handleFailure(response){
     console.log('Failure', response);
-
+    $mdToast.show({
+      position: "top left",
+      template: function(){
+        if (response.status == 401){"<md-toast>Incorrect Username or Password</md-toast>"}
+        else {"<md-toast>There was a problem signing you in</md-toast>"}
+      }
+  })
   };
 })

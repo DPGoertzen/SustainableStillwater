@@ -1,7 +1,7 @@
 <div id="formContent">
   <md-content layout-padding>
     <div>
-      <form name="loginForm">
+      <form name="loginForm" novalidate ng-submit="loginForm.$valid && login.login()">
         <md-input-container class="md-block">
           <label class="form-font">Username</label>
           <input required name="username" ng-model="login.username" />
@@ -12,7 +12,7 @@
         </md-input-container>
         <div>
           <section layout="row" layout-align="center">
-            <md-button class="groupY left" ng-click="login.login()">Login</md-button>
+            <md-button type="submit" class="groupY left">Login</md-button>
             <a href="/register"><md-button class="groupY right">Register</md-button></a>
           </section>
         </div>
