@@ -85,10 +85,14 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
         tempMilestone.msOptions.unit = '$';
         tempMilestone.msOptions.step = 10;
         tempMilestone.msOptions.max = tempPhases[i].milestones[j].milestoneGoal;
-      } else if (tempPhases[i].milestones[j].measurement == 'complete'){
+      } else if (tempPhases[i].milestones[j].measurement == 'boolean'){
         tempMilestone.msOptions.unit = '';
         tempMilestone.msOptions.step = 1;
         tempMilestone.msOptions.max = 1;
+      } else if(tempPhases[i].milestones[j].measurement == 'number'){
+        tempMilestone.msOptions.unit = '';
+        tempMilestone.msOptions.step = 1;
+        tempMilestone.msOptions.max = tempPhases[i].milestones[j].milestoneGoal;
       }
       if(vm.loggedIn == false){
         tempMilestone.msOptions.readOnly = true;
@@ -129,16 +133,18 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
 
   vm.save = function(phase){
     console.log('clicked save', phase);
+    console.log('initiative', init);
 
     var sendData = {
       milestones: [],
     };
+    sendData.initId = init._id;
     sendData.phaseValue = phase.phaseValue;
     sendData.phaseId = phase.phaseId;
 
     for (var i = 0; i < phase.milestones.length; i++) {
       var sendMilestone = {
-        id: phase.milestones[i].id,
+        id: phase.milestones[i].milestoneId,
         value: phase.milestones[i].value,
       }
       sendData.milestones.push(sendMilestone);
