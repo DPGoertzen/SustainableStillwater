@@ -25,10 +25,8 @@
         <span class="uppercase bold">Phone:</span>
         {{initview.init.contactPhone}}
       </p>
-      <p ng-repeat="phase in pc.initPhases">
-        <span class="md-title underline">{{phase.phaseName}}:</span><br />
-        Percent Complete: {{phase.phaseValue}}%
-      </p>
+
+
       <md-button class="groupX right" ng-click="initview.addPhase()">Add Phase</md-button>
     </md-sidenav>
 
