@@ -433,14 +433,14 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
                init: d3.select(currentClicked).datum()
               }
             })
-            if(!d3.selectAll("circle").filter(".pillar2").empty()){
-              d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
-            }
-            if(!d3.selectAll("circle").filter(".pillar3").empty()){
-              d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
-            }
+          if(!d3.selectAll("circle").filter(".pillar2").empty()){
+            d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
+            d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
+          }
+          if(!d3.selectAll("circle").filter(".pillar3").empty()){
+            d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
+            d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
+          }
             break;
           case "orbitter notApproved pillar1":
 
@@ -463,14 +463,14 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
                init: d3.select(currentClicked).datum()
               }
             })
-            if(!d3.selectAll("circle").filter(".pillar2").empty()){
-              d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
-            }
-            if(!d3.selectAll("circle").filter(".pillar3").empty()){
-              d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
-            }
+          if(!d3.selectAll("circle").filter(".pillar2").empty()){
+            d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
+            d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
+          }
+          if(!d3.selectAll("circle").filter(".pillar3").empty()){
+            d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
+            d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
+          }
             break;
           case "orbitter pillar1":
 
@@ -493,14 +493,14 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
                init: d3.select(currentClicked).datum()
               }
             })
-            if(!d3.selectAll("circle").filter(".pillar2").empty()){
-              d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
-            }
-            if(!d3.selectAll("circle").filter(".pillar3").empty()){
-              d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
-            }
+          if(!d3.selectAll("circle").filter(".pillar2").empty()){
+            d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
+            d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
+          }
+          if(!d3.selectAll("circle").filter(".pillar3").empty()){
+            d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
+            d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
+          }
             break;
           case "orbitter approved pillar2":
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .4, -height * .6] + ")scale(" + 1.5 + ")");
@@ -524,14 +524,14 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
                init: d3.select(currentClicked).datum()
               }
             })
-            if(!d3.selectAll("circle").filter(".pillar1").empty()){
-              d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
-            }
-            if(!d3.selectAll("circle").filter(".pillar3").empty()){
-              d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
-            }
+          if(!d3.selectAll("circle").filter(".pillar3").empty()){
+            d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
+            d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
+          }
+          if(!d3.selectAll("circle").filter(".pillar1").empty()){
+            d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
+            d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
+          }
 
             break;
           case "orbitter notApproved pillar2":
@@ -556,14 +556,14 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
                init: d3.select(currentClicked).datum()
               }
             })
-            if(!d3.selectAll("circle").filter(".pillar1").empty()){
-              d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
-            }
-            if(!d3.selectAll("circle").filter(".pillar3").empty()){
-              d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
-            }
+          if(!d3.selectAll("circle").filter(".pillar3").empty()){
+            d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
+            d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
+          }
+          if(!d3.selectAll("circle").filter(".pillar1").empty()){
+            d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
+            d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
+          }
             break;
           case "orbitter pillar2":
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .4, -height * .6] + ")scale(" + 1.5 + ")");
@@ -586,14 +586,14 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
                init: d3.select(currentClicked).datum()
               }
             })
-            if(!d3.selectAll("circle").filter(".pillar1").empty()){
-              d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
-            }
-            if(!d3.selectAll("circle").filter(".pillar3").empty()){
-              d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
-            }
+          if(!d3.selectAll("circle").filter(".pillar3").empty()){
+            d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
+            d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
+          }
+          if(!d3.selectAll("circle").filter(".pillar1").empty()){
+            d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
+            d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
+          }
             break;
           case "orbitter approved pillar3":
             svg.transition().duration(750).attr("transform", "translate(" + [width * .2, -height * .1] + ")scale(" + 1.5 + ")");
