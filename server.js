@@ -47,6 +47,7 @@ app.use(session({
   cookie: { maxAge: 1800000 * 4, secure: false }
 }));
 
+require('dotenv').config();
 app.use(passport.initialize());
 app.use(passport.session());
 
