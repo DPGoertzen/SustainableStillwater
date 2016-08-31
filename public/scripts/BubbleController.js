@@ -417,14 +417,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
             pillar = "pillar1";
 
-            if(!d3.selectAll("circle").filter(".pillar2").empty()){
-              d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
-            }
-            if(!d3.selectAll("circle").filter(".pillar3").empty()){
-              d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
-            }
+
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             $mdDialog.show({
               templateUrl: 'views/initviewpillar1.html',
@@ -440,20 +433,21 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
                init: d3.select(currentClicked).datum()
               }
             })
+            if(!d3.selectAll("circle").filter(".pillar2").empty()){
+              d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
+              d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
+            }
+            if(!d3.selectAll("circle").filter(".pillar3").empty()){
+              d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
+              d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
+            }
             break;
           case "orbitter notApproved pillar1":
 
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
             pillar = "pillar1";
 
-            if(!d3.selectAll("circle").filter(".pillar2").empty()){
-              d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
-            }
-            if(!d3.selectAll("circle").filter(".pillar3").empty()){
-              d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
-            }
+
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             $mdDialog.show({
               templateUrl: 'views/initviewpillar1.html',
@@ -469,20 +463,21 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
                init: d3.select(currentClicked).datum()
               }
             })
+            if(!d3.selectAll("circle").filter(".pillar2").empty()){
+              d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
+              d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
+            }
+            if(!d3.selectAll("circle").filter(".pillar3").empty()){
+              d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
+              d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
+            }
             break;
           case "orbitter pillar1":
 
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
             pillar = "pillar1";
 
-            if(!d3.selectAll("circle").filter(".pillar2").empty()){
-              d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
-            }
-            if(!d3.selectAll("circle").filter(".pillar3").empty()){
-              d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
-            }
+
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             $mdDialog.show({
               templateUrl: 'views/initviewpillar1.html',
@@ -498,6 +493,14 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
                init: d3.select(currentClicked).datum()
               }
             })
+            if(!d3.selectAll("circle").filter(".pillar2").empty()){
+              d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
+              d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
+            }
+            if(!d3.selectAll("circle").filter(".pillar3").empty()){
+              d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
+              d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
+            }
             break;
           case "orbitter approved pillar2":
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .4, -height * .6] + ")scale(" + 1.5 + ")");
@@ -505,14 +508,6 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
             // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
 
-            if(!d3.selectAll("circle").filter(".pillar1").empty()){
-              d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
-            }
-            if(!d3.selectAll("circle").filter(".pillar3").empty()){
-              d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
-            }
 
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             $mdDialog.show({
@@ -529,6 +524,15 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
                init: d3.select(currentClicked).datum()
               }
             })
+            if(!d3.selectAll("circle").filter(".pillar1").empty()){
+              d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
+              d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
+            }
+            if(!d3.selectAll("circle").filter(".pillar3").empty()){
+              d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
+              d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
+            }
+
             break;
           case "orbitter notApproved pillar2":
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .4, -height * .6] + ")scale(" + 1.5 + ")");
@@ -536,14 +540,6 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
             // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
 
-            if(!d3.selectAll("circle").filter(".pillar1").empty()){
-              d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
-            }
-            if(!d3.selectAll("circle").filter(".pillar3").empty()){
-              d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
-            }
 
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             $mdDialog.show({
@@ -560,6 +556,14 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
                init: d3.select(currentClicked).datum()
               }
             })
+            if(!d3.selectAll("circle").filter(".pillar1").empty()){
+              d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
+              d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
+            }
+            if(!d3.selectAll("circle").filter(".pillar3").empty()){
+              d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
+              d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
+            }
             break;
           case "orbitter pillar2":
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .4, -height * .6] + ")scale(" + 1.5 + ")");
@@ -567,15 +571,6 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
             // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
 
-            if(!d3.selectAll("circle").filter(".pillar1").empty()){
-              d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
-            }
-            if(!d3.selectAll("circle").filter(".pillar3").empty()){
-              d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
-            }
-
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             $mdDialog.show({
               templateUrl: 'views/initviewpillar2.html',
@@ -591,6 +586,14 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
                init: d3.select(currentClicked).datum()
               }
             })
+            if(!d3.selectAll("circle").filter(".pillar1").empty()){
+              d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
+              d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
+            }
+            if(!d3.selectAll("circle").filter(".pillar3").empty()){
+              d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
+              d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
+            }
             break;
           case "orbitter approved pillar3":
             svg.transition().duration(750).attr("transform", "translate(" + [width * .2, -height * .1] + ")scale(" + 1.5 + ")");
@@ -598,14 +601,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
             // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
 
-            if(!d3.selectAll("circle").filter(".pillar2").empty()){
-              d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
-            }
-            if(!d3.selectAll("circle").filter(".pillar1").empty()){
-              d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
-            }
+
 
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             $mdDialog.show({
@@ -622,6 +618,14 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
                init: d3.select(currentClicked).datum()
               }
             })
+            if(!d3.selectAll("circle").filter(".pillar2").empty()){
+              d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
+              d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
+            }
+            if(!d3.selectAll("circle").filter(".pillar1").empty()){
+              d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
+              d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
+            }
             break;
           case "orbitter notApproved pillar3":
             svg.transition().duration(750).attr("transform", "translate(" + [width * .2, -height * .1] + ")scale(" + 1.5 + ")");
@@ -629,14 +633,6 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
             // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
 
-            if(!d3.selectAll("circle").filter(".pillar2").empty()){
-              d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
-            }
-            if(!d3.selectAll("circle").filter(".pillar1").empty()){
-              d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
-            }
 
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             $mdDialog.show({
@@ -653,6 +649,15 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
                init: d3.select(currentClicked).datum()
               }
             })
+            if(!d3.selectAll("circle").filter(".pillar2").empty()){
+              d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
+              d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
+            }
+            if(!d3.selectAll("circle").filter(".pillar1").empty()){
+              d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
+              d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
+            }
+
             break;
           case "orbitter pillar3":
             svg.transition().duration(750).attr("transform", "translate(" + [width * .2, -height * .1] + ")scale(" + 1.5 + ")");
@@ -660,14 +665,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
             // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
 
-            if(!d3.selectAll("circle").filter(".pillar2").empty()){
-              d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
-            }
-            if(!d3.selectAll("circle").filter(".pillar1").empty()){
-              d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
-              d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
-            }
+
 
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             $mdDialog.show({
@@ -684,6 +682,15 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
                init: d3.select(currentClicked).datum()
               }
             })
+
+            if(!d3.selectAll("circle").filter(".pillar2").empty()){
+              d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
+              d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
+            }
+            if(!d3.selectAll("circle").filter(".pillar1").empty()){
+              d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
+              d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
+            }
             break;
         }
 
@@ -704,13 +711,14 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       if(isTransformed){
         console.log("isTransformed is currently", isTransformed);
         svg.transition().duration(750).attr("transform", "translate(" + [0, 0] + ")scale(" + 1 + ")");
-        d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
-        d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
-        d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
-        d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
-        d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
-        d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
-
+        if(!d3.selectAll("circle").filter(".pillar1").empty() && !d3.selectAll("circle").filter(".pillar2").empty() && !d3.selectAll("circle").filter(".pillar3").empty()){
+          d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".approved").attr("initialColor"));
+          d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar1").filter(".notApproved").attr("initialColor"));
+          d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
+          d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
+          d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
+          d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
+        }
         isTransformed = false;
         // if isSCircleClicked is false, we need to create our infoRectangle.
       }else if(!isSCircleClicked){
