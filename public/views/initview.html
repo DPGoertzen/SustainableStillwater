@@ -25,13 +25,10 @@
         <span class="uppercase bold">Phone:</span>
         {{initview.init.contactPhone}}
       </p>
-      <p ng-repeat="phase in pc.initPhases">
-        <span class="md-title underline">{{phase.phaseName}}:</span><br />
-        Percent Complete: {{phase.phaseValue}}%
-      </p>
+
       <md-button class="groupX right" ng-click="initview.addPhase()">Add Phase</md-button>
     </md-sidenav>
-    
+
   <md-content layout="column" flex style="height:auto; max-height:100%; overflow:auto;">
     <div ng-repeat="phase in initview.initPhases" layout-align="space-around center" class="md-whiteframe-1dp dial-container center">
       <h4 class="md-headline bold uppercase">{{phase.phaseName}}</h4>

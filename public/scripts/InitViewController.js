@@ -1,6 +1,7 @@
 angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$mdMedia', '$mdDialog', 'UserService', '$scope', function($http,init,$mdMedia,$mdDialog,UserService,$scope){
 
   var vm = this;
+  vm.totalInitiativeValue = 0;
 
   vm.init = init;
   vm.findInitiatives = UserService.findInitiatives;
@@ -8,7 +9,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
   vm.data = UserService.data;
   vm.admin = false;
   vm.loggedIn = false;
-  console.log('this is data', vm.data);
+  // console.log('this is data', vm.data);
 
   if(vm.data.username == 'admin'){
     vm.admin = true;
@@ -37,12 +38,12 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
   };
   var tempPhases = init.phase;
 
-  console.log('temp phases are', tempPhases);
+  // console.log('temp phases are', tempPhases);
 
   vm.initPhases = [];
 
   for (var i = 0; i < tempPhases.length; i++) {
-      console.log(tempPhases[i].milestones);
+      // console.log(tempPhases[i].milestones);
 
       tempPhaseObject = {
       phaseId: tempPhases[i]._id,
@@ -108,26 +109,35 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
   $scope.$watchCollection(function(){
       var values =[];
       for (var m = 0; m < vm.initPhases.length; m++) {
-        console.log('Each vm.initPhases', vm.initPhases[m]);
+        // console.log('Each vm.initPhases', vm.initPhases[m]);
         for (var n = 0; n < vm.initPhases[m].milestones.length; n++) {
           values.push(vm.initPhases[m].milestones[n].value);
         }
       }
       for(var k = 0; k < vm.initPhases.length; k++){
-        console.log(vm.initPhases[k].milestones);
+        // console.log(vm.initPhases[k].milestones);
         tempValue = 0;
         for (var l = 0; l < vm.initPhases[k].milestones.length; l++) {
           var milestone = vm.initPhases[k].milestones[l];
-          console.log('MS value', milestone.value);
+          // console.log('MS value', milestone.value);
           tempValue += (milestone.value/milestone.msOptions.max)/(vm.initPhases[k].milestones.length)*100;
         }
         vm.initPhases[k].phaseValue = Math.round(10*tempValue)/10;
-        console.log(tempValue);
+        vm.totalInitiativeValue += vm.initPhases[k].phaseValue;
+        console.log("vm.initPhases[k].phaseValue", vm.initPhases[k].phaseValue);
+        console.log("totalInitiativeValue", vm.totalInitiativeValue);
+        // console.log(tempValue);
       }
-      console.log('Values array', values);
+;
+      // console.log('Values array', values);
       return values;
     }, function() {
+      vm.totalInitiativeProgress = vm.totalInitiativeValue / vm.initPhases.length;
+      console.log("totalInitiativeValue and initPhases.length", vm.totalInitiativeValue, vm.initPhases.length)
   })
+
+
+
 
 
   vm.save = function(phase){
@@ -140,23 +150,24 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
     sendData.initId = init._id;
     sendData.phaseValue = phase.phaseValue;
     sendData.phaseId = phase.phaseId;
+    sendData.totalProgress = vm.totalInitiativeProgress;
 
-    for (var i = 0; i < phase.milestones.length; i++) {
-      var sendMilestone = {
-        id: phase.milestones[i].milestoneId,
-        value: phase.milestones[i].value,
-      }
-      sendData.milestones.push(sendMilestone);
-    }
-
-
+    // for (var i = 0; i < phase.milestones.length; i++) {
+    //   var sendMilestone = {
+    //     id: phase.milestones[i].milestoneId,
+    //     value: phase.milestones[i].value,
+    //   }
+    //   sendData.milestones.push(sendMilestone);
+    // }
+    //
+    //
     console.log('sendData', sendData);
-
-    $http.post('/init/editPhase', sendData).then(function(response){
-
-    }, function(response){
-      console.log('fail to post edit');
-    })
+    //
+    // $http.post('/init/editPhase', sendData).then(function(response){
+    //
+    // }, function(response){
+    //   console.log('fail to post edit');
+    // })
 
   }
 
