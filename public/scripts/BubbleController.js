@@ -215,9 +215,9 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     .call(d3.util.wrap(100, originX, originY-55));
 
     // generate our pillars
-    arcGenerator(0, 120, 120/firstPillarData.array.length, "#00D8C4", "#009688", firstPillarData, "black");
-    arcGenerator(120, 240, 120/secondPillarData.array.length, "#03A9F4", "#0271A3", secondPillarData, "black");
-    arcGenerator(240, 360, 120/thirdPillarData.array.length, "#CDDC39", "#767f21", thirdPillarData, "black");
+    arcGenerator(0, 120, 100/firstPillarData.array.length, "#00D8C4", "#009688", firstPillarData, "black");
+    arcGenerator(120, 240, 100/secondPillarData.array.length, "#03A9F4", "#0271A3", secondPillarData, "black");
+    arcGenerator(240, 360, 100/thirdPillarData.array.length, "#CDDC39", "#767f21", thirdPillarData, "black");
 
 
     // specifies where we start, where we end, the distant between orbitters and
@@ -230,7 +230,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       whichText = 0;
       console.log("our array length is", currentPillar.array.length);
       if(currentPillar.array.length != 0){
-        var i = initialDegree -85
+        var i = initialDegree -75
         for(var j = 0; j<currentPillar.array.length; j++){
 
           // use this to alternate heights

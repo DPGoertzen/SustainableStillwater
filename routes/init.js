@@ -45,7 +45,7 @@ router.post('/newInit', function(request,response){
     });
     var mailOptions = {
       from: 'Sustainable Stillwater MN',
-      to: 'bqanderson@me.com',
+      to: 'b.quinn.anderson@gmail.com',
       subject: 'New Initiative Added to SSMN',
       text: 'There is a new Initiative pedding approval.\n' +
             // 'Organization Name:' + data.name + '\n' +

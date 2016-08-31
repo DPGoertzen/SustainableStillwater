@@ -28,7 +28,6 @@ angular.module('ssmnApp').controller('InitiativeController', ['$http', '$locatio
       console.log('Fail to post');
     });
 
-
   };
 
   vm.exit = function(){
