@@ -108,6 +108,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
 
   $scope.$watchCollection(function(){
       var values =[];
+      vm.totalInitiativeValue = 0;
       for (var m = 0; m < vm.initPhases.length; m++) {
         // console.log('Each vm.initPhases', vm.initPhases[m]);
         for (var n = 0; n < vm.initPhases[m].milestones.length; n++) {
@@ -150,6 +151,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
     sendData.initId = init._id;
     sendData.phaseValue = phase.phaseValue;
     sendData.phaseId = phase.phaseId;
+    sendData.totalInitiativeProgress = vm.totalInitiativeProgress;
 
     for (var i = 0; i < phase.milestones.length; i++) {
       var sendMilestone = {
