@@ -145,6 +145,7 @@ router.post('/editPhase', function(request,response){
   var savedValue = data.phaseValue;
   var phaseId = data.phaseId;
   var id = data.initId;
+  var totalProgress = data.totalInitiativeProgress
 
   console.log('user data of phase is', data);
 
@@ -153,6 +154,8 @@ router.post('/editPhase', function(request,response){
   User.findOne({"initiatives._id": id}, function(err, user){
 
     var currentInit = user.initiatives.id(id);
+
+    currentInit.totalProgress = totalProgress;
 
     console.log('current phase', currentInit.phase.id(phaseId));
 
