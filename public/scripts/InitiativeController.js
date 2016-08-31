@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('InitiativeController', function($http, $location,$mdDialog, UserService){
+angular.module('ssmnApp').controller('InitiativeController', ['$http', '$location', '$window', '$mdDialog', 'UserService', function($http, $location, $window, $mdDialog, UserService){
   var vm = this;
 
 
@@ -7,7 +7,6 @@ angular.module('ssmnApp').controller('InitiativeController', function($http, $lo
 
 
   vm.submit = function(){
-    console.log('You clicked it!');
     var sendData = {};
 
     sendData.pillar = vm.pillar;
@@ -18,18 +17,13 @@ angular.module('ssmnApp').controller('InitiativeController', function($http, $lo
     sendData.contactEmail = vm.contactEmail;
     sendData.website = vm.website;
 
-    console.log('sendData',sendData);
-    
-
     $http.post('/init/newInit', sendData).then(function(response){
-
-      console.log('Successfully posted', response);
-      $mdDialog.hide();
       var ourPromise = UserService.findInitiatives();
       ourPromise.then(function(resultingData){
         vm.data = resultingData;
         console.log("in the promise vm.data is", vm.data);
       })
+      $window.location.href= "/";
     }, function(response){
       console.log('Fail to post');
     });
@@ -38,5 +32,4 @@ angular.module('ssmnApp').controller('InitiativeController', function($http, $lo
     $mdDialog.hide();
   }
 
-
-})
+}])
