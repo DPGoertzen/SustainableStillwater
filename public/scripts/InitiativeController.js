@@ -28,9 +28,6 @@ angular.module('ssmnApp').controller('InitiativeController', ['$http', '$locatio
       console.log('Fail to post');
     });
 
-    $http.post('/init/sendMail').then(function(response){
-      console.log('send email', response);
-    });
   };
 
   vm.exit = function(){
