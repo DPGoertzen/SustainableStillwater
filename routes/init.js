@@ -1,4 +1,6 @@
 var router = require('express').Router();
+var nodemailer = require('nodemailer');
+
 var User = require('../models/User');
 var Initiative = require('../models/initiative').model;
 var Phase = require('../models/phase').model;
@@ -20,22 +22,51 @@ router.post('/newInit', function(request,response){
     approved: false
   })
   console.log('here is the new init',createdInitiative);
-
-      User.findById(id, function(err, user){
+    User.findById(id, function(err, user){
+      if(err){
+        console.log(err);
+      };
+      // console.log('user inits', user.initiatives);
+      user.initiatives.push(createdInitiative);
+      user.save(function(err){
         if(err){
           console.log(err);
         };
-        // console.log('user inits', user.initiatives);
-        user.initiatives.push(createdInitiative);
-        user.save(function(err){
-          if(err){
-            console.log(err);
-          };
-        })
       })
-      response.sendStatus(200);
-});
+    })
 
+    // This is was added by BQA to email Michael for Intiative approval
+    var transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+        user: process.env.username,
+        pass: process.env.password
+      }
+    });
+    var mailOptions = {
+      from: 'Sustainable Stillwater MN',
+      to: 'bqanderson@me.com',
+      subject: 'New Initiative Added to SSMN',
+      text: 'There is a new Initiative pedding approval.\n' +
+            // 'Organization Name:' + data.name + '\n' +
+            'Initiative Name: ' + data.name + '\n' +
+            'Objectives: ' + data.objectives + '\n' +
+            'Contact Name: ' + data.contactName + '\n' +
+            'Contact Email: ' + data.contactEmail + '\n' +
+            'Contact Phone: ' + data.contactPhone + '\n'
+    };
+
+    transporter.sendMail(mailOptions, function(error, info){
+      if(error){
+        console.log('There was an error', error);
+        response.sendStatus(500);
+      } else {
+        console.log('Message Sent', info.response);
+        response.sendStatus(200);
+      }
+    });
+
+});
 
 router.get('/profile', function(request,response){
   var user = request.user;
