@@ -435,10 +435,12 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             })
           if(!d3.selectAll("circle").filter(".pillar2").empty()){
             d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".approved").attr("initialColor"));
+            console.log(d3.selectAll("circle").filter(".pillar2").filter(".notApproved"));
             d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar2").filter(".notApproved").attr("initialColor"));
           }
           if(!d3.selectAll("circle").filter(".pillar3").empty()){
             d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".approved").attr("initialColor"));
+            console.log(d3.selectAll("circle").filter(".pillar3").filter(".notApproved"));
             d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("fill", d3.selectAll("circle").filter(".pillar3").filter(".notApproved").attr("initialColor"));
           }
             break;
