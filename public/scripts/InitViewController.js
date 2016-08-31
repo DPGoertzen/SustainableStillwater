@@ -152,22 +152,22 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
     sendData.phaseId = phase.phaseId;
     sendData.totalProgress = vm.totalInitiativeProgress;
 
-    // for (var i = 0; i < phase.milestones.length; i++) {
-    //   var sendMilestone = {
-    //     id: phase.milestones[i].milestoneId,
-    //     value: phase.milestones[i].value,
-    //   }
-    //   sendData.milestones.push(sendMilestone);
-    // }
-    //
-    //
+    for (var i = 0; i < phase.milestones.length; i++) {
+      var sendMilestone = {
+        id: phase.milestones[i].milestoneId,
+        value: phase.milestones[i].value,
+      }
+      sendData.milestones.push(sendMilestone);
+    }
+
+
     console.log('sendData', sendData);
-    //
-    // $http.post('/init/editPhase', sendData).then(function(response){
-    //
-    // }, function(response){
-    //   console.log('fail to post edit');
-    // })
+    
+    $http.post('/init/editPhase', sendData).then(function(response){
+
+    }, function(response){
+      console.log('fail to post edit');
+    })
 
   }
 

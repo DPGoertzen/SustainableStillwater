@@ -1,4 +1,4 @@
-angular.module('ssmnApp').factory('UserService', function($http){
+angular.module('ssmnApp').factory('UserService', function($http, $location){
 
 
   var data = {
@@ -12,6 +12,16 @@ angular.module('ssmnApp').factory('UserService', function($http){
 
   data.loggedIn = false;
 
+  function checkIfLoggedIn(){
+    $http.get('/login').then(function(response){
+      if(response.data == true){
+        data.loggedIn = true;
+        $location.path('/profile');
+      }else{
+        data.loggedIn = false;
+      }
+    })
+  }
 
   function updateLoggedInStatus(status) {
     data.loggedIn = status;
@@ -23,14 +33,12 @@ angular.module('ssmnApp').factory('UserService', function($http){
 
   findInitiatives = function(){
     return $http.get('/init/profile').then(function(response){
-      console.log('profile', response);
       return data.initiatives = response.data.initiatives;
       // console.log("our data.initiatives is", data.initiatives);
       // console.log(vm.data);
     })
   }
   function userRetrievalSuccess(response){
-    console.log('getting success with users', response.data);
     data.users = response.data;
 
     for (var i = 0; i < data.users.length; i++) {
@@ -48,9 +56,6 @@ angular.module('ssmnApp').factory('UserService', function($http){
     }
     // data.initApprovedArray = initApprovedArray;
     // data.initPendingArray = initPendingArray;
-    console.log('approved', data.initApprovedArray);
-    console.log('not approved', data.initPendingArray);
-    console.log('users', data.users);
   }
   function userRetrievalFail(){
     console.log('error retrieving users');
@@ -66,6 +71,7 @@ angular.module('ssmnApp').factory('UserService', function($http){
     updateLoggedInStatus: updateLoggedInStatus,
     getUsername: getUsername,
     findInitiatives: findInitiatives,
-    getPendingInits: getPendingInits
+    getPendingInits: getPendingInits,
+    checkIfLoggedIn: checkIfLoggedIn
   }
 })

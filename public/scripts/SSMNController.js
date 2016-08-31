@@ -1,14 +1,14 @@
-angular.module('ssmnApp').controller('SSMNController', function(DataService,UserService, $mdMedia, $mdDialog){
+angular.module('ssmnApp').controller('SSMNController', function(DataService,UserService, $mdMedia, $mdDialog, $http){
   var vm = this;
 
   vm.data = UserService.data;
+  vm.checkIfLoggedIn = UserService.checkIfLoggedIn;
 
-
-
+  vm.checkIfLoggedIn();
 
   vm.logout = function() {
-    console.log('clicked logout');
-    UserService.updateLoggedInStatus(false);
-
+    $http.get('/logout').then(function(response){
+      UserService.updateLoggedInStatus(false);
+    })
   }
 })
