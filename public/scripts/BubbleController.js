@@ -429,6 +429,57 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       // If we're not transformed, begin the transformation
       // if(!isTransformed){
         switch(d3.select(currentClicked).attr("class")){
+
+          case "orbitter approved pillar1":
+
+            svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
+            pillar = "pillar1";
+
+
+            useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+            $mdDialog.show({
+              templateUrl: 'views/initviewpillar1.html',
+              controller: 'InitViewController',
+              controllerAs: 'initview',
+              disableParentScroll: true,
+              fullscreen: useFullScreen,
+              trapFocus: true,
+              focusOnOpen: true,
+              clickOutsideToClose: true,
+              ariaLabel: 'Good',
+              locals: {
+               init: d3.select(currentClicked).datum()
+              }
+            })
+
+          changePillarColorBack(".pillar2");
+          changePillarColorBack(".pillar3");
+            break;
+          case "orbitter notApproved pillar1":
+
+            svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
+            pillar = "pillar1";
+
+
+            useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+            $mdDialog.show({
+              templateUrl: 'views/initviewpillar1.html',
+              controller: 'InitViewController',
+              controllerAs: 'initview',
+              disableParentScroll: true,
+              fullscreen: useFullScreen,
+              trapFocus: true,
+              focusOnOpen: true,
+              clickOutsideToClose: true,
+              ariaLabel: 'Good',
+              locals: {
+               init: d3.select(currentClicked).datum()
+              }
+            })
+          changePillarColorBack(".pillar2");
+          changePillarColorBack(".pillar3");
+            break;
+
           case "orbitter pillar1":
 
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
