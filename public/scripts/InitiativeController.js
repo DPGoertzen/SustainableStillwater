@@ -21,6 +21,7 @@ angular.module('ssmnApp').controller('InitiativeController', ['$http', '$locatio
       var ourPromise = UserService.findInitiatives();
       ourPromise.then(function(resultingData){
         vm.data = resultingData;
+        vm.allInitiativesArray = UserService.data.allInitiativesArray;
         console.log("in the promise vm.data is", vm.data);
       })
       $window.location.href= "/";

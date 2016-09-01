@@ -8,7 +8,8 @@ angular.module('ssmnApp').factory('UserService', function($http, $location){
     allInitiativesArray: [],
     username: '',
     loggedIn: false,
-    admin: false
+    admin: false,
+    pendingArrayLength: 0
   };
 
   function checkIfLoggedIn(){
@@ -31,10 +32,10 @@ angular.module('ssmnApp').factory('UserService', function($http, $location){
       data.username = response.data.username;
       if(data.username == 'admin'){
         data.admin = true;
-        $location.path('/admin')
-      } else {
-        $location.path('/profile');
+
       }
+        $location.path('/profile');
+
     })
   }
 
@@ -63,6 +64,7 @@ angular.module('ssmnApp').factory('UserService', function($http, $location){
         }
       }
     }
+    data.pendingArrayLength = data.initPendingArray.length;
     // data.initApprovedArray = initApprovedArray;
     // data.initPendingArray = initPendingArray;
   }

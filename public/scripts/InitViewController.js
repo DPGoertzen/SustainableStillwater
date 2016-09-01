@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$mdMedia', '$mdDialog', 'UserService', '$scope', function($http,init,$mdMedia,$mdDialog,UserService,$scope){
+angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$mdMedia', '$mdDialog', 'UserService', '$scope', '$window','$location', function($http,init,$mdMedia,$mdDialog,UserService,$scope,$window, $location){
 
   var vm = this;
   vm.totalInitiativeValue = 0;
@@ -184,6 +184,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
     sendData.initId = init._id;
 
     $http.post('/init/approved', sendData).then(function(response){
+      $window.location.href= "/";
       $mdDialog.hide();
     },function(response){
       console.log('failed to approve');

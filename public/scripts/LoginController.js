@@ -21,9 +21,9 @@ angular.module('ssmnApp').controller('LoginController', function($http, $locatio
     if(response.config.data.username == 'admin'){
       UserService.data.admin = true;
       $location.path('/admin')
-    } else {
-      $location.path('/profile');
     }
+      $location.path('/profile');
+  
   };
 
   function handleFailure(response){
