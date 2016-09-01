@@ -4,7 +4,6 @@ angular.module('ssmnApp').controller('LoginController', function($http, $locatio
   vm.username = '';
   vm.password = '';
 
-
   vm.login = function(){
 
     var sendData = {};
@@ -16,16 +15,15 @@ angular.module('ssmnApp').controller('LoginController', function($http, $locatio
   };
 
   function handleSuccess(response){
-    console.log('Success', response);
     UserService.updateLoggedInStatus(true);
-    UserService.getUsername(response.config.data.username)
+    UserService.data.username = response.config.data.username;
 
     if(response.config.data.username == 'admin'){
+      UserService.data.admin = true;
       $location.path('/admin')
     } else {
       $location.path('/profile');
     }
-
   };
 
   function handleFailure(response){

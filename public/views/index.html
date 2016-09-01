@@ -42,6 +42,8 @@
     <a href="/login" ng-if="!ssmn.data.loggedIn">Login</a>
     <a href="/logout" ng-if="ssmn.data.loggedIn" ng-click="ssmn.logout()">Logout</a>
     <a href="/register" ng-if="!ssmn.data.loggedIn">Register</a>
+    <a href="/profile" ng-if="ssmn.data.admin">Profile</a>
+    <a href="/admin" ng-if="ssmn.data.admin">Admin</a>
     <!-- <md-button class="md-primary md-raised" ng-click="ssmn.login()">Login</md-button> -->
     <div ng-view>
 
