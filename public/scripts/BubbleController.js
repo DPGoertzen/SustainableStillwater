@@ -14,9 +14,9 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     thirdPillarData = data.thirdPillarData;
     $ctrl.createBubbles = createBubbles;
     createBubbles();
-    console.log("our data after the .then", data);
-    console.log("inside bubble controller, our firstPillarData.array is", firstPillarData.array);
-    console.log("inside bubble controller, the length of firstPillarData.array is", firstPillarData.array.length);
+    // console.log("our data after the .then", data);
+    // console.log("inside bubble controller, our firstPillarData.array is", firstPillarData.array);
+    // console.log("inside bubble controller, the length of firstPillarData.array is", firstPillarData.array.length);
 
   })
 
@@ -186,7 +186,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       initialFontSize: "24px"
     }).style("text-anchor", "middle")
     .text("Health & Connected Community")
-    .call(d3.util.wrap(100, width*.86, height*.13))
+    .call(d3.util.wrap(100, width*.855, height*.13))
 
     var business = layerFront.append('image')
       .attr('xlink:href','assets/business.svg')
@@ -196,7 +196,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       .attr('x', width * .65)
       .attr('y', height * .78)
 
-    var stewardshipText = layerFront.append("text").attr({
+    var businessText = layerFront.append("text").attr({
       class: "originCircle",
       x: originX,
       y: originY,
@@ -221,7 +221,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       .attr('width', 120)
       .attr('opacity', .9)
       .attr('x', width * .1)
-      .attr('y', height * .2)
+      .attr('y', height * .25)
 
     var stewardshipText = layerFront.append("text").attr({
       class: "originCircle",
@@ -239,7 +239,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       initialFontSize: "24px"
     }).style("text-anchor", "middle")
     .text("Resource & Environmental Stewardship")
-    .call(d3.util.wrap(100, width*.15, height*.12))
+    .call(d3.util.wrap(100, width*.145, height*.12))
 
 
     // build our central circle for the organization.
@@ -248,7 +248,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         cx: originX,
         cy: originY,
         r: innerCircleRadius,
-        fill: d3.hsl(147, 1, .34),
+        fill: "#388E3C",
         // stroke: "black",
         // "stroke-width": "3px",
         originalScale: innerCircleRadius
@@ -273,7 +273,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
     // generate our pillars
     arcGenerator(0, 105/firstPillarData.array.length, "#00D8C4", "#009688", firstPillarData, "black");
-    arcGenerator(120, 105/secondPillarData.array.length, "#7E57C2", "#311B92", secondPillarData, "white");
+    arcGenerator(120, 105/secondPillarData.array.length, "#7E57C2", "#512DA8", secondPillarData, "white");
     arcGenerator(240, 105/thirdPillarData.array.length, "#CDDC39", "#767f21", thirdPillarData, "black");
 
 
@@ -351,7 +351,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
             }).style("text-anchor", "middle")
             .datum(currentPillar.array[whichText])
             .text(currentPillar.array[whichText].name)
-            .call(d3.util.wrap(90, orbitterX, orbitterY - 5));
+            .call(d3.util.wrap(90, orbitterX, orbitterY - 3));
           }
           whichText++;
           whichOrbitter++;
