@@ -156,7 +156,6 @@ html, body {
 }
 
 #canvas{
-  border: solid black;
   /*width: 70%;*/
   max-width: 1500px;
   max-height: 800px;
