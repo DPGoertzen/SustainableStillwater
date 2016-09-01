@@ -62,14 +62,14 @@
           </div>
         </md-input-container>
         <div flex="5" hide-xs hide-sm>
-          <!-- Spacer //-->
+          <!-- Spacer // -->
         </div>
         <md-input-container class="md-block" flex-gt-sm>
           <label class="form-font">Phone Number</label>
-          <input required name="phone" ng-model="init.contactPhone" ng-pattern="/^[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}$/" />
-          <div class="hint" ng-show="showHints">(###) ###-####</div>
+          <input required name="phone" ng-model="init.contactPhone" ng-pattern="/^[(][0-9]{3}[)][0-9]{3}-[0-9]{4}$/" />
+          <div class="hint" ng-show="showHints">(###)###-####</div>
           <div ng-messages="userForm.phone.$error" ng-hide="showHints">
-            <div ng-message="pattern">(###) ###-#### - Please enter a valid phone number.</div>
+            <div ng-message="pattern">(###)###-#### - Please enter a valid phone number.</div>
           </div>
         </md-input-container>
       </div>
@@ -78,6 +78,11 @@
         <label class="form-font">Website</label>
         <input name="website" ng-model="init.website" />
       </md-input-container>
+
+
+        <label class="form-font">Image</label>
+        <input type="file" name="image" accept="image/*" ng-model="init.image" />
+
 
       <div>
         <section layout="row" layout-align="center">
