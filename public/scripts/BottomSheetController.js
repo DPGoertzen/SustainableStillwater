@@ -6,36 +6,93 @@ angular.module('ssmnApp').controller('BottomSheetController', ['$http', '$mdMedi
   // data = DataService.data;
   // console.log("data.firstPillarData", data.firstPillarData);
 
-  var myUserPromise = DataService.getAllUserData();
-  myUserPromise.then(function(resultingData){
-    var data = resultingData;
-    console.log("data in the promise is", data);
-    var firstPillarData = data.firstPillarData;
-    var secondPillarData = data.secondPillarData;
-    var thirdPillarData = data.thirdPillarData;
+  vm.getAllUserData = DataService.getAllUserData;
+  vm.getAllUserData();
 
-    var firstPillarDataSum = 0;
-    var secondPillarDataSum = 0;
-    var thirdPillarDataSum = 0;
+  vm.data = DataService.data
+  vm.phaseOptionsPillar1 = {
+    skin: {
+      type: 'tron',
+      color: 'rgba(0,216,196,1)'
+    },
+    size: 125,
+    unit: '%',
+    barWidth: 40,
+    barColor: 'rgba(0,216,196,.5)',
+    // bgColor: 'rgba(0,255,0,.5)',
+    trackColor: 'rgba(0,216,196,.1)',
+    prevBarColor: 'rgba(0,0,0,.2)',
+    readOnly: true,
+    fontSize: 30,
+    subText: {
+      enabled: true,
+      text: 'Complete'
+    },
+    step: 0.1,
+    displayPrevious: true
+  };
+  vm.phaseOptionsPillar2 = {
+    skin: {
+      type: 'tron',
+      color: 'rgba(126,87,194,1)'
+    },
+    size: 125,
+    unit: '%',
+    barWidth: 40,
+    barColor: 'rgba(126,87,194,.5)',
+    // bgColor: 'rgba(0,255,0,.5)',
+    trackColor: 'rgba(126,87,194,.1)',
+    prevBarColor: 'rgba(0,0,0,.2)',
+    readOnly: true,
+    fontSize: 30,
+    subText: {
+      enabled: true,
+      text: 'Complete'
+    },
+    step: 0.1,
+    displayPrevious: true
+  };
+  vm.phaseOptionsPillar3 = {
+    skin: {
+      type: 'tron',
+      color: 'rgba(205,220,57,1)'
+    },
+    size: 125,
+    unit: '%',
+    barWidth: 40,
+    barColor: 'rgba(205,220,57,.5)',
+    // bgColor: 'rgba(0,255,0,.5)',
+    trackColor: 'rgba(205,220,57,.1)',
+    prevBarColor: 'rgba(0,0,0,.2)',
+    readOnly: true,
+    fontSize: 30,
+    subText: {
+      enabled: true,
+      text: 'Complete'
+    },
+    step: 0.1,
+    displayPrevious: true
+  };
+  vm.phaseOptionsTotal = {
+    skin: {
+      type: 'tron',
+      color: 'rgba(56,142,60,1)'
+    },
+    size: 125,
+    unit: '%',
+    barWidth: 40,
+    barColor: 'rgba(56,142,60,.5)',
+    // bgColor: 'rgba(0,255,0,.5)',
+    trackColor: 'rgba(56,142,60,.1)',
+    prevBarColor: 'rgba(0,0,0,.2)',
+    readOnly: true,
+    fontSize: 30,
+    subText: {
+      enabled: true,
+      text: 'Complete'
+    },
+    step: 0.1,
+    displayPrevious: true
+  };
 
-    for(var i = 0; i < firstPillarData.length; i++){
-      if(firstPillarData.totalProgress != NaN){
-        firstPillarDataSum += firstPillarData.totalProgress
-      }
-    }
-    for(var i = 0; i < secondPillarData.length; i++){
-      if(secondPillarData.totalProgress != NaN){
-        secondPillarDataSum += secondPillarData.totalProgress
-      }
-    }
-    for(var i = 0; i < thirdPillarData.length; i++){
-      if(thirdPillarData.totalProgress != NaN){
-        thirdPillarDataSum += thirdPillarData.totalProgress
-      }
-    }
-    console.log("firstPillarDataSum and firstPillarData.length", firstPillarDataSum, firstPillarData.length);
-    vm.firstPillarProgress = firstPillarDataSum / firstPillarData.length;
-    vm.secondPillarProgress = secondPillarDataSum / secondPillarData.length;
-    vm.thirdPillarProgress = thirdPillarDataSum / thirdPillarData.length;
-  })
 }])
