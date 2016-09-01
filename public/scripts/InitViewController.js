@@ -10,7 +10,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
   vm.admin = false;
   vm.loggedIn = false;
   // console.log('this is data', vm.data);
-
+  console.log('pillar', init.pillar);
   if(vm.data.username == 'admin'){
     vm.admin = true;
   }
@@ -18,18 +18,46 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
     vm.loggedIn = true;
   }
 
+  var trackColor = '';
+  var prevBarColor = '';
+  var barColor = '';
+  var skinColor = '';
+
+  switch(init.pillar){
+    case 1:
+      trackColor = 'rgba(0,216,196,.1)';
+      prevBarColor = 'rgba(0,216,196,.2)';
+      barColor = 'rgba(0,216,196,.5)';
+      skinColor = 'rgba(0,216,196,1)';
+    break;
+    case 2:
+      trackColor = 'rgba(126,87,194,.1)';
+      prevBarColor = 'rgba(126,87,194,.2)';
+      barColor = 'rgba(126,87,194,.5)';
+      skinColor = 'rgba(126,87,194,1)';
+    break;
+    case 3:
+      trackColor = 'rgba(205,220,57,.1)';
+      prevBarColor = 'rgba(205,220,57,.2)';
+      barColor = 'rgba(205,220,57,.5)';
+      skinColor = 'rgba(205,220,57,1)';
+    break;
+  }
+
+  console.log(trackColor);
+
   var phaseOptions = {
     skin: {
       type: 'tron',
-      color: 'rgba(56,142,60,1)'
+      color: skinColor
     },
     size: 200,
     unit: '%',
     barWidth: 40,
-    barColor: 'rgba(56,142,60,.5)',
-    trackColor: 'rgba(56,142,60,.1)',
-    prevBarColor: 'rgba(56,142,60,.2)',
-    readOnly: false,
+    barColor: barColor,
+    trackColor: trackColor,
+    prevBarColor: prevBarColor,
+    readOnly: true,
     fontSize: 30,
     subText: {
       enabled: true,
@@ -50,6 +78,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
       tempPhaseObject = {
       phaseId: tempPhases[i]._id,
       phaseName: tempPhases[i].label,
+      // phaseValue: tempPhases[i].phaseValue,
       phaseOptions: phaseOptions,
       milestones: []
     }
@@ -62,16 +91,20 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
         msOptions: {
                 skin: {
                   type: 'tron',
+                  color: skinColor,
                   width: 3,
-                  spaceWidth: 2,
-                  color: 'rgba(56,142,60,.5)'
+                  spaceWidth: 2
                 },
                 size: 100,
+              //  unit: '$',
+              //  max: tempPhases[i].milestones[j].milestoneGoal,
                trackWidth: 20,
                barWidth: 15,
-               barColor: 'rgba(56,142,60,.5)',
-               trackColor: 'rgba(56,142,60,.1)',
-               prevBarColor: 'rgba(0,0,0,.2)',
+               barColor: barColor,
+               trackColor: trackColor,
+               prevBarColor: prevBarColor,
+              //  readOnly: false,
+              //  step: 1, //variable value based on 'unit'
                displayPrevious: true,
 
              }

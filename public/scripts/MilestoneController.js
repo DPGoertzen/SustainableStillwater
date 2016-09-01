@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('MilestoneController', ['$http', 'init', '$mdDialog', function($http,init, $mdDialog){
+angular.module('ssmnApp').controller('MilestoneController', ['$http', 'init', '$mdDialog', function($http,init, $mdDialog, $mdToast){
 
   var vm = this;
 
@@ -36,6 +36,14 @@ angular.module('ssmnApp').controller('MilestoneController', ['$http', 'init', '$
     // console.log(sendData);
     $http.post('/init/newPhase', sendData).then(function(response){
       console.log('posted new phase yay!');
+      $mdDialog.hide();
+      $mdToast.show({
+        position: "top left",
+        template: function(){
+          if (response.status == 401){"<md-toast>New Phase Successfully Saved!</md-toast>"}
+          else {"<md-toast>There was a problem saving the phase.</md-toast>"}
+        }
+      })
     }, function(response){
       console.log('Fail to post');
     });
@@ -43,13 +51,13 @@ angular.module('ssmnApp').controller('MilestoneController', ['$http', 'init', '$
 
 
 
-        vm.exit = function() {
-          $mdDialog.hide();
-        }
+  vm.exit = function() {
+    $mdDialog.hide();
+  }
 
 
-        vm.clear = function() {
-          vm.phaseName = null;
-          vm.milestones = [{id: 'milestone1'}];
-        }
+  vm.clear = function() {
+    vm.phaseName = null;
+    vm.milestones = [{id: 'milestone1'}];
+  }
 }]);
