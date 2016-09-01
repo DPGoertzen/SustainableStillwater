@@ -24,6 +24,7 @@
     <script src="scripts/LoginController.js" charset="utf-8"></script>
     <script src="scripts/RegisterController.js" charset="utf-8"></script>
     <script src="scripts/PhaseController.js" charset="utf-8"></script>
+    <script src="scripts/BottomSheetController.js" charset="utf-8"></script>
     <script src="scripts/DataService.js" charset="utf-8"></script>
     <script src="scripts/UserService.js" charset="utf-8"></script>
     <script src="scripts/client.js" charset="utf-8"></script>
@@ -38,10 +39,10 @@
   </head>
   <body ng-controller="SSMNController as ssmn">
 
-    <a href="/login" ng-if="!ssmn.data.loggedIn">Login</a>
-    <a href="/logout" ng-if="ssmn.data.loggedIn" ng-click="ssmn.logout()">Logout</a>
-    <a href="/register" ng-if="!ssmn.data.loggedIn">Register</a>
-    <!-- <md-button class="md-primary md-raised" ng-click="ssmn.login()">Login</md-button> -->
+    <md-button ng-click="ssmn.login()" ng-if="!ssmn.data.loggedIn">Login</md-button>
+    <md-button ng-click="ssmn.logout()" ng-if="ssmn.data.loggedIn" ng-click="ssmn.logout()">Logout</md-button>
+    <md-button ng-click="ssmn.register()" ng-if="!ssmn.data.loggedIn">Register</md-button>
+
     <div ng-view>
 
     </div>

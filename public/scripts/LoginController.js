@@ -1,9 +1,8 @@
-angular.module('ssmnApp').controller('LoginController', function($http, $location, UserService, $mdToast){
+angular.module('ssmnApp').controller('LoginController', function($http, $location, UserService, $mdToast, $mdDialog){
   var vm = this;
 
   vm.username = '';
   vm.password = '';
-
 
   vm.login = function(){
 
@@ -12,20 +11,19 @@ angular.module('ssmnApp').controller('LoginController', function($http, $locatio
     sendData.password = vm.password;
 
     $http.post('/login', sendData).then(handleSuccess, handleFailure);
-
+    $mdDialog.hide();
   };
 
   function handleSuccess(response){
-    console.log('Success', response);
     UserService.updateLoggedInStatus(true);
-    UserService.getUsername(response.config.data.username)
+    UserService.data.username = response.config.data.username;
 
     if(response.config.data.username == 'admin'){
+      UserService.data.admin = true;
       $location.path('/admin')
     } else {
       $location.path('/profile');
     }
-
   };
 
   function handleFailure(response){

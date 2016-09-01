@@ -5,18 +5,17 @@ angular.module('ssmnApp').factory('UserService', function($http, $location){
     initiatives: [],
     initApprovedArray: [],
     initPendingArray: [],
-    allInitiativesArray: []
+    allInitiativesArray: [],
+    username: '',
+    loggedIn: false,
+    admin: false
   };
-
-
-
-  data.loggedIn = false;
 
   function checkIfLoggedIn(){
     $http.get('/login').then(function(response){
       if(response.data == true){
         data.loggedIn = true;
-        $location.path('/profile');
+        testUsername();
       }else{
         data.loggedIn = false;
       }
@@ -27,8 +26,16 @@ angular.module('ssmnApp').factory('UserService', function($http, $location){
     data.loggedIn = status;
   }
 
-  function getUsername(username){
-    data.username = username;
+  function testUsername(){
+    $http.get('/init/profile').then(function(response){
+      data.username = response.data.username;
+      if(data.username == 'admin'){
+        data.admin = true;
+        $location.path('/admin')
+      } else {
+        $location.path('/profile');
+      }
+    })
   }
 
   findInitiatives = function(){
@@ -40,11 +47,12 @@ angular.module('ssmnApp').factory('UserService', function($http, $location){
   }
   function userRetrievalSuccess(response){
     data.users = response.data;
-
+    data.allInitiativesArray = [];
+    data.initApprovedArray = [];
+    data.initPendingArray = [];
     for (var i = 0; i < data.users.length; i++) {
       if(data.users[i].initiatives != null){
         data.allInitiativesArray.push(data.users[i].initiatives);
-
         for (var j = 0; j < data.users[i].initiatives.length; j++) {
           if(data.users[i].initiatives[j].approved == true){
             data.initApprovedArray.push(data.users[i].initiatives[j]);
@@ -69,7 +77,7 @@ angular.module('ssmnApp').factory('UserService', function($http, $location){
   return {
     data: data,
     updateLoggedInStatus: updateLoggedInStatus,
-    getUsername: getUsername,
+    testUsername: testUsername,
     findInitiatives: findInitiatives,
     getPendingInits: getPendingInits,
     checkIfLoggedIn: checkIfLoggedIn

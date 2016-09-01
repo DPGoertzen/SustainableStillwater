@@ -14,9 +14,9 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     thirdPillarData = data.thirdPillarData;
     $ctrl.createBubbles = createBubbles;
     createBubbles();
-    // console.log("our data after the .then", data);
-    // console.log("inside bubble controller, our firstPillarData.array is", firstPillarData.array);
-    // console.log("inside bubble controller, the length of firstPillarData.array is", firstPillarData.array.length);
+    console.log("our data after the .then", data);
+    console.log("inside bubble controller, our firstPillarData.array is", firstPillarData.array);
+    console.log("inside bubble controller, the length of firstPillarData.array is", firstPillarData.array.length);
 
   })
 
@@ -100,9 +100,9 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     // .call(d3.behavior.zoom().center([width / 2, height * .75]).scaleExtent([1, 8]).on('zoom', zoomed))
     // .append("g");
 
-    // function zoomed() {
-    //   svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-    // }
+    function zoomed() {
+      svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    }
 
     // the only way we can set the z-depth with SVG's in D3 is by drawing
     // the top layer last, so we group things (that's what the 'g' does)
@@ -120,27 +120,27 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     .innerRadius(0)
     .outerRadius(1200)
     .startAngle(0 * (Math.PI/180)) //converting from degs to radians
-    .endAngle(125 * (Math.PI/180))
+    .endAngle(120 * (Math.PI/180))
 
     var arcPillar2 = d3.svg.arc()
     .innerRadius(0)
     .outerRadius(1200)
     .startAngle(120 * (Math.PI/180)) //converting from degs to radians
-    .endAngle(245 * (Math.PI/180))
+    .endAngle(240 * (Math.PI/180))
 
     var arcPillar3 = d3.svg.arc()
     .innerRadius(0)
     .outerRadius(1200)
     .startAngle(240 * (Math.PI/180)) //converting from degs to radians
-    .endAngle(365 * (Math.PI/180))
+    .endAngle(360 * (Math.PI/180))
 
     layerBack.append("path")
     .attr("class", "arc pillar1")
     .attr("d", arcPillar1)
     // .attr("fill", "#B2DFDB")
     .attr("fill", "#424242")
-    // .attr("stroke", "black")
-    // .attr("stroke-width", "4px")
+    .attr("stroke", "black")
+    .attr("stroke-width", "4px")
     .attr("transform", "translate(" + [width/2,height/2] + ")")
 
     layerBack.append("path")
@@ -148,8 +148,8 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     .attr("d", arcPillar2)
     // .attr("fill", "#D1C4E9")
     .attr("fill", "#424242")
-    // .attr("stroke", "black")
-    // .attr("stroke-width", "4px")
+    .attr("stroke", "black")
+    .attr("stroke-width", "4px")
     .attr("transform", "translate(" + [width/2,height/2] + ")")
 
     layerBack.append("path")
@@ -157,8 +157,8 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     .attr("d", arcPillar3)
     // .attr("fill", "#F0F4C3")
     .attr("fill", "#424242")
-    // .attr("stroke", "black")
-    // .attr("stroke-width", "4px")
+    .attr("stroke", "black")
+    .attr("stroke-width", "4px")
     .attr("transform", "translate(" + [width/2,height/2] + ")")
 
 
@@ -166,80 +166,26 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       .attr('xlink:href','assets/community.svg')
       .attr('height', 150)
       .attr('width', 150)
-      .attr('opacity', 1)
+      .attr('opacity', .33)
       .attr('x', width * .8)
       .attr('y', height * .2)
-
-    var communityText = layerFront.append("text").attr({
-      class: "originCircle",
-      x: originX,
-      y: originY,
-      "font-family": "Raleway",
-      "font-size": "18px",
-      stroke: "#00d8c4",
-      fill: "#00d8c4",
-      opacity: 1,
-      originX: originX,
-      originY: originY,
-      initialX: originX,
-      initialY: originY,
-      initialFontSize: "24px"
-    }).style("text-anchor", "middle")
-    .text("Health & Connected Community")
-    .call(d3.util.wrap(100, width*.855, height*.13))
 
     var business = layerFront.append('image')
       .attr('xlink:href','assets/business.svg')
       .attr('height', 150)
       .attr('width', 150)
-      .attr('opacity', 1)
+      .attr('opacity', .33)
       .attr('x', width * .65)
-      .attr('y', height * .78)
-
-    var businessText = layerFront.append("text").attr({
-      class: "originCircle",
-      x: originX,
-      y: originY,
-      "font-family": "Raleway",
-      "font-size": "18px",
-      stroke: "#7e57c2",
-      fill: "#7e57c2",
-      opacity: 1,
-      originX: originX,
-      originY: originY,
-      initialX: originX,
-      initialY: originY,
-      initialFontSize: "24px"
-    }).style("text-anchor", "middle")
-    .text("Local Economic Vitality")
-    .call(d3.util.wrap(100, width*.75, height*.84))
-
+      .attr('y', height * .8)
 
     var stewardship = layerFront.append('image')
       .attr('xlink:href','assets/stewardship.svg')
       .attr('height', 120)
       .attr('width', 120)
-      .attr('opacity', .9)
+      .attr('opacity', .33)
       .attr('x', width * .1)
-      .attr('y', height * .25)
+      .attr('y', height * .18)
 
-    var stewardshipText = layerFront.append("text").attr({
-      class: "originCircle",
-      x: originX,
-      y: originY,
-      "font-family": "Raleway",
-      "font-size": "18px",
-      stroke: "#cddc39",
-      fill: "#cddc39",
-      opacity: 1,
-      originX: originX,
-      originY: originY,
-      initialX: originX,
-      initialY: originY,
-      initialFontSize: "24px"
-    }).style("text-anchor", "middle")
-    .text("Resource & Environmental Stewardship")
-    .call(d3.util.wrap(100, width*.145, height*.12))
 
 
     // build our central circle for the organization.
@@ -248,7 +194,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         cx: originX,
         cy: originY,
         r: innerCircleRadius,
-        fill: "#388E3C",
+        fill: d3.hsl(147, 1, .34),
         // stroke: "black",
         // "stroke-width": "3px",
         originalScale: innerCircleRadius
@@ -273,7 +219,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
     // generate our pillars
     arcGenerator(0, 105/firstPillarData.array.length, "#00D8C4", "#009688", firstPillarData, "black");
-    arcGenerator(120, 105/secondPillarData.array.length, "#7E57C2", "#512DA8", secondPillarData, "white");
+    arcGenerator(120, 105/secondPillarData.array.length, "#7E57C2", "#311B92", secondPillarData, "white");
     arcGenerator(240, 105/thirdPillarData.array.length, "#CDDC39", "#767f21", thirdPillarData, "black");
 
 
@@ -289,37 +235,57 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       if(currentPillar.array.length != 0){
         var i = initialDegree -75
         for(var j = 0; j<currentPillar.array.length; j++){
+
+          // use this to alternate heights
+          if(leveler == true){
+            leveler = false;
+          } else {
+            leveler = true;
+          }
+
+          // do the hard math (THANKS RYAN MULCAHY) to position our orbitters at a
+          // height based on whether leveler is true or false
+          var orbitterX = (originX + ((outerCircleRadius * (leveler ? 1:1.4)) * Math.cos(i*(Math.PI/180))));
+          var orbitterY = (originY + ((outerCircleRadius * (leveler ? 1:1.4)) * Math.sin(i*(Math.PI/180))));
+
+          // generate a line from the center of the orbitter to the center of
+          // our origin.
+          var orbitterLine = layerBack.append("line").attr({
+            x1: orbitterX,
+            y1: orbitterY,
+            x2: originX,
+            y2: originY,
+            stroke: color,
+            "stroke-width": "3px"
+          });
+          // create our orbitting circles, storing information about initial
+          // placement so we can retrieve it when we shift them around the
+          // screen
+          // var outerOrbitter = layerFront
+          // .append("circle").attr({
+          //   id: "orbitter" + whichOrbitter,
+          //   class: "outerOrbitter",
+          //   cx: orbitterX,
+          //   cy: orbitterY,
+          //   r: orbitRadius * 1.1,
+          //   opacity: 1,
+          //   fill: "white",
+          //   stroke: "black",
+          //   "stroke-width": "2px",
+          //   originX: originX,
+          //   originY: originY,
+          //   initialX: orbitterX,
+          //   initialY: orbitterY,
+          //   initialR: orbitRadius
+          // })
           if(currentPillar.array[whichText].approved){
-            // use this to alternate heights
-            if(leveler == true){
-              leveler = false;
-            } else {
-              leveler = true;
-            }
-
-            // do the hard math (THANKS RYAN MULCAHY) to position our orbitters at a
-            // height based on whether leveler is true or false
-            var orbitterX = (originX + ((outerCircleRadius * (leveler ? 1:1.4)) * Math.cos(i*(Math.PI/180))));
-            var orbitterY = (originY + ((outerCircleRadius * (leveler ? 1:1.4)) * Math.sin(i*(Math.PI/180))));
-
-            // generate a line from the center of the orbitter to the center of
-            // our origin.
-            var orbitterLine = layerBack.append("line").attr({
-              x1: orbitterX,
-              y1: orbitterY,
-              x2: originX,
-              y2: originY,
-              stroke: color,
-              "stroke-width": "3px"
-            });
-
             var orbitter = layerFront
             .append("circle").attr({
               id: "orbitter" + whichOrbitter,
-              class: "orbitter pillar" + whichPillar,
+              class: "orbitter approved pillar" + whichPillar,
               cx: orbitterX,
               cy: orbitterY,
-              r: orbitRadius + 5,
+              r: orbitRadius,
               opacity: 1,
               fill: color,
               // stroke: "black",
@@ -328,31 +294,51 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
               originY: originY,
               initialX: orbitterX,
               initialY: orbitterY,
-              initialR: orbitRadius +5,
+              initialR: orbitRadius,
               initialColor: color,
               darkerColor: secondColor
             }).datum(currentPillar.array[whichText])
-
-            var orbitterText = layerFront.append("text").attr({
+          }else{
+            var orbitter = layerFront
+            .append("circle").attr({
               id: "orbitter" + whichOrbitter,
-              class: "orbitter pillar" + whichPillar,
-              x: orbitterX,
-              y: orbitterY,
-              "font-family": "Raleway",
-              "font-size": "12px",
-              stroke: textColor,
-              fill: textColor,
+              class: "orbitter notApproved pillar" + whichPillar,
+              cx: orbitterX,
+              cy: orbitterY,
+              r: orbitRadius,
               opacity: 1,
+              fill: secondColor,
+              // stroke: "black",
+              // "stroke-width": "2px",
               originX: originX,
               originY: originY,
               initialX: orbitterX,
               initialY: orbitterY,
-              initialFontSize: "12px"
-            }).style("text-anchor", "middle")
-            .datum(currentPillar.array[whichText])
-            .text(currentPillar.array[whichText].name)
-            .call(d3.util.wrap(90, orbitterX, orbitterY - 3));
+              initialR: orbitRadius,
+              initialColor: secondColor,
+              darkerColor: '#424242'
+            }).datum(currentPillar.array[whichText])
           }
+
+          var orbitterText = layerFront.append("text").attr({
+            id: "orbitter" + whichOrbitter,
+            class: "orbitter pillar" + whichPillar,
+            x: orbitterX,
+            y: orbitterY,
+            "font-family": "Raleway",
+            "font-size": "12px",
+            stroke: textColor,
+            fill: textColor,
+            opacity: 1,
+            originX: originX,
+            originY: originY,
+            initialX: orbitterX,
+            initialY: orbitterY,
+            initialFontSize: "12px"
+          }).style("text-anchor", "middle")
+          .datum(currentPillar.array[whichText])
+          .text(currentPillar.array[whichText].name)
+          .call(d3.util.wrap(90, orbitterX, orbitterY));
           whichText++;
           whichOrbitter++;
           i+=gapBetweenDegree;
@@ -429,7 +415,6 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       // If we're not transformed, begin the transformation
       // if(!isTransformed){
         switch(d3.select(currentClicked).attr("class")){
-
           case "orbitter approved pillar1":
 
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
@@ -451,7 +436,6 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
                init: d3.select(currentClicked).datum()
               }
             })
-
           changePillarColorBack(".pillar2");
           changePillarColorBack(".pillar3");
             break;
@@ -479,11 +463,11 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
           changePillarColorBack(".pillar2");
           changePillarColorBack(".pillar3");
             break;
-
           case "orbitter pillar1":
 
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
             pillar = "pillar1";
+
 
             useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
             $mdDialog.show({
@@ -500,10 +484,60 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
                init: d3.select(currentClicked).datum()
               }
             })
-            changePillarColorBack(".pillar2");
-            changePillarColorBack(".pillar3");
+          changePillarColorBack(".pillar2");
+          changePillarColorBack(".pillar3");
             break;
+          case "orbitter approved pillar2":
+            svg.transition().duration(750).attr("transform", "translate(" + [-width * .4, -height * .6] + ")scale(" + 1.5 + ")");
+            pillar = "pillar2";
 
+            // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
+
+
+            useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+            $mdDialog.show({
+              templateUrl: 'views/initviewpillar2.html',
+              controller: 'InitViewController',
+              controllerAs: 'initview',
+              disableParentScroll: true,
+              fullscreen: useFullScreen,
+              trapFocus: true,
+              focusOnOpen: true,
+              clickOutsideToClose: true,
+              ariaLabel: 'Good',
+              locals: {
+               init: d3.select(currentClicked).datum()
+              }
+            })
+          changePillarColorBack(".pillar1");
+          changePillarColorBack(".pillar3");
+
+            break;
+          case "orbitter notApproved pillar2":
+            svg.transition().duration(750).attr("transform", "translate(" + [-width * .4, -height * .6] + ")scale(" + 1.5 + ")");
+            pillar = "pillar2";
+
+            // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
+
+
+            useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+            $mdDialog.show({
+              templateUrl: 'views/initviewpillar2.html',
+              controller: 'InitViewController',
+              controllerAs: 'initview',
+              disableParentScroll: true,
+              fullscreen: useFullScreen,
+              trapFocus: true,
+              focusOnOpen: true,
+              clickOutsideToClose: true,
+              ariaLabel: 'Good',
+              locals: {
+               init: d3.select(currentClicked).datum()
+              }
+            })
+          changePillarColorBack(".pillar1");
+          changePillarColorBack(".pillar3");
+            break;
           case "orbitter pillar2":
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .4, -height * .6] + ")scale(" + 1.5 + ")");
             pillar = "pillar2";
@@ -525,8 +559,60 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
                init: d3.select(currentClicked).datum()
               }
             })
+          changePillarColorBack(".pillar1");
+          changePillarColorBack(".pillar3");
+            break;
+          case "orbitter approved pillar3":
+            svg.transition().duration(750).attr("transform", "translate(" + [width * .2, -height * .1] + ")scale(" + 1.5 + ")");
+            pillar = "pillar3";
+
+            // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
+
+
+
+            useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+            $mdDialog.show({
+              templateUrl: 'views/initviewpillar3.html',
+              controller: 'InitViewController',
+              controllerAs: 'initview',
+              disableParentScroll: true,
+              fullscreen: useFullScreen,
+              trapFocus: true,
+              focusOnOpen: true,
+              clickOutsideToClose: true,
+              ariaLabel: 'Good',
+              locals: {
+               init: d3.select(currentClicked).datum()
+              }
+            })
+          changePillarColorBack(".pillar1");
+          changePillarColorBack(".pillar2");
+            break;
+          case "orbitter notApproved pillar3":
+            svg.transition().duration(750).attr("transform", "translate(" + [width * .2, -height * .1] + ")scale(" + 1.5 + ")");
+            pillar = "pillar3";
+
+            // d3.selectAll(".orbitter").attr("fill", d3.select(this).attr("initialColor"))
+
+
+            useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+            $mdDialog.show({
+              templateUrl: 'views/initviewpillar3.html',
+              controller: 'InitViewController',
+              controllerAs: 'initview',
+              disableParentScroll: true,
+              fullscreen: useFullScreen,
+              trapFocus: true,
+              focusOnOpen: true,
+              clickOutsideToClose: true,
+              ariaLabel: 'Good',
+              locals: {
+               init: d3.select(currentClicked).datum()
+              }
+            })
             changePillarColorBack(".pillar1");
-            changePillarColorBack(".pillar3");
+            changePillarColorBack(".pillar2");
+
             break;
           case "orbitter pillar3":
             svg.transition().duration(750).attr("transform", "translate(" + [width * .2, -height * .1] + ")scale(" + 1.5 + ")");
@@ -634,8 +720,11 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     }
 
   function changePillarColorBack(pillar){
-    if(!d3.selectAll("circle").filter(pillar).empty()){
-      d3.selectAll("circle").filter(pillar).attr("fill", d3.selectAll("circle").filter(pillar).attr("initialColor"));
+    if(!d3.selectAll("circle").filter(pillar).filter(".approved").empty()){
+      d3.selectAll("circle").filter(pillar).filter(".approved").attr("fill", d3.selectAll("circle").filter(pillar).filter(".approved").attr("initialColor"));
+    }
+    if(!d3.selectAll("circle").filter(pillar).filter(".notApproved").empty()){
+      d3.selectAll("circle").filter(pillar).filter(".notApproved").attr("fill", d3.selectAll("circle").filter(pillar).filter(".notApproved").attr("initialColor"));
     }
   }
 

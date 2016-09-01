@@ -1,11 +1,10 @@
-angular.module('ssmnApp').controller('AdminController', ['$http', '$mdMedia', '$mdDialog', 'UserService', function($http, $mdMedia, $mdDialog, UserService){
+angular.module('ssmnApp').controller('AdminController', ['$http', '$mdMedia', '$mdDialog', 'UserService','$mdSidenav', function($http, $mdMedia, $mdDialog, UserService, $mdSidenav){
   var vm = this;
 
   vm.getPendingInits = UserService.getPendingInits;
   vm.getPendingInits();
   vm.data = UserService.data;
 
-  
 
 
   vm.initModal = function(init) {

@@ -171,6 +171,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
       console.log('fail to post edit');
     })
 
+
   }
 
 
