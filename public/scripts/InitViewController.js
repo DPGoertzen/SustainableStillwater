@@ -10,7 +10,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
   vm.admin = false;
   vm.loggedIn = false;
   // console.log('this is data', vm.data);
-
+  console.log('pillar', init.pillar);
   if(vm.data.username == 'admin'){
     vm.admin = true;
   }
@@ -18,15 +18,45 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
     vm.loggedIn = true;
   }
 
+  var trackColor = '';
+  var prevBarColor = '';
+  var barColor = '';
+  var skinColor = '';
+
+  switch(init.pillar){
+    case 1:
+      trackColor = 'rgba(0,216,196,.1)';
+      prevBarColor = 'rgba(0,216,196,.2)';
+      barColor = 'rgba(0,216,196,.5)';
+      skinColor = 'rgba(0,216,196,1)';
+    break;
+    case 2:
+      trackColor = 'rgba(126,87,194,.1)';
+      prevBarColor = 'rgba(126,87,194,.2)';
+      barColor = 'rgba(126,87,194,.5)';
+      skinColor = 'rgba(126,87,194,1)';
+    break;
+    case 3:
+      trackColor = 'rgba(205,220,57,.1)';
+      prevBarColor = 'rgba(205,220,57,.2)';
+      barColor = 'rgba(205,220,57,.5)';
+      skinColor = 'rgba(205,220,57,1)';
+    break;
+  }
+
+  console.log(trackColor);
+
   var phaseOptions = {
     skin: {
-      type: 'tron'
+      type: 'tron',
+      color: skinColor
     },
     size: 200,
     unit: '%',
     barWidth: 40,
-    trackColor: 'rgba(255,0,0,.1)',
-    prevBarColor: 'rgba(0,0,0,.2)',
+    barColor: barColor,
+    trackColor: trackColor,
+    prevBarColor: prevBarColor,
     readOnly: true,
     fontSize: 30,
     subText: {
@@ -61,6 +91,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
         msOptions: {
                 skin: {
                   type: 'tron',
+                  color: skinColor,
                   width: 3,
                   spaceWidth: 2
                 },
@@ -69,8 +100,9 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
               //  max: tempPhases[i].milestones[j].milestoneGoal,
                trackWidth: 20,
                barWidth: 15,
-               trackColor: 'rgba(255,0,0,.1)',
-               prevBarColor: 'rgba(0,0,0,.2)',
+               barColor: barColor,
+               trackColor: trackColor,
+               prevBarColor: prevBarColor,
               //  readOnly: false,
               //  step: 1, //variable value based on 'unit'
                displayPrevious: true,
