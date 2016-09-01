@@ -64,6 +64,15 @@ function userRetrievalSuccess(response){
       thirdPillarApproveLength++;
     }
   }
+  if(firstPillarApproveLength == 0){
+    firstPillarApproveLength = 1;
+  }
+  if(secondPillarApproveLength == 0){
+    secondPillarApproveLength = 1;
+  }
+  if(thirdPillarApproveLength == 0){
+    thirdPillarApproveLength = 1;
+  }
   // for(var i = 0; i < secondPillarData.array.length; i++){
   //   if(secondPillarData.array[i].totalProgress != NaN){
   //     secondPillarDataSum += secondPillarData.array[i].totalProgress
