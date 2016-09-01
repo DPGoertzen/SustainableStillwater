@@ -1,15 +1,19 @@
+<md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="4">
+  <md-button class="md-icon-button md-primary" ng-click="ssmn.toggleLeft()">
+    <md-icon md-svg-icon="styles/ourIcons/ic_arrow_back_18px.svg"></md-icon>
+  </md-button>
+  <md-button class="md-primary md-raised" layout-wrap layout-margin layout-align="center" ng-click="profile.newInit()">
+    <h1><md-button class="md-icon-button md-primary" ng-click="ssmn.toggleLeft()">
+      <md-icon md-svg-icon="styles/ourIcons/ic_add_24px.svg"></md-icon>
+    </md-button> New Initiative</h1></md-button>
 
-<div layout="row" layout-wrap layout-margin layout-align="center">
-  <div ng-repeat="init in profile.data.initiatives">
-    <md-button class="md-primary md-raised" ng-click="profile.initModal(init)">Initiative: {{init.name}}</md-button>
-
-  </div>
-  <div >
-    <md-button class="md-primary md-raised" layout-wrap layout-margin layout-align="center" ng-click="profile.newInit()">Create a New Initiative</md-button>
-
-  </div>
-</div>
+  <md-content layout-margin>
+    <md-button class="md-primary md-raised" ng-click="profile.toggleInits = !profile.toggleInits"><h2>Our Initiatives</h2>{{profile.data.ourInitiativesCount}}</md-button>
+    <div ng-show="profile.toggleInits" ng-repeat="init in profile.data.initiatives">
+      <md-button class="md-primary md-raised" ng-click="profile.initModal(init)">{{init.name}}</md-button>
+      <md-divider ng-if="!$last"></md-divider>
+    </div>
+  </md-content>
 
 
-<!-- <md-button class="md-primary md-raised" layout-wrap layout-margin layout-align="center" ng-click="profile.newInit()">Create a New Initiative</md-button> -->
-<!-- <a href="/initiative">Create a New Initiative</a> -->
+</md-sidenav>

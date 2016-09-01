@@ -40,6 +40,7 @@ angular.module('ssmnApp').factory('UserService', function($http, $location){
 
   findInitiatives = function(){
     return $http.get('/init/profile').then(function(response){
+      data.ourInitiativesCount = response.data.initiatives.length;
       return data.initiatives = response.data.initiatives;
       // console.log("our data.initiatives is", data.initiatives);
       // console.log(vm.data);
