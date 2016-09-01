@@ -33,6 +33,10 @@ html, body {
   background-color: #DCDCDC;
 }
 
+.white {
+  background-color: white;
+}
+
 
 /*font styles*/
 .lite {
@@ -65,21 +69,10 @@ html, body {
   font-weight: 700;
 }
 
-
-/*md-input-container {
-  margin-top: 12px;
+.mn-title {
+  font-family: 'Lora';
+  font-size: 36px;
 }
-
-md-input-container.md-default-theme .md-input, md-input-container .md-input,
-md-select.md-default-theme .md-select-value, md-select .md-select-value,
-md-input-container:not(.md-input-invalid).md-input-focused .md-input,
-md-select.md-default-theme .md-select-value.md-select-placeholder,
-md-select .md-select-value.md-select-placeholder {
-  color: steelblue;
-  border-color: steelblue;
-  font-weight: 700;
-}*/
-
 
 
 .center {
@@ -168,105 +161,4 @@ md-select .md-select-value.md-select-placeholder {
   max-width: 1500px;
   max-height: 800px;
   margin: 0 auto 0 auto;
-}
-
-/*Testing color palletes*/
-
-/*Teal*/
-.t500 {
-  color: #009688;
-}
-
-.t300 {
-  color: #4db6ac;
-}
-
-.t800 {
-  color: #00695c;
-}
-
-.ta200 {
-  color: #64ffda;
-}
-
-.bg-t500 {
-  background-color: #009688;
-}
-
-.bg-t300 {
-  background-color: #4db6ac;
-}
-
-.bg-t800 {
-  background-color: #00695c;
-}
-
-.bg-ta200 {
-  background-color: #64ffda;
-}
-
-/*Light Blue*/
-.lb500 {
-  color: #03a9f4;
-}
-
-.lb200 {
-  color: #81d4fa;
-}
-
-.lb900 {
-  color: #01579b;
-}
-
-.lba100 {
-  color: #80d8ff;
-}
-
-.bg-lb500 {
-  background-color: #03a9f4;
-}
-
-.bg-lb200 {
-  background-color: #81d4fa;
-}
-
-.bg-lb900 {
-  background-color: #01579b;
-}
-
-.bg-lba100 {
-  background-color: #80d8ff;
-}
-
-/*Lime*/
-.lm500 {
-  color: #cddc39;
-}
-
-.lm300 {
-  color: #dce775;
-}
-
-.lm800 {
-  color: #9e9d24;
-}
-
-.lma100 {
-  color: #f4ff81;
-}
-
-.bg-lm500 {
-  background-color: #cddc39;
-}
-
-.bg-lm300 {
-  background-color: #dce775;
-}
-
-.bg-lm800 {
-  background-color: #9e9d24;
-}
-
-.bg-lma100 {
-  background-color: #f4ff81;
 }
