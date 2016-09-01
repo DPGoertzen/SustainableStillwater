@@ -3,6 +3,7 @@
   <head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" />
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
     <link rel="stylesheet" href="vendors/angular-material/angular-material.min.css" />
     <link rel="stylesheet" href="styles/stylesheet.css" />
 
@@ -39,12 +40,24 @@
   </head>
   <body ng-controller="SSMNController as ssmn">
 
-    <a href="/login" ng-if="!ssmn.data.loggedIn">Login</a>
-    <a href="/logout" ng-if="ssmn.data.loggedIn" ng-click="ssmn.logout()">Logout</a>
-    <a href="/register" ng-if="!ssmn.data.loggedIn">Register</a>
-    <a href="/profile" ng-if="ssmn.data.admin">Profile</a>
-    <a href="/admin" ng-if="ssmn.data.admin">Admin</a>
-    <!-- <md-button class="md-primary md-raised" ng-click="ssmn.login()">Login</md-button> -->
+    <div class="md-whiteframe-3dp white center" layout="row" flex>
+      <div flex=20>
+
+      </div>
+      <div layout="row" layout-align="center center">
+        <img src="../assets/05086b_3f74cc6abf9a481d83b00c89c5923886-mv2.jpg" alt="" />
+        <h1 class="mn-title">
+          MN
+        </h1>
+      </div>
+    </div>
+
+    <div>
+      <md-button ng-click="ssmn.login()" ng-if="!ssmn.data.loggedIn">Login</md-button>
+      <md-button ng-click="ssmn.logout()" ng-if="ssmn.data.loggedIn" ng-click="ssmn.logout()">Logout</md-button>
+      <md-button ng-click="ssmn.register()" ng-if="!ssmn.data.loggedIn">Register</md-button>
+    </div>
+
     <div ng-view>
 
     </div>

@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('RegisterController', function($http, $location){
+angular.module('ssmnApp').controller('RegisterController', function($http, $location, $mdMedia, $mdDialog){
   var vm = this;
 
   vm.register = function(){
@@ -9,11 +9,20 @@ angular.module('ssmnApp').controller('RegisterController', function($http, $loca
     sendData.password = vm.password;
 
     $http.post('/register', sendData).then(handleSuccess, handleFailure);
+    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+    $mdDialog.show({
+      controller: 'LoginController',
+      controllerAs: 'login',
+      templateUrl: 'views/login.html',
+      fullscreen: useFullScreen,
+      clickOutsideToClose: true,
+      ariaLabel: 'Good'
+    })
   };
 
   function handleSuccess(response){
     // console.log('Success', response);
-    $location.path('/login');
+    // $location.path('/login');
   };
 
   function handleFailure(response){

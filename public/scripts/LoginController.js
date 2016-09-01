@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('LoginController', function($http, $location, UserService, $mdToast){
+angular.module('ssmnApp').controller('LoginController', function($http, $location, UserService, $mdToast, $mdDialog){
   var vm = this;
 
   vm.username = '';
@@ -11,7 +11,7 @@ angular.module('ssmnApp').controller('LoginController', function($http, $locatio
     sendData.password = vm.password;
 
     $http.post('/login', sendData).then(handleSuccess, handleFailure);
-
+    $mdDialog.hide();
   };
 
   function handleSuccess(response){
