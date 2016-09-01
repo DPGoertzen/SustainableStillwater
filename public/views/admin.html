@@ -1,8 +1,7 @@
 <div layout="row" layout-wrap layout-margin layout-align="center">
   <div ng-repeat="init in admin.data.initPendingArray">
-    <md-button class="md-warn md-raised" ng-click="admin.initModal(init)">Pending Initiative: {{init.name}}</md-button>
+    <md-button class="md-warn md-raised" ng-click="admin.initModal(init)">{{init.name}}</md-button>
+  </div> 
+<div ng-repeat="init in admin.data.initApprovedArray">
+    <md-button class="md-primary md-raised" ng-click="admin.initModal(init)">{{init.name}}</md-button>
   </div>
-  <div ng-repeat="init in admin.data.initApprovedArray">
-    <md-button class="md-primary md-raised" ng-click="admin.initModal(init)">Approved Intiative: {{init.name}}</md-button>
-  </div>
-</div>

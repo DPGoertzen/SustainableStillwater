@@ -221,7 +221,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       .attr('width', 120)
       .attr('opacity', .9)
       .attr('x', width * .1)
-      .attr('y', height * .25)
+      .attr('y', height * .2)
 
     var stewardshipText = layerFront.append("text").attr({
       class: "originCircle",
@@ -429,6 +429,57 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       // If we're not transformed, begin the transformation
       // if(!isTransformed){
         switch(d3.select(currentClicked).attr("class")){
+
+          case "orbitter approved pillar1":
+
+            svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
+            pillar = "pillar1";
+
+
+            useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+            $mdDialog.show({
+              templateUrl: 'views/initviewpillar1.html',
+              controller: 'InitViewController',
+              controllerAs: 'initview',
+              disableParentScroll: true,
+              fullscreen: useFullScreen,
+              trapFocus: true,
+              focusOnOpen: true,
+              clickOutsideToClose: true,
+              ariaLabel: 'Good',
+              locals: {
+               init: d3.select(currentClicked).datum()
+              }
+            })
+
+          changePillarColorBack(".pillar2");
+          changePillarColorBack(".pillar3");
+            break;
+          case "orbitter notApproved pillar1":
+
+            svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
+            pillar = "pillar1";
+
+
+            useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+            $mdDialog.show({
+              templateUrl: 'views/initviewpillar1.html',
+              controller: 'InitViewController',
+              controllerAs: 'initview',
+              disableParentScroll: true,
+              fullscreen: useFullScreen,
+              trapFocus: true,
+              focusOnOpen: true,
+              clickOutsideToClose: true,
+              ariaLabel: 'Good',
+              locals: {
+               init: d3.select(currentClicked).datum()
+              }
+            })
+          changePillarColorBack(".pillar2");
+          changePillarColorBack(".pillar3");
+            break;
+
           case "orbitter pillar1":
 
             svg.transition().duration(750).attr("transform", "translate(" + [-width * .6, -height * .1] + ")scale(" + 1.5 + ")");
@@ -529,24 +580,13 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         isTransformed = false;
         // if isSCircleClicked is false, we need to create our infoRectangle.
       }else{
-        console.log("sustainableCircle is clicked and is", isSCircleClicked);
-          // var infoRectangle = layerFront.append("rect").attr({
-          //   class: "infoRectangle",
-          //   x: 0,
-          //   y: .8*height,
-          //   rx: 20,
-          //   ry: 20,
-          //   width: width,
-          //   height: .2*height,
-          //   stroke: "black",
-          //   fill: "aqua"
-          // });
-          $mdBottomSheet.show({
-            templateUrl:'views/bottomsheet.html',
-            controller: 'BottomSheetController',
-            controllerAs: 'bottomSheet',
-            clickOutsideToClose: true
-          });
+        console.log("WE GOT TO HERE", isSCircleClicked);
+        $mdBottomSheet.show({
+          templateUrl:'views/bottomsheet.html',
+          controller: 'BottomSheetController',
+          controllerAs: 'bottomSheet',
+          clickOutsideToClose: true
+        });
       }
     }
 

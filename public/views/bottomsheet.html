@@ -1,11 +1,29 @@
-<md-bottom-sheet>Hello!
-<p>
-  First Pillar Progress: {{bottomSheet.firstPillarProgress}}%
-</p>
-<p>
-  Second Pillar Progress: {{bottomSheet.secondPillarProgress}}%
-</p>
-<p>
-  Third Pillar Progress: {{bottomSheet.thirdPillarProgress}}%
-</p>
+<md-bottom-sheet>
+  <h1 style="text-align: center;">Sustainable Stillwater Overall Progress</h1>
+  <div layout="row" layout-align="space-around center" class="top-padding" >
+    <div layout="row" layout-align="space-around center" class="top-padding" style="border-right: 1px solid ">
+      <p style="padding: 0 20px">
+        <ui-knob value="bottomSheet.data.firstPillarProgress" options="bottomSheet.phaseOptionsPillar1" style="display:block;"></ui-knob>
+        First Pillar Progress
+      </p>
+
+
+      <p style="padding: 0 20px">
+        <ui-knob value="bottomSheet.data.secondPillarProgress" options="bottomSheet.phaseOptionsPillar2" style="display:block; padding-left:10px;"></ui-knob>
+        Second Pillar Progress
+      </p>
+
+      <p style="padding: 0 200px 0 20px">
+        <ui-knob value="bottomSheet.data.thirdPillarProgress" options="bottomSheet.phaseOptionsPillar3" style="display:block;"></ui-knob>
+        Third Pillar Progress
+      </p>
+    </div>
+    <div layout="row" layout-align="space-around center" class="top-padding">
+      <p>
+        <ui-knob value="bottomSheet.data.totalPillarProgress" options="bottomSheet.phaseOptionsTotal" style="display:block; padding-right:10px;"></ui-knob>
+          Total Pillar Progress
+      </p>
+
+    </div>
+  </div>
 </md-bottom-sheet>
