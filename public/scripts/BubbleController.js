@@ -272,9 +272,9 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     .call(d3.util.wrap(100, originX, originY-55));
 
     // generate our pillars
-    arcGenerator(0, 105/firstPillarData.array.length, "#00D8C4", "#009688", firstPillarData, "black");
+    arcGenerator(0, 105/firstPillarData.array.length, "#80CBC4", "#009688", firstPillarData, "black");
     arcGenerator(120, 105/secondPillarData.array.length, "#7E57C2", "#512DA8", secondPillarData, "white");
-    arcGenerator(240, 105/thirdPillarData.array.length, "#CDDC39", "#767f21", thirdPillarData, "black");
+    arcGenerator(240, 105/thirdPillarData.array.length, "#CDDC39", "#9E9D24", thirdPillarData, "black");
 
 
     // specifies where we start, where we end, the distant between orbitters and

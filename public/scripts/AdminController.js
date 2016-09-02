@@ -8,11 +8,25 @@ angular.module('ssmnApp').controller('AdminController', ['$http', '$mdMedia', '$
 
 
   vm.initModal = function(init) {
-    console.log('ya clicked it');
     console.log('The initiative is', init);
+
+    var url = '';
+
+    switch (init.pillar) {
+      case 1:
+        url = 'views/initEditPillar1.html'
+      break;
+      case 2:
+        url = 'views/initEditPillar2.html'
+      break;
+      case 3:
+        url = 'views/initEditPillar3.html'
+      break;
+    }
+
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
     $mdDialog.show({
-      templateUrl: 'views/initview.html',
+      templateUrl: url,
       controller: 'InitViewController',
       controllerAs: 'initview',
       fullscreen: useFullScreen,

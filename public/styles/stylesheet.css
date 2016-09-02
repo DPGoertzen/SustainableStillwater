@@ -77,8 +77,6 @@ html, body {
 
 .center {
   text-align: center;
-  /*margin: 0 auto;
-  display: inline-block;*/
 }
 
 .top-padding {
@@ -115,8 +113,6 @@ html, body {
     font-size: 16px;
     margin: 20px 0;
     padding: 3px 15px 3px 15px;
-    /*color: rgb(49, 46, 46);
-    background-color: rgba(224, 224, 224, 0.96);*/
     text-transform: none;
     font-weight: 700;
     min-width:100px;

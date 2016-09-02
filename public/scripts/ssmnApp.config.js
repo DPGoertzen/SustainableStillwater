@@ -53,8 +53,19 @@ angular.module('ssmnApp').config(function($routeProvider, $locationProvider){
 })
 .config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')
-    .primaryPalette('teal')
-    .accentPalette('lime',{
+    .primaryPalette('green', {
       'default': '700'
+    })
+    .accentPalette('deep-purple',{
+      'default': 'A700'
     });
+
+  $mdThemingProvider.theme('pillar1')
+    .primaryPalette('teal', {'default': '200'});
+
+  $mdThemingProvider.theme('pillar2')
+    .primaryPalette('deep-purple', {'default': '700'});
+
+  $mdThemingProvider.theme('pillar3')
+    .primaryPalette('lime', {'default': '500'});
 });
