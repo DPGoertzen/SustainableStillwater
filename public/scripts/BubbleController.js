@@ -38,6 +38,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     var useFullScreen;
     var orbitRadius = 50;
     var whichPillar = 1;
+    var clickToViewText;
 
     d3.util = d3.util || {};
 
@@ -109,6 +110,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     // into a back and front layer. FRONT LAYER MUST BE BELOW BACK LAYER!!!
     var layerBack = svg.append('g');
     var layerFront = svg.append('g');
+    var layerSSMN = svg.append('g');
 
     // set the middle of the canvas
     var originX = .5*width;
@@ -243,7 +245,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
 
     // build our central circle for the organization.
-    var sustainableCircle = layerFront.append("circle").attr({
+    var sustainableCircle = layerSSMN.append("circle").attr({
         class: "originCircle",
         cx: originX,
         cy: originY,
@@ -253,7 +255,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
         // "stroke-width": "3px",
         originalScale: innerCircleRadius
     });
-    var sustainableText = layerFront.append("text").attr({
+    var sustainableText = layerSSMN.append("text").attr({
       class: "originCircle",
       x: originX,
       y: originY,
@@ -270,6 +272,25 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     }).style("text-anchor", "middle")
     .text("Sustainable Stillwater Minnesota")
     .call(d3.util.wrap(100, originX, originY-55));
+
+    clickToViewText = layerSSMN.append("text").attr({
+      class: "originCircle",
+      x: originX,
+      y: originY,
+      "font-family": "Raleway",
+      "font-size": "24px",
+      stroke: "white",
+      fill: "white",
+      opacity: 0,
+      originX: originX,
+      originY: originY,
+      initialX: originX,
+      initialY: originY,
+      initialFontSize: "24px"
+    }).style("text-anchor", "middle")
+    .text("Click to View our Shared Progress")
+    .call(d3.util.wrap(100, originX, originY-50));
+
 
     // generate our pillars
     arcGenerator(0, 105/firstPillarData.array.length, "#80CBC4", "#009688", firstPillarData, "black");
@@ -364,8 +385,10 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
     // set up our click handlers for our orbitters and sustainableCircle
     var orbitters = d3.selectAll(".orbitter").on('click', clickedOrbitter);
-    var orbitters = d3.selectAll("text").on('click', clickedOrbitter)
-    var ssCircle = d3.selectAll(".originCircle").on('click', clickedSustainableCircle);
+    var orbittersText = d3.selectAll("text").on('click', clickedOrbitter)
+    var ssCircleClick = d3.selectAll(".originCircle").on('click', clickedSustainableCircle);
+    var ssCircleMouseOver = layerSSMN.on('mouseover', mouseOverSustainableCircle);
+    var ssCircleMouseLeave = layerSSMN.on('mouseleave', mouseLeaveSustainableCircle);
     var arcs = d3.selectAll(".arc").on('click', clickedArc);
 
     var orbittersGrow = d3.selectAll(".orbitter").on('mouseover', clickedOrbitterGrow);
@@ -427,7 +450,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       var pillar;
 
       // If we're not transformed, begin the transformation
-      // if(!isTransformed){
+      // if(!isTransformed)
         switch(d3.select(currentClicked).attr("class")){
 
           case "orbitter approved pillar1":
@@ -628,5 +651,32 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     }
   }
 
-  };  }
+  function mouseOverSustainableCircle(){
+    sustainableText.remove();
+    clickToViewText.attr({"opacity": 1})
+  }
+
+  function mouseLeaveSustainableCircle(){
+    clickToViewText.attr({"opacity": 0})
+    sustainableText = layerSSMN.append("text").attr({
+      class: "originCircle",
+      x: originX,
+      y: originY,
+      "font-family": "Raleway",
+      "font-size": "24px",
+      stroke: "white",
+      fill: "white",
+      opacity: 1,
+      originX: originX,
+      originY: originY,
+      initialX: originX,
+      initialY: originY,
+      initialFontSize: "24px"
+    }).style("text-anchor", "middle")
+    .text("Sustainable Stillwater Minnesota")
+    .call(d3.util.wrap(100, originX, originY-55));
+  }
+
+
+};}
 ])
