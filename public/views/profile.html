@@ -30,4 +30,17 @@
   </span>
   </md-content>
 </span>
+
+<span ng-show="profile.data.admin">
+  <md-content layout-margin>
+    <md-button class="md-primary md-raised" ng-click="profile.toggleApprovedInits = !profile.toggleApprovedInits"><h2>Approved Initiatives ({{profile.data.approvedArrayLength}})</h2></md-button>
+    <span ng-controller="AdminController as admin">
+        <md-list flex>
+          <md-list-item md-theme="default" class="md-3-line" ng-show="profile.toggleApprovedInits" ng-repeat="init in admin.data.initApprovedArray" ng-click="admin.initModal(init)">
+            <div class="md-list-item-text" layout="column">{{init.name}}</div>
+        </md-list-item>
+      </md-list>
+  </span>
+  </md-content>
+</span>
 </md-sidenav>

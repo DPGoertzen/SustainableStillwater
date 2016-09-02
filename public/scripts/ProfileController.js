@@ -6,6 +6,7 @@ angular.module('ssmnApp').controller('ProfileController', function($http, $scope
   vm.data = UserService.data;
   vm.toggleInits = false;
   vm.togglePendInits = false;
+  vm.toggleApprovedInits = false;
 
   console.log("and outside the promise vm.data is going to be undefined, like so:", vm.data);
 

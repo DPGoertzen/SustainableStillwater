@@ -67,6 +67,7 @@ angular.module('ssmnApp').factory('UserService', function($http, $location){
       }
     }
     data.pendingArrayLength = data.initPendingArray.length;
+    data.approvedArrayLength = data.initApprovedArray.length;
     // data.initApprovedArray = initApprovedArray;
     // data.initPendingArray = initPendingArray;
   }
