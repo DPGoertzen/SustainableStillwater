@@ -9,13 +9,19 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
   vm.data = UserService.data;
   vm.admin = false;
   vm.loggedIn = false;
-  console.log('pillar', init.pillar);
   if(vm.data.username == 'admin'){
     vm.admin = true;
   }
   if(vm.data.loggedIn == true ){
     vm.loggedIn = true;
   }
+
+  vm.phasePresent = false;
+  if(init.phase.length != 0){
+    vm.phasePresent = true;
+  }
+  console.log('init', init);
+  console.log('vm.phasePresent', vm.phasePresent);
 
   var trackColor = '';
   var prevBarColor = '';
@@ -42,8 +48,6 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
       skinColor = 'rgba(205,220,57,1)';
     break;
   }
-
-  console.log(trackColor);
 
   var phaseOptions = {
     skin: {
@@ -127,7 +131,6 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
     }
     vm.initPhases.push(tempPhaseObject);
   };
-  console.log('initphases are ',vm.initPhases);
 
   $scope.$watchCollection(function(){
       var values =[];
@@ -145,14 +148,10 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
         }
         vm.initPhases[k].phaseValue = Math.round(10*tempValue)/10;
         vm.totalInitiativeValue += vm.initPhases[k].phaseValue;
-        console.log("vm.initPhases[k].phaseValue", vm.initPhases[k].phaseValue);
-        console.log("totalInitiativeValue", vm.totalInitiativeValue);
-      }
-;
+      };
       return values;
     }, function() {
       vm.totalInitiativeProgress = vm.totalInitiativeValue / vm.initPhases.length;
-      console.log("totalInitiativeValue and initPhases.length", vm.totalInitiativeValue, vm.initPhases.length)
   })
 
 
@@ -160,8 +159,6 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
 
 
   vm.save = function(phase){
-    console.log('clicked save', phase);
-    console.log('initiative', init);
 
     var sendData = {
       milestones: [],
@@ -181,7 +178,6 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
     }
 
 
-    console.log('sendData', sendData);
 
     $http.post('/init/editPhase', sendData).then(function(response){
       $mdToast.show({
@@ -202,7 +198,6 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
 
 
   vm.approve = function(init) {
-    console.log('boop', init);
     var sendData = {};
     sendData.approved = true;
     sendData.initId = init._id;

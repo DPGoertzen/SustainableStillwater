@@ -5,7 +5,7 @@
       <md-button class="md-warn md-raised" ng-if="initview.admin" ng-click="initview.delete(initview.init)">Delete</md-button>
   </md-toolbar>
 
-  <div flex layout="row" ng-controller="ProgressController as pc">
+  <div flex layout="row">
     <md-sidenav flex="35" md-is-locked-open="true" class="md-whiteframe-3dp" layout-padding>
       <img src="https://static.wixstatic.com/media/05086b_e184c2229f21477e8f95d529d501ad84~mv2.jpg/v1/fill/w_244,h_161,al_c,q_80,usm_0.66_1.00_0.01/05086b_e184c2229f21477e8f95d529d501ad84~mv2.jpg" />
       <p>
@@ -30,9 +30,14 @@
 
       <md-button class="groupX right" ng-click="initview.addPhase()">Add Phase</md-button>
     </md-sidenav>
+    <md-content ng-if="!initview.phasePresent" layout="column" flex >
+      <div layout-align="center" class="center" style="width:400px; padding-left:50px;">
+          <h2 >No Phases Added Yet</h2>
+      </div>
+    </md-content>
 
-  <md-content layout="column" flex>
-    <div ng-repeat="phase in initview.initPhases" layout-align="space-around center" class="md-whiteframe-1dp dial-container center">
+  <md-content ng-if="initview.phasePresent" layout="column" flex>
+    <div ng-repeat="phase in initview.initPhases" layout-align="space-around center" class="md-whiteframe-1dp dial-container center" style="width:400px; padding-left:50px;">
       <h4 class="md-headline bold uppercase">{{phase.phaseName}}</h4>
       <ui-knob value="phase.phaseValue" options="phase.phaseOptions"></ui-knob><br />
       <div layout="row" layout-align="space-around center" class="top-padding">

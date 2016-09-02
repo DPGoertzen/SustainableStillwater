@@ -30,9 +30,14 @@
       </p>
 
     </md-sidenav>
+    <md-content ng-if="!initview.phasePresent" layout="column" flex >
+      <div layout-align="center" class="center" style="width:400px; padding-left:50px;">
+          <h2 >No Phases Added Yet</h2>
+      </div>
+    </md-content>
 
-    <md-content layout="column" flex>
-      <div ng-repeat="phase in initview.initPhases" layout-align="space-around center" class="md-whiteframe-1dp dial-container center">
+    <md-content ng-if="initview.phasePresent" layout="column" flex>
+      <div ng-repeat="phase in initview.initPhases" layout-align="space-around center" class="md-whiteframe-1dp dial-container center" style="width:400px; padding-left:50px;">
         <h4 class="md-headline bold uppercase">{{phase.phaseName}}</h4>
         <ui-knob value="phase.phaseValue" options="phase.phaseOptions"></ui-knob><br />
         <div layout="row" layout-align="space-around center" class="top-padding">
