@@ -151,7 +151,13 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
       };
       return values;
     }, function() {
-      vm.totalInitiativeProgress = vm.totalInitiativeValue / vm.initPhases.length;
+      if(vm.initPhases.length != 0){
+        var totalInitiativeProgress = vm.totalInitiativeValue / vm.initPhases.length;
+      } else {
+        var totalInitiativeProgress = 0;
+      }
+      console.log("totalInitiativeProgress initially is", totalInitiativeProgress);
+      vm.totalInitiativeProgress = totalInitiativeProgress;
   })
 
 
