@@ -1,4 +1,4 @@
-angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$mdMedia', '$mdDialog', 'UserService', '$scope', '$window','$location', function($http,init,$mdMedia,$mdDialog,UserService,$scope,$window, $location){
+angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$mdMedia', '$mdDialog', 'UserService', '$scope', '$window','$location', '$mdToast', function($http,init,$mdMedia,$mdDialog,UserService,$scope,$window, $location,$mdToast){
 
   var vm = this;
   vm.totalInitiativeValue = 0;
@@ -9,7 +9,6 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
   vm.data = UserService.data;
   vm.admin = false;
   vm.loggedIn = false;
-  // console.log('this is data', vm.data);
   console.log('pillar', init.pillar);
   if(vm.data.username == 'admin'){
     vm.admin = true;
@@ -25,10 +24,10 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
 
   switch(init.pillar){
     case 1:
-      trackColor = 'rgba(0,216,196,.1)';
-      prevBarColor = 'rgba(0,216,196,.2)';
-      barColor = 'rgba(0,216,196,.5)';
-      skinColor = 'rgba(0,216,196,1)';
+      trackColor = 'rgba(128,203,196,.1)';
+      prevBarColor = 'rgba(128,203,196,.2)';
+      barColor = 'rgba(128,203,196,.5)';
+      skinColor = 'rgba(128,203,196,1)';
     break;
     case 2:
       trackColor = 'rgba(126,87,194,.1)';
@@ -68,17 +67,13 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
   };
   var tempPhases = init.phase;
 
-  // console.log('temp phases are', tempPhases);
-
   vm.initPhases = [];
 
   for (var i = 0; i < tempPhases.length; i++) {
-      // console.log(tempPhases[i].milestones);
 
       tempPhaseObject = {
       phaseId: tempPhases[i]._id,
       phaseName: tempPhases[i].label,
-      // phaseValue: tempPhases[i].phaseValue,
       phaseOptions: phaseOptions,
       milestones: []
     }
@@ -96,15 +91,11 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
                   spaceWidth: 2
                 },
                 size: 100,
-              //  unit: '$',
-              //  max: tempPhases[i].milestones[j].milestoneGoal,
                trackWidth: 20,
                barWidth: 15,
                barColor: barColor,
                trackColor: trackColor,
                prevBarColor: prevBarColor,
-              //  readOnly: false,
-              //  step: 1, //variable value based on 'unit'
                displayPrevious: true,
 
              }
@@ -142,27 +133,22 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
       var values =[];
       vm.totalInitiativeValue = 0;
       for (var m = 0; m < vm.initPhases.length; m++) {
-        // console.log('Each vm.initPhases', vm.initPhases[m]);
         for (var n = 0; n < vm.initPhases[m].milestones.length; n++) {
           values.push(vm.initPhases[m].milestones[n].value);
         }
       }
       for(var k = 0; k < vm.initPhases.length; k++){
-        // console.log(vm.initPhases[k].milestones);
         tempValue = 0;
         for (var l = 0; l < vm.initPhases[k].milestones.length; l++) {
           var milestone = vm.initPhases[k].milestones[l];
-          // console.log('MS value', milestone.value);
           tempValue += (milestone.value/milestone.msOptions.max)/(vm.initPhases[k].milestones.length)*100;
         }
         vm.initPhases[k].phaseValue = Math.round(10*tempValue)/10;
         vm.totalInitiativeValue += vm.initPhases[k].phaseValue;
         console.log("vm.initPhases[k].phaseValue", vm.initPhases[k].phaseValue);
         console.log("totalInitiativeValue", vm.totalInitiativeValue);
-        // console.log(tempValue);
       }
 ;
-      // console.log('Values array', values);
       return values;
     }, function() {
       vm.totalInitiativeProgress = vm.totalInitiativeValue / vm.initPhases.length;
@@ -198,7 +184,13 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
     console.log('sendData', sendData);
 
     $http.post('/init/editPhase', sendData).then(function(response){
-
+      $mdToast.show({
+        position: "center left",
+        template: function(){
+          if (response.status == 401){"<md-toast>Phase Successfully Saved!</md-toast>"}
+          else {"<md-toast>There was a problem saving the phase.</md-toast>"}
+        }
+      })
     }, function(response){
       console.log('fail to post edit');
     })

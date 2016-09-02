@@ -1,6 +1,4 @@
-<!-- <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right"> -->
-
-<md-dialog md-theme="pillar1" aria-label="My Dialog" style="position: absolute; top: 0; right: 0;">
+<div md-theme="pillar2" style="height:auto; max-height:100%; overflow:auto;">
   <md-toolbar layout="row" class="md-display-1 md-whiteframe-3dp" layout-padding>
       <span class="bold">{{initview.init.name}}</span>
       <md-button class="md-warn md-raised" ng-if="initview.admin" ng-click="initview.approve(initview.init)">Approve</md-button>
@@ -30,23 +28,31 @@
       </p>
 
 
+      <md-button class="groupX right" ng-click="initview.addPhase()">Add Phase</md-button>
     </md-sidenav>
 
-    <md-content layout="column" flex>
-      <div ng-repeat="phase in initview.initPhases" layout-align="space-around center" class="md-whiteframe-1dp dial-container center">
-        <h4 class="md-headline bold uppercase">{{phase.phaseName}}</h4>
-        <ui-knob value="phase.phaseValue" options="phase.phaseOptions"></ui-knob><br />
-        <div layout="row" layout-align="space-around center" class="top-padding">
-          <div ng-repeat="mileStone in phase.milestones track by $index"  >
-            <ui-knob value="mileStone.value" options="mileStone.msOptions"></ui-knob> <br />
-            <span class="regItal">{{mileStone.name}}</span>
-          </div>
+  <md-content layout="column" flex style="height:auto; max-height:100%; overflow:auto;">
+    <div ng-repeat="phase in initview.initPhases" layout-align="space-around center" class="md-whiteframe-1dp dial-container center">
+      <h4 class="md-headline bold uppercase">{{phase.phaseName}}</h4>
+      <ui-knob value="phase.phaseValue" options="phase.phaseOptions"></ui-knob><br />
+      <div layout="row" layout-align="space-around center" class="top-padding">
+        <div ng-repeat="mileStone in phase.milestones track by $index"  >
+          <ui-knob value="mileStone.value" options="mileStone.msOptions"></ui-knob> <br />
+          <span class="regItal">{{mileStone.name}}</span>
         </div>
       </div>
+      <div>
+        <section layout="row" layout-align="center">
+          <md-button class="groupX left"  ng-click="initview.save(phase)">Save Changes</md-button>
+          <!-- <md-button class="groupX right" >Edit Milestones</md-button> -->
+        </section>
+      </div>
+    </div>
+
+
 
 
 
     </md-content>
   </div>
-</md-dialog>
-<!-- </md-sidenav> -->
+</div>

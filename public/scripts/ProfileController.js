@@ -4,30 +4,33 @@ angular.module('ssmnApp').controller('ProfileController', function($http, $scope
   vm.findInitiatives = UserService.findInitiatives;
   vm.findInitiatives();
   vm.data = UserService.data;
-  // console.log("our vm.data initially is", vm.data);
   vm.toggleInits = false;
   vm.togglePendInits = false;
 
   console.log("and outside the promise vm.data is going to be undefined, like so:", vm.data);
 
-  // findInitiatives = function(){
-  //   $http.get('/init/profile').then(function(response){
-  //     console.log('profile', response);
-  //     vm.data = response.data.initiatives;
-  //     console.log(vm.data);
-  //   })
-  // }
-
   vm.data = UserService.data;
-  // console.log(vm.data.username);
-  // findInitiatives();
 
   vm.initModal = function(init) {
-    console.log('ya clicked it');
     console.log('The initiative is', init);
+
+    var url = '';
+
+    switch (init.pillar) {
+      case 1:
+        url = 'views/initEditPillar1.html'
+      break;
+      case 2:
+        url = 'views/initEditPillar2.html'
+      break;
+      case 3:
+        url = 'views/initEditPillar3.html'
+      break;
+    }
+
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
     $mdDialog.show({
-      templateUrl: 'views/initview.html',
+      templateUrl: url,
       controller: 'InitViewController',
       controllerAs: 'initview',
       fullscreen: useFullScreen,
