@@ -187,7 +187,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       initialY: originY,
       initialFontSize: "24px"
     }).style("text-anchor", "middle")
-    .text("Health & Connected Community")
+    .text("Healthy & Connected Community")
     .call(d3.util.wrap(100, width*.855, height*.13))
 
     var business = layerFront.append('image')

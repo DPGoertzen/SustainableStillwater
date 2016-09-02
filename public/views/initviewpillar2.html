@@ -1,6 +1,8 @@
 <!-- <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right"> -->
 
 <md-dialog md-theme="pillar2" aria-label="My Dialog" style="position: absolute; top: 25px; right: 25px;">
+  <div style="height:auto; max-height:100%; overflow:auto;">
+
   <md-toolbar layout="row" class="md-display-1 md-whiteframe-3dp" layout-padding>
       <span class="bold">{{initview.init.name}}</span>
       <md-button class="md-warn md-raised" ng-if="initview.admin" ng-click="initview.approve(initview.init)">Approve</md-button>
@@ -52,5 +54,6 @@
 
     </md-content>
   </div>
+</div>
 </md-dialog>
 <!-- </md-sidenav> -->
