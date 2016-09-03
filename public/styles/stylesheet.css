@@ -92,8 +92,21 @@ html, body {
   background-color: rgba(224, 224, 224, 0.96);
 }
 
+.bs-header {
+  background-color: #424242;
+  color: #388E3C;
+}
+
+.bs-dialbox {
+  border-right: 4px solid #424242;
+}
+
+.bs-type {
+  color: #424242;
+}
+
 md-slider .md-slider-wrapper {
-  width: 80%;
+  width: 70%;
 }
 
 .underline {

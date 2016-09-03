@@ -1,28 +1,28 @@
 <md-bottom-sheet>
-  <div layout-align="center center" flex>
+  <div flex class="bs-header">
     <h1 class="md-display-2 center">Sustainable Stillwater Shared Progress</h1>
   </div>
 
-  <div layout="row" flex>
-    <div layout="row" layout-align="space-around center" style="border-right: 1px solid" flex=75>
+  <div layout="row" flex class="dial-container">
+    <div layout="row" layout-align="space-around center" class="bs-dialbox" flex=75>
       <div layout="column" layout-align="center center">
         <ui-knob value="bottomSheet.data.firstPillarProgress" options="bottomSheet.phaseOptionsPillar1"></ui-knob><br />
-        <p class="center regItal">Healthy &amp; Connected <br />Community Progress</p>
+        <p class="md-title bs-type center regItal">Healthy &amp; Connected <br />Community Progress</p>
       </div>
       <div layout="column" layout-align="center center">
         <ui-knob value="bottomSheet.data.secondPillarProgress" options="bottomSheet.phaseOptionsPillar2"></ui-knob><br />
-        <p class="center regItal">Local Economic <br />Vitality Progress</p>
+        <p class="md-title bs-type center regItal">Local Economic <br />Vitality Progress</p>
       </div>
       <div layout="column" layout-align="center center">
         <ui-knob value="bottomSheet.data.thirdPillarProgress" options="bottomSheet.phaseOptionsPillar3"></ui-knob><br />
-        <p class="center regItal">Resource &amp; Environmental <br />Stewardship Progress</p>
+        <p class="md-title bs-type center regItal">Resource &amp; Environmental <br />Stewardship Progress</p>
       </div>
     </div>
 
     <div layout="row" layout-align="center center" flex=25>
       <div layout="column" layout-align="center center">
         <ui-knob value="bottomSheet.data.totalPillarProgress" options="bottomSheet.phaseOptionsTotal"></ui-knob>
-        <p class="center regItal">Total Pillar Progress</p>
+        <p class="md-title bs-type center regItal">Total Pillar Progress</p>
       </div>
     </div>
   </div>
