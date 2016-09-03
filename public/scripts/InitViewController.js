@@ -87,6 +87,7 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
         milestoneId: tempPhases[i].milestones[j]._id,
         name: tempPhases[i].milestones[j].name,
         value: tempPhases[i].milestones[j].startingPoint,
+        goal: tempPhases[i].milestones[j].milestoneGoal,
         msOptions: {
                 skin: {
                   type: 'tron',
