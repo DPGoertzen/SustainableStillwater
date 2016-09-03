@@ -178,8 +178,8 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
       y: originY,
       "font-family": "Raleway",
       "font-size": "18px",
-      stroke: "#00d8c4",
-      fill: "#00d8c4",
+      stroke: "#80CBC4",
+      fill: "#80CBC4",
       opacity: 1,
       originX: originX,
       originY: originY,
@@ -305,6 +305,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
     function arcGenerator(initialDegree, gapBetweenDegree, color, secondColor, currentPillar, textColor){
       // since the unit circle starts at 3 o'clock, shift it back
 
+      leveler = false;
       whichText = 0;
       console.log("our array length is", currentPillar.array.length);
       if(currentPillar.array.length != 0){
@@ -652,29 +653,33 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
   }
 
   function mouseOverSustainableCircle(){
-    sustainableText.remove();
-    clickToViewText.attr({"opacity": 1})
+    if (!isTransformed) {
+      sustainableText.remove();
+      clickToViewText.attr({"opacity": 1})
+    }
   }
 
   function mouseLeaveSustainableCircle(){
-    clickToViewText.attr({"opacity": 0})
-    sustainableText = layerSSMN.append("text").attr({
-      class: "originCircle",
-      x: originX,
-      y: originY,
-      "font-family": "Raleway",
-      "font-size": "24px",
-      stroke: "white",
-      fill: "white",
-      opacity: 1,
-      originX: originX,
-      originY: originY,
-      initialX: originX,
-      initialY: originY,
-      initialFontSize: "24px"
-    }).style("text-anchor", "middle")
-    .text("Sustainable Stillwater Minnesota")
-    .call(d3.util.wrap(100, originX, originY-55));
+    if (!isTransformed) {
+      clickToViewText.attr({"opacity": 0})
+      sustainableText = layerSSMN.append("text").attr({
+        class: "originCircle",
+        x: originX,
+        y: originY,
+        "font-family": "Raleway",
+        "font-size": "24px",
+        stroke: "white",
+        fill: "white",
+        opacity: 1,
+        originX: originX,
+        originY: originY,
+        initialX: originX,
+        initialY: originY,
+        initialFontSize: "24px"
+      }).style("text-anchor", "middle")
+      .text("Sustainable Stillwater Minnesota")
+      .call(d3.util.wrap(100, originX, originY-55));
+    }
   }
 
 
