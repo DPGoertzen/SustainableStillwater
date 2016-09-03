@@ -43,11 +43,11 @@
       <div layout="row" layout-align="space-around center" class="top-padding">
         <div ng-repeat="mileStone in phase.milestones track by $index"  >
           <ui-knob value="mileStone.value" options="mileStone.msOptions"></ui-knob> <br />
-          <span class="regItal">{{mileStone.name}}</span><br />
+          <span class="regItal">{{mileStone.name}} test: {{mileStone.msOptions.max}}</span><br />
           <md-input-container>
-            <input ng-model="mileStone.value" type="number" max="{{mileStone.goal}}" step="{{mileStone.msOptions.step}}" />
+            <input ng-model="mileStone.value" type="number" min="0" max="{{mileStone.msOptions.max}}" step="{{mileStone.msOptions.step}}" />
           </md-input-container><br />
-          <md-slider ng-model="mileStone.value" max="{{mileStone.goal}}" step="{{mileStone.msOptions.step}}"></md-slider>
+          <md-slider style="width=80%" ng-model="mileStone.value" min="0" max="{{mileStone.msOptions.max}}" step="{{mileStone.msOptions.step}}"></md-slider>
         </div>
       </div>
       <div>

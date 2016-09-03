@@ -61,11 +61,14 @@ angular.module('ssmnApp').config(function($routeProvider, $locationProvider){
     });
 
   $mdThemingProvider.theme('pillar1')
-    .primaryPalette('teal', {'default': '200'});
+    .primaryPalette('teal', {'default': '200'})
+    .accentPalette('teal', {'default': '400'});
 
   $mdThemingProvider.theme('pillar2')
-    .primaryPalette('deep-purple', {'default': '700'});
+    .primaryPalette('deep-purple', {'default': '700'})
+    .accentPalette('indigo', {'default': '300'});
 
   $mdThemingProvider.theme('pillar3')
-    .primaryPalette('lime', {'default': '500'});
+    .primaryPalette('lime', {'default': '500'})
+    .accentPalette('lime', {'default': '700'});
 });

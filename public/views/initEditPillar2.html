@@ -36,18 +36,18 @@
       </div>
     </md-content>
 
-  <md-content ng-if="initview.phasePresent" layout="column" flex style="height:auto; max-height:100%; overflow:auto;">
+  <md-content ng-if="initview.phasePresent" layout="column" flex>
     <div ng-repeat="phase in initview.initPhases" layout-align="space-around center" class="md-whiteframe-1dp dial-container center">
       <h4 class="md-headline bold uppercase">{{phase.phaseName}}</h4>
       <ui-knob value="phase.phaseValue" options="phase.phaseOptions"></ui-knob><br />
       <div layout="row" layout-align="space-around center" class="top-padding">
         <div ng-repeat="mileStone in phase.milestones track by $index"  >
           <ui-knob value="mileStone.value" options="mileStone.msOptions"></ui-knob> <br />
-          <span class="regItal">{{mileStone.name}}</span><br />
+          <span class="regItal">{{mileStone.name}} test: {{mileStone.msOptions.max}}</span><br />
           <md-input-container>
-            <input ng-model="mileStone.value" type="number" max="{{mileStone.goal}}" step="{{mileStone.msOptions.step}}" />
+            <input ng-model="mileStone.value" type="number" min="0" max="{{mileStone.msOptions.max}}" step="{{mileStone.msOptions.step}}" />
           </md-input-container><br />
-          <md-slider ng-model="mileStone.value" max="{{mileStone.goal}}" step="{{mileStone.msOptions.step}}"></md-slider>
+          <md-slider ng-model="mileStone.value" min="0" max="{{mileStone.msOptions.max}}" step="{{mileStone.msOptions.step}}"></md-slider>
         </div>
       </div>
       <div>

@@ -90,7 +90,10 @@ html, body {
 .form-box {
   border: 1px solid steelblue;
   background-color: rgba(224, 224, 224, 0.96);
-;
+}
+
+md-slider .md-slider-wrapper {
+  width: 80%;
 }
 
 .underline {
