@@ -293,9 +293,9 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
 
     // generate our pillars
-    arcGenerator(0, 105/firstPillarData.array.length, "#80CBC4", "#009688", firstPillarData, "black");
-    arcGenerator(120, 105/secondPillarData.array.length, "#7E57C2", "#512DA8", secondPillarData, "white");
-    arcGenerator(240, 105/thirdPillarData.array.length, "#CDDC39", "#9E9D24", thirdPillarData, "black");
+    arcGenerator(0, 110/firstPillarData.array.length, "#80CBC4", "#009688", firstPillarData, "black");
+    arcGenerator(120, 110/secondPillarData.array.length, "#7E57C2", "#512DA8", secondPillarData, "white");
+    arcGenerator(240, 110/thirdPillarData.array.length, "#CDDC39", "#9E9D24", thirdPillarData, "black");
 
 
     // specifies where we start, where we end, the distant between orbitters and
@@ -654,7 +654,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
 
   function mouseOverSustainableCircle(){
     if (!isTransformed) {
-      sustainableText.remove();
+      sustainableText.attr({"opacity": 0});
       clickToViewText.attr({"opacity": 1})
     }
   }
@@ -662,23 +662,7 @@ angular.module('ssmnApp').controller('BubbleController', ['DataService', '$eleme
   function mouseLeaveSustainableCircle(){
     if (!isTransformed) {
       clickToViewText.attr({"opacity": 0})
-      sustainableText = layerSSMN.append("text").attr({
-        class: "originCircle",
-        x: originX,
-        y: originY,
-        "font-family": "Raleway",
-        "font-size": "24px",
-        stroke: "white",
-        fill: "white",
-        opacity: 1,
-        originX: originX,
-        originY: originY,
-        initialX: originX,
-        initialY: originY,
-        initialFontSize: "24px"
-      }).style("text-anchor", "middle")
-      .text("Sustainable Stillwater Minnesota")
-      .call(d3.util.wrap(100, originX, originY-55));
+      sustainableText.attr({"opacity": 1})
     }
   }
 
