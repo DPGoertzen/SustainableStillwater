@@ -11,7 +11,7 @@
     <md-button class="md-primary md-raised" ng-click="profile.toggleInits = !profile.toggleInits"><h2>Our Initiatives ({{profile.data.ourInitiativesCount}})</h2></md-button>
 
 
-        <md-list class="md-dense" flex>
+        <md-list flex>
           <md-list-item md-theme="default" class="md-3-line" ng-show="profile.toggleInits" ng-repeat="init in profile.data.initiatives" ng-click="profile.initModal(init)">
             <div class="md-list-item-text" layout="column">{{init.name}}</div>
         </md-list-item>
