@@ -5,7 +5,7 @@
       <md-button class="md-warn md-raised" ng-if="initview.admin" ng-click="initview.delete(initview.init)">Delete</md-button>
   </md-toolbar>
 
-  <div flex layout="row" ng-controller="ProgressController as pc">
+  <div flex layout="row">
     <md-sidenav flex="35" md-is-locked-open="true" class="md-whiteframe-3dp" layout-padding>
       <img src="/assets/business.svg" />
       <p>
@@ -31,7 +31,7 @@
       <md-button class="groupX right" ng-click="initview.addPhase()">Add Phase</md-button>
     </md-sidenav>
     <md-content ng-if="!initview.phasePresent" layout="column" flex >
-      <div layout-align="center" class="center" style="width:400px; padding-left:50px;">
+      <div layout-align="center" class="center">
           <h2 >No Phases Added Yet</h2>
       </div>
     </md-content>
@@ -47,13 +47,13 @@
           <md-input-container>
             <input ng-model="mileStone.value" type="number" min="0" max="{{mileStone.msOptions.max}}" step="{{mileStone.msOptions.step}}" />
           </md-input-container><br />
-          <md-slider ng-model="mileStone.value" min="0" max="{{mileStone.msOptions.max}}" step="{{mileStone.msOptions.step}}"></md-slider>
+          <md-slider layout-align="space-around center" ng-model="mileStone.value" min="0" max="{{mileStone.msOptions.max}}" step="{{mileStone.msOptions.step}}"></md-slider>
         </div>
       </div>
       <div>
         <section layout="row" layout-align="center">
-          <md-button class="groupX left"  ng-click="initview.save(phase)">Save Changes</md-button>
-          <!-- <md-button class="groupX right" >Edit Milestones</md-button> -->
+          <md-button class="groupX left"  ng-click="initview.showConfirm(phase)">Save Changes</md-button>
+          <md-button class="groupX right" ng-click="initview.exit()">Exit</md-button>
         </section>
       </div>
     </div>

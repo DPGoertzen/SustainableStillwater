@@ -47,13 +47,13 @@
           <md-input-container>
             <input ng-model="mileStone.value" type="number" min="0" max="{{mileStone.msOptions.max}}" step="{{mileStone.msOptions.step}}" />
           </md-input-container><br />
-          <md-slider ng-model="mileStone.value" min="0" max="{{mileStone.msOptions.max}}" step="{{mileStone.msOptions.step}}"></md-slider>
+          <md-slider layout-align="space-around center" ng-model="mileStone.value" min="0" max="{{mileStone.msOptions.max}}" step="{{mileStone.msOptions.step}}"></md-slider>
         </div>
       </div>
       <div>
         <section layout="row" layout-align="center">
-          <md-button class="groupX left"  ng-click="initview.save(phase)">Save Changes</md-button>
-          <!-- <md-button class="groupX right" >Edit Milestones</md-button> -->
+          <md-button class="groupX left"  ng-click="initview.showConfirm(phase)">Save Changes</md-button>
+          <md-button class="groupX right" ng-click="initview.exit()">Exit</md-button>
         </section>
       </div>
     </div>

@@ -16,28 +16,6 @@ html, body {
   width: 500px;
 }
 
-/*colors for testing layout*/
-.lightgreen {
-  background-color: lightgreen;
-}
-
-.lightblue {
-  background-color: lightblue;
-}
-
-.pink {
-  background-color: pink;
-}
-
-.lightgrey {
-  background-color: #DCDCDC;
-}
-
-.white {
-  background-color: white;
-}
-
-
 /*font styles*/
 .lite {
   font-weight: 300;
@@ -97,6 +75,12 @@ html, body {
   color: #388E3C;
 }
 
+.bs-title {
+  /*text-transform: uppercase;*/
+  letter-spacing: 3px;
+  /*font-weight: 700;*/
+}
+
 .bs-dialbox {
   border-right: 4px solid #424242;
 }
@@ -107,6 +91,7 @@ html, body {
 
 md-slider .md-slider-wrapper {
   width: 70%;
+  margin: 0 auto;
 }
 
 .underline {

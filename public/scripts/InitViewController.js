@@ -161,45 +161,85 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
       vm.totalInitiativeProgress = totalInitiativeProgress;
   })
 
+  vm.showConfirm = function(phase) {
+    var confirm = $mdDialog.confirm()
+          .title('Do you want to save your changes?')
+          .ok('Save Changes')
+          .cancel('Cancel');
+    $mdDialog.show(confirm).then(function() {
+        var sendData = {
+          milestones: [],
+        };
+        sendData.initId = init._id;
+        sendData.phaseValue = phase.phaseValue;
+        sendData.phaseId = phase.phaseId;
 
+        sendData.totalInitiativeProgress = vm.totalInitiativeProgress;
 
-
-
-  vm.save = function(phase){
-
-    var sendData = {
-      milestones: [],
-    };
-    sendData.initId = init._id;
-    sendData.phaseValue = phase.phaseValue;
-    sendData.phaseId = phase.phaseId;
-
-    sendData.totalInitiativeProgress = vm.totalInitiativeProgress;
-
-    for (var i = 0; i < phase.milestones.length; i++) {
-      var sendMilestone = {
-        id: phase.milestones[i].milestoneId,
-        value: phase.milestones[i].value,
-      }
-      sendData.milestones.push(sendMilestone);
-    }
-
-
-
-    $http.post('/init/editPhase', sendData).then(function(response){
-      $mdToast.show({
-        position: "center left",
-        template: function(){
-          if (response.status == 401){"<md-toast>Phase Successfully Saved!</md-toast>"}
-          else {"<md-toast>There was a problem saving the phase.</md-toast>"}
+        for (var i = 0; i < phase.milestones.length; i++) {
+          var sendMilestone = {
+            id: phase.milestones[i].milestoneId,
+            value: phase.milestones[i].value,
+          }
+          sendData.milestones.push(sendMilestone);
         }
-      })
-    }, function(response){
-      console.log('fail to post edit');
-    })
+
+        $http.post('/init/editPhase', sendData).then(function(response){
+          $mdToast.show({
+            position: "center left",
+            template: function(){
+              if (response.status == 401) {
+                "<md-toast>Phase Successfully Saved!</md-toast>"
+                console.log('Saved Successfully');
+              } else {
+                "<md-toast>There was a problem saving the phase.</md-toast>"
+              }
+            }
+          })
+        }, function(response){
+          console.log('fail to post edit');
+        })
+    }, function() {
+      $scope.status = 'You decided to keep your debt.';
+    });
+  };
 
 
-  }
+  // vm.save = function(phase){
+  //
+  //   var sendData = {
+  //     milestones: [],
+  //   };
+  //   sendData.initId = init._id;
+  //   sendData.phaseValue = phase.phaseValue;
+  //   sendData.phaseId = phase.phaseId;
+  //
+  //   sendData.totalInitiativeProgress = vm.totalInitiativeProgress;
+  //
+  //   for (var i = 0; i < phase.milestones.length; i++) {
+  //     var sendMilestone = {
+  //       id: phase.milestones[i].milestoneId,
+  //       value: phase.milestones[i].value,
+  //     }
+  //     sendData.milestones.push(sendMilestone);
+  //   }
+  //
+  //
+  //
+  //   $http.post('/init/editPhase', sendData).then(function(response){
+  //     $mdToast.show({
+  //       position: "center left",
+  //       template: function(){
+  //         if (response.status == 401){"<md-toast>Phase Successfully Saved!</md-toast>"}
+  //         else {"<md-toast>There was a problem saving the phase.</md-toast>"}
+  //       }
+  //     })
+  //   }, function(response){
+  //     console.log('fail to post edit');
+  //   })
+  //
+  //
+  // }
 
 
 
@@ -227,7 +267,6 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
 
   }
 
-
   vm.addPhase = function() {
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
     $mdDialog.show({
@@ -243,5 +282,8 @@ angular.module('ssmnApp').controller('InitViewController', ['$http', 'init', '$m
     })
   }
 
+  vm.exit = function(){
+    $mdDialog.hide();
+  }
 
 }])

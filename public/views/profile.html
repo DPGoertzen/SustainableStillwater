@@ -2,13 +2,13 @@
   <md-button class="md-icon-button md-primary" ng-click="ssmn.toggleLeft()" aria-label="go back">
     <md-icon md-svg-icon="styles/ourIcons/ic_arrow_back_18px.svg"></md-icon>
   </md-button>
-  <md-button class="md-primary md-raised" layout-wrap layout-margin layout-align="center" ng-click="profile.newInit()" aria-label="add new initiative">
+  <md-button class="md-primary" layout-wrap layout-margin layout-align="center" ng-click="profile.newInit()" aria-label="add new initiative">
     <h1><md-button class="md-icon-button md-primary" ng-click="ssmn.toggleLeft()" aria-label="add">
       <md-icon md-svg-icon="styles/ourIcons/ic_add_24px.svg"></md-icon>
     </md-button> New Initiative</h1></md-button>
 
   <md-content layout-margin>
-    <md-button class="md-primary md-raised" ng-click="profile.toggleInits = !profile.toggleInits" style="width: 95%"><h2>Our Initiatives ({{profile.data.ourInitiativesCount}})</h2></md-button>
+    <md-button class="md-primary" ng-click="profile.toggleInits = !profile.toggleInits" style="width: 95%"><h2>Our Initiatives ({{profile.data.ourInitiativesCount}})</h2></md-button>
 
 
         <md-list flex>
@@ -20,7 +20,7 @@
 
 <span ng-show="profile.data.admin">
   <md-content layout-margin>
-    <md-button class="md-primary md-raised" ng-click="profile.togglePendInits = !profile.togglePendInits" style="width: 95%;"><h2>Pending Initiatives ({{profile.data.pendingArrayLength}})</h2></md-button>
+    <md-button class="md-primary" ng-click="profile.togglePendInits = !profile.togglePendInits" style="width: 95%;"><h2>Pending Initiatives ({{profile.data.pendingArrayLength}})</h2></md-button>
     <span ng-controller="AdminController as admin">
         <md-list flex>
           <md-list-item md-theme="default" class="md-3-line" ng-show="profile.togglePendInits" ng-repeat="init in admin.data.initPendingArray" ng-click="admin.initModal(init)">
@@ -33,7 +33,7 @@
 
 <span ng-show="profile.data.admin">
   <md-content layout-margin>
-    <md-button class="md-primary md-raised" ng-click="profile.toggleApprovedInits = !profile.toggleApprovedInits"><h2>Approved Initiatives ({{profile.data.approvedArrayLength}})</h2></md-button>
+    <md-button class="md-primary" ng-click="profile.toggleApprovedInits = !profile.toggleApprovedInits"><h2>Approved Initiatives ({{profile.data.approvedArrayLength}})</h2></md-button>
     <span ng-controller="AdminController as admin">
         <md-list flex>
           <md-list-item md-theme="default" class="md-3-line" ng-show="profile.toggleApprovedInits" ng-repeat="init in admin.data.initApprovedArray" ng-click="admin.initModal(init)">
